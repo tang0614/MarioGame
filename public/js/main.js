@@ -6,30 +6,27 @@ import {loadImage,loadLevel} from './loader.js';
 const canvas =document.getElementById('screen');
 const context = canvas.getContext('2d');
 
-loadImage('./image/tiles.png')//loading image
-.then(image => {
-    console.log(`w: ${image.width} | h: ${image.height}`)
-    return(image); //must remeber to return
-})
-.catch(err => console.error(err))
-.then(image =>{
-    const sprites = new SpriteSheet(image,16,16); //subsetted image size in browser
-    sprites.define('ground',0,0); // subsetting the image
-    sprites.define('sky',3,23); // subsetting the image
-    
-    loadLevel('1')
-    .then(f => {
-        console.log(f);
-        f.backgrounds.forEach((background)=>{
-            drawBackGround(background,context,sprites);
-        })
-    
-    });
-    
-    
-    
-});
 
+function loadBackGroundSprite() {
+
+
+    return loadImage('./image/tiles.png')//loading image
+            .catch(err => console.error(err.message))
+            .then(image =>{
+                const sprites = new SpriteSheet(image,16,16); //subsetted image size in browser
+                sprites.define('ground',0,0); // subsetting the image
+                sprites.define('sky',3,23); // subsetting the image
+                return sprites
+            });
+}
+
+function loadBackGroundLevel(name) {
+    return loadLevel(name)
+    .catch(err=>console.log(err.message))
+    .then(levelData =>{
+        return levelData
+    })
+}
 
 
 function drawBackGround(backgrounds, context, sprites){
@@ -39,8 +36,19 @@ function drawBackGround(backgrounds, context, sprites){
                 sprites.drawTile(backgrounds.tile,context,x,y); //location of the subsetted image in browser
             }
         }
-        
-
     })
-
 }
+
+//These three should run in parallel
+//returned sprites,levelData are not promise object
+Promise.all([loadBackGroundSprite(),loadBackGroundLevel('1')])
+.then(([sprites,levelData]) =>{
+    console.log('level loaded: ', levelData);
+    console.log('sprites loaded: ',sprites);
+    
+    levelData.backgrounds.forEach((background)=>{
+        drawBackGround(background,context,sprites);
+       
+    }); 
+
+})
