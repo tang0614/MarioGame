@@ -31,9 +31,11 @@ export function loadLevel(name){
     console.log('loading json')
     return fetch(`./levels/${name}.json`)
     .then(response=>{ 
+       
         return new Promise((resolve,reject) =>{
             if(response.ok){ // if HTTP-status is 200-299
                 console.log('resolving json')
+                
                 resolve(response.json());
             }else{
                 console.log('rejecting json')
@@ -46,10 +48,3 @@ export function loadLevel(name){
 }
 
 
-export function loadBackGroundLevel(name) {
-    return loadLevel(name)
-    .catch(err=>console.log(err.message))
-    .then(levelData =>{
-        return levelData
-    })
-}

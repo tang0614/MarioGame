@@ -12,6 +12,7 @@ export function loadMarioSprite() {
             });
 }
 
+
 export function loadBackGroundSprite() {
 
     return loadImage('./image/tiles.png')//loading image
@@ -22,4 +23,13 @@ export function loadBackGroundSprite() {
                 sprites.defineTile('sky',3,23); // subsetting the image
                 return sprites
             });
+}
+
+
+export function loadBackGroundLevel(name) {
+    return loadLevel(name)
+    .catch(err=>console.log(err.message))
+    .then(levelData =>{
+        return levelData
+    })
 }
