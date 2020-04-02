@@ -44,3 +44,12 @@ export function loadLevel(name){
     });
 
 }
+
+
+export function loadBackGroundLevel(name) {
+    return loadLevel(name)
+    .catch(err=>console.log(err.message))
+    .then(levelData =>{
+        return levelData
+    })
+}

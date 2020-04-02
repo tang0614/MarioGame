@@ -1,69 +1,54 @@
 import SpriteSheet from './SpriteSheet.js';
-import {loadImage,loadLevel} from './loader.js';
-
-
+import Compositor from './compository.js'
+import {loadImage,loadLevel,loadBackGroundLevel} from './loader.js';
+import {loadMarioSprite,loadBackGroundSprite} from './sprites.js';
+import {getBackgroundLayer} from './layer.js'
 //create variables
 const canvas =document.getElementById('screen');
 const context = canvas.getContext('2d');
 
 
-function loadBackGroundSprite() {
 
 
-    return loadImage('./image/tiles.png')//loading image
-            .catch(err => console.error(err.message))
-            .then(image =>{
-                const sprites = new SpriteSheet(image,16,16); //subsetted image size in browser
-                sprites.defineTile('ground',0,0); // subsetting the image
-                sprites.defineTile('sky',3,23); // subsetting the image
-                return sprites
-            });
+
+
+
+function getSpriteLayer(sprite,pos){
+    
+    return function drawOnContext(context){
+        sprite.draw('mario',context,pos.x,pos.y);
+    }
 }
-
-function loadBackGroundLevel(name) {
-    return loadLevel(name)
-    .catch(err=>console.log(err.message))
-    .then(levelData =>{
-        return levelData
-    })
-}
-
-function loadMarioSprite() {
-
-    return loadImage('./image/characters.gif')//loading image
-            .catch(err => console.error(err.message))
-            .then(image =>{
-                const sprites = new SpriteSheet(image,16,16); //subsetted image size in browser
-                sprites.define('mario',276,44,16,16); // subsetting the image
-                return sprites
-            });
-}
-
-
-function drawBackGround(backgrounds, context, sprites){
-    backgrounds.ranges.forEach(([x1,x2,y1,y2])=>{
-        for(let x=x1; x<x2; x++){
-            for(let y=y1; y<y2;y++){
-                sprites.drawTile(backgrounds.tile,context,x,y); //location of the subsetted image in browser
-            }
-        }
-    })
-}
-
 //These three should run in parallel
 //returned sprites,levelData are not promise object
 Promise.all([loadMarioSprite(),loadBackGroundSprite(),loadBackGroundLevel('1')])
 .then(([mario,sprites,levelData]) =>{
     console.log('mario loaded: ',mario);
-    console.log('level loaded: ', levelData);
     console.log('sprites loaded: ',sprites);
+    console.log('level loaded: ', levelData);
     
     
-    levelData.backgrounds.forEach((background)=>{
-        drawBackGround(background,context,sprites);
-       
-    }); 
+    const composite=new Compositor();
 
-    mario.draw('mario',context,64,64);
+    const layer_function = getBackgroundLayer(levelData.backgrounds,sprites);
+    composite.layers.push(layer_function);
+
+    const pos ={
+        x:64,
+        y:64
+    };
+    const mario_layer_function = getSpriteLayer(mario,pos);
+    composite.layers.push(mario_layer_function);
+
+    function update(){
+        //draw all buffers on the context
+        //replace the buffer in each update, not change redraw the context
+        composite.draw(context);
+        pos.x +=2;
+        pos.y +=2;
+        requestAnimationFrame(update);
+    }
+
+    //update();
 
 })
