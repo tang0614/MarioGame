@@ -9,20 +9,24 @@ export default class SpriteSheet {
     }
 
     //method to subset tile and save it
-    define(name,x_subset,y_subset){
+    define(name,x_subset,y_subset,width,height){
         const buffer = document.createElement('canvas');
-        buffer.width = this.width;
-        buffer.height = this.height;
+        buffer.width = width;
+        buffer.height = height;
 
         //buffer image is not showing in html because we didnot put this DOM element in our html
         buffer.getContext('2d').drawImage(
-            this.image, x_subset * this.width, y_subset * this.height, this.width, this.height,
+            this.image, x_subset, y_subset, width, height,
             0,0,
-            this.width,this.height);
+            width,height);
 
     
         //add name, butter as key, value pair into Map using map.set method
         this.tiles.set(name,buffer);
+    }
+    
+    defineTile(name,x_subset,y_subset){
+        this.define(name ,x_subset * this.width, y_subset * this.height,this.width,this.height);
     }
 
     //draw the subset on which position

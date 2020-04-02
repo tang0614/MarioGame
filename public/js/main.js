@@ -14,8 +14,8 @@ function loadBackGroundSprite() {
             .catch(err => console.error(err.message))
             .then(image =>{
                 const sprites = new SpriteSheet(image,16,16); //subsetted image size in browser
-                sprites.define('ground',0,0); // subsetting the image
-                sprites.define('sky',3,23); // subsetting the image
+                sprites.defineTile('ground',0,0); // subsetting the image
+                sprites.defineTile('sky',3,23); // subsetting the image
                 return sprites
             });
 }
@@ -26,6 +26,17 @@ function loadBackGroundLevel(name) {
     .then(levelData =>{
         return levelData
     })
+}
+
+function loadMarioSprite() {
+
+    return loadImage('./image/characters.gif')//loading image
+            .catch(err => console.error(err.message))
+            .then(image =>{
+                const sprites = new SpriteSheet(image,16,16); //subsetted image size in browser
+                sprites.define('mario',276,44,16,16); // subsetting the image
+                return sprites
+            });
 }
 
 
@@ -41,14 +52,18 @@ function drawBackGround(backgrounds, context, sprites){
 
 //These three should run in parallel
 //returned sprites,levelData are not promise object
-Promise.all([loadBackGroundSprite(),loadBackGroundLevel('1')])
-.then(([sprites,levelData]) =>{
+Promise.all([loadMarioSprite(),loadBackGroundSprite(),loadBackGroundLevel('1')])
+.then(([mario,sprites,levelData]) =>{
+    console.log('mario loaded: ',mario);
     console.log('level loaded: ', levelData);
     console.log('sprites loaded: ',sprites);
+    
     
     levelData.backgrounds.forEach((background)=>{
         drawBackGround(background,context,sprites);
        
     }); 
+
+    mario.draw('mario',context,64,64);
 
 })
