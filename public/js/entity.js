@@ -1,4 +1,6 @@
 import Vector from './math.js'
+import {loadMarioSprite,loadBackGroundSprite,loadBackGroundLevel} from './sprites.js';
+
 
 export default class Entity{
     constructor(name,sprite,acc){
@@ -9,9 +11,9 @@ export default class Entity{
         this.sprite = sprite;
     }
 
-    update(){
-        this.pos.x +=this.velocity.x;
-        this.pos.y +=this.velocity.y;
+    update(dt){
+        this.pos.x +=(this.velocity.x * dt);
+        this.pos.y +=(this.velocity.y * dt);
         this.velocity.y +=this.acc;
     }
 
@@ -20,4 +22,16 @@ export default class Entity{
     }
 
 
+}
+
+export function createMario(){
+  
+    return loadMarioSprite()
+    .catch(err=>{console.log(err.message)})
+    .then(mario=>{
+        const mario_entity = new Entity('mario',mario,30);
+        mario_entity.pos.set(64,180);
+        mario_entity.velocity.set(200,-600);
+        return mario_entity
+    })
 }

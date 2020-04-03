@@ -1,19 +1,13 @@
 import SpriteSheet from './SpriteSheet.js';
 import Compositor from './compository.js'
-import {getBackgroundLayer} from './layer.js'
-import {createMario} from './createIdle.js';
+import {getBackgroundLayer,getSpriteLayer} from './layer.js'
+import {createMario} from './entity.js';
 import {loadBackGroundSprite,loadBackGroundLevel} from './sprites.js';
+import Timer from './time.js';
 
 //create variables
 const canvas =document.getElementById('screen');
 const context = canvas.getContext('2d');
-
-
-function getSpriteLayer(entity){
-    return function drawOnContext(context){
-        entity.draw(context);
-    }
-}
 
 
 //These three should run in parallel
@@ -29,18 +23,14 @@ Promise.all([createMario(),loadBackGroundSprite(),loadBackGroundLevel('1')])
     const layer_function = getBackgroundLayer(levelData.backgrounds,sprites);
     composite.layers.push(layer_function);
 
-    
     const mario_layer_function = getSpriteLayer(mario_entity);
     composite.layers.push(mario_layer_function);
-
-    function update(){
-        //draw all buffers on the context
-        //replace the buffer in each update, not change redraw the context
+    
+    const timer = new Timer(1/60);
+    timer.update = function update(dt){
         composite.draw(context);
-        mario_entity.update();
-        requestAnimationFrame(update);
+        mario_entity.update(dt);
+    
     }
-
-    update();
-
-})
+    timer.start();
+});

@@ -24,3 +24,9 @@ export function getBackgroundLayer(backgrounds,sprites){
         context.drawImage(buffer,0,0);
     }
 }
+
+export function getSpriteLayer(entity){
+    return function drawOnContext(context){
+        entity.draw(context);
+    }
+}
