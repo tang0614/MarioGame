@@ -18,20 +18,22 @@ class Jump extends Trait{
     constructor(){
         super('jump');
         this.duration =0.5;
-        this.jump_velocity = 200;
+        this.jump_velocity = 60;
         this.jumpTime = 0;
     }
     start(){
-        this.jumpTime=0.5;
+        this.jumpTime=this.duration;
+        console.log(this.jumpTime);
     }
     cancel(){
         this.jumpTime=0;
+        console.log(this.jumpTime);
     }
     update(entity,dt){
 
         if(this.jumpTime>0){
-            entity.velocity.y -=this.jump_velocity; //jump upward
-            this.jumpTime -= dt;
+            entity.velocity.y -= this.jump_velocity; //jump upward
+            this.jumpTime -= 5*dt;
         }
 
     }
@@ -51,7 +53,7 @@ export default class Entity{
     }
     addTrait(trait){
         this.traits.push(trait);
-        //this[trait.NAME] =trait;
+        this[trait.NAME] =trait;
     }
     update(dt){
         this.traits.forEach(trait => {
@@ -67,7 +69,7 @@ export function createMario(){
     return loadMarioSprite()
     .catch(err=>{console.log(err.message)})
     .then(mario=>{
-        const mario_entity = new Entity('mario',30);
+        const mario_entity = new Entity('mario',10);
         mario_entity.addTrait(new Velocity());
         mario_entity.addTrait(new Jump());
         //add a draw method to mario entity
