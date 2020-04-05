@@ -17,7 +17,9 @@ Promise.all([createMario(),loadBackGroundSprite(),loadBackGroundLevel('1')])
     console.log('mario loaded: ',mario_entity);
     console.log('sprites loaded: ',sprites);
     console.log('level loaded: ', levelData);
-   
+    mario_entity.pos.set(64,180);
+    mario_entity.velocity.set(200,-600);
+
     const composite=new Compositor();
 
     const layer_function = getBackgroundLayer(levelData.backgrounds,sprites);
@@ -25,7 +27,7 @@ Promise.all([createMario(),loadBackGroundSprite(),loadBackGroundLevel('1')])
 
     const mario_layer_function = getSpriteLayer(mario_entity);
     composite.layers.push(mario_layer_function);
-    
+    console.log(composite);
     const timer = new Timer(1/60);
     timer.update = function update(dt){
         composite.draw(context);

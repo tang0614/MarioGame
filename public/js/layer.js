@@ -27,6 +27,8 @@ export function getBackgroundLayer(backgrounds,sprites){
 
 export function getSpriteLayer(entity){
     return function drawOnContext(context){
+        //entity.sprite.draw(entity.name,context,entity.pos.x,entity.pos.y);
         entity.draw(context);
+
     }
 }
