@@ -75,6 +75,7 @@ export function createMario(){
         //add a draw method to mario entity
         mario_entity.draw = function drawMario(context){
             mario.draw('mario',context,this.pos.x,this.pos.y);
+           
         }
         
         return mario_entity
