@@ -1,7 +1,7 @@
 import {loadBackGroundSprite} from './sprites.js';
 import Level from './level.js';
 import {getBackgroundLayer,getSpriteLayer} from './layer.js'
-
+import {createCollisionLayer} from './layer.js'
 export function loadImage(url){
     //return a correct object
     return new Promise((resolve,reject) =>{
@@ -46,6 +46,9 @@ export function loadLevel(name){
 
         const mario_draw_function = getSpriteLayer(level.entities);
         level.compo.layers.push(mario_draw_function);
+
+        // const mario_border_function = createCollisionLayer(level);
+        // level.comp.layers.push(mario_border_function);
         return level;
 
     });

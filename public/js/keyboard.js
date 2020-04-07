@@ -16,6 +16,7 @@ export default class Keyboard{
 
     handleEvent(event){
         const keyCode = event.keyCode;
+        console.log(keyCode);
         console.log(`event type is ${event.type}`);
 
         if(this.keyMap.has(keyCode)){
@@ -26,7 +27,7 @@ export default class Keyboard{
         
 
         //Get current state
-        const keyState = event.type ==='keyup' ? Pressed:Released;
+        const keyState = event.type ==='keydown' ? Pressed:Released;
         //is current state same as before = hold
         if(this.keyStates.get(keyCode) ===keyState){
             console.log('same as last one, returning back');
