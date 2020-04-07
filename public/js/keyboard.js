@@ -30,10 +30,11 @@ export default class Keyboard{
         const keyState = event.type ==='keydown' ? Pressed:Released;
         //is current state same as before = hold
         if(this.keyStates.get(keyCode) ===keyState){
-            console.log('same as last one, returning back');
+            console.log('pressing same button, returning back');
             return;
         }
-        console.log('different as last one');
+        console.log('pressing differen button/released');
+        //update state
         this.keyStates.set(keyCode,keyState);
         //call callback
         this.keyMap.get(keyCode)(keyState);

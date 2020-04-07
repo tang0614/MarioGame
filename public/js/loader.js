@@ -1,7 +1,7 @@
 import {loadBackGroundSprite} from './sprites.js';
 import Level from './level.js';
 import {getBackgroundLayer,getSpriteLayer} from './layer.js'
-import {createCollisionLayer} from './layer.js'
+
 export function loadImage(url){
     //return a correct object
     return new Promise((resolve,reject) =>{

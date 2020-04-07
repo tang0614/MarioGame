@@ -1,4 +1,4 @@
-import {createMario} from './entity.js';
+import {createMario} from './createMario.js';
 import Timer from './time.js';
 import Keyboard from './keyboard.js'; 
 import {loadLevel}from './loader.js';

@@ -29,30 +29,42 @@ export function getSpriteLayer(entities){
 export function createCollisionLayer(level){
 
     const resolvedTiles = [];
-    const tileResolver = level.tile_collider.tile_matrix;
+    const tileResolver = level.tile_collider.tile_resolver;
+    
     const tileSize = tileResolver.tileSize;
     const getByIndexOriginal = tileResolver.getTileByIndex;
     //overwite toTileIndex function and save it into getByIndexOriginal
     //every time call the toTileIndex function it first print out indexX,indexY
     //then it calls the origianl tileResolver.toTileIndex to get the tile
     
-    tileResolver.getTileByIndex = function getByIndexFake(x, y) {
-        resolvedTiles.push({x, y});
-        return getByIndexOriginal.call(tileResolver, x, y);
+    tileResolver.getTileByIndex = function getByIndexFake(x_index, y_index) {
+        resolvedTiles.push({x_index, y_index});
+        return getByIndexOriginal.call(tileResolver, x_index, y_index);
     }
 
 
     return function drawCollision(context) {
-        context.strokeStyle = 'blue';
-        resolvedTiles.forEach(({x, y}) => {
+        
+        resolvedTiles.forEach(({x_index, y_index}) => {
+            context.strokeStyle = 'blue';
            
             context.beginPath();
             context.rect(
-                x * tileSize,
-                y * tileSize,
-                tileSize, tileSize);
+                x_index * tileSize,
+                y_index * tileSize,
+                tileSize, 
+                tileSize);
             context.stroke();
         });
+
+        level.entities.forEach(entity=>{
+            context.strokeStyle = 'red';
+            context.beginPath();
+            context.rect(entity.pos.x,entity.pos.y,
+                entity.size.x,entity.size.y);
+            context.stroke();
+
+        })
 
         resolvedTiles.length = 0;
     };
