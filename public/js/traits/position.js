@@ -1,7 +1,7 @@
 import Trait from './trait.js'
-export default class Velocity extends Trait{
+export default class Position extends Trait{
     constructor(){
-        super('velocity');
+        super('position');
     }
     update(entity,dt){
         entity.pos.x +=(entity.velocity.x * dt);

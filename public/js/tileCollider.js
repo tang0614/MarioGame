@@ -6,52 +6,63 @@ export default class TileCollider{
     
         this.tile_resolver = new TileResolver(tileMatrix);
     }
+
     test(entity){
+        
         this.checkY(entity);
         this.checkX(entity);
+        
         //const matchedTile = this.tile_resolver.getTileByPosition(entity.pos.x,entity.pos.y);
     
     }
-    checkX(entity){
 
+    checkX(entity){
+        if(entity.velocity.x==0){
+            return;
+        }
+      
         const matchedTiles = this.tile_resolver.getTileByRange(
-            entity.pos.x, entity.pos.x + entity.size.x,
+            entity.pos.x, entity.pos.x+ entity.size.x,
             entity.pos.y, entity.pos.y+ entity.size.x);
-        
+
         matchedTiles.forEach(match=>{
-        
+     
+     
             //name is ground
             if(match.tile.name!=='ground'){
                 return;
             }
-            //falling to matched tile, speed up
+            //falling to matched tile, speed up   
             if(entity.velocity.x>0){
                 
-                if(entity.pos.x>match.x_left-entity.size.x){
+                if(entity.pos.x >match.x_left-entity.size.x){
                     entity.pos.x=match.x_left-entity.size.x;
                     entity.velocity.x=0;
-
+                   
                 }
             } else if(entity.velocity.x<0){
 
-                if(entity.pos.y<match.y_right){
-                    entity.pos.y=match.y_right;
+                if(entity.pos.x<match.x_right){
+                    entity.pos.x=match.x_right;
                     entity.velocity.x=0;
+                   
 
                 }
-            }
+            } 
         })
     }
     checkY(entity){
-    
 
-        const matchedTiles = this.tile_resolver.getTileByRange(
+        if(entity.velocity.y==0){
+            return;
+        }
+         const matchedTiles = this.tile_resolver.getTileByRange(
             entity.pos.x, entity.pos.x + entity.size.x,
-            entity.pos.y, entity.pos.y+ entity.size.x);
+            entity.pos.y,entity.pos.y+ entity.size.y);
         
         matchedTiles.forEach(match=>{
-        
-          
+            console.log('entity.velocity.y is ....');
+            console.log(entity.velocity.y);
             //name is ground
             if(match.tile.name!=='ground'){
                 return;
@@ -66,14 +77,14 @@ export default class TileCollider{
 
                 }
             } else if(entity.velocity.y<0){
-
+            //jumping
                 if(entity.pos.y<match.y_floor){
                     entity.pos.y=match.y_floor;
                     entity.velocity.y=0;
-
+                 
                 }
-
-            }
+ 
+            } 
 
 
         })

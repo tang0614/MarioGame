@@ -14,7 +14,8 @@ export default class Level {
     update(dt){
         this.entities.forEach(entity=>{
             entity.update(dt);
-            this.tile_collider.test(entity);
+            
+            this.tile_collider.test(entity); // test X Y collision
         })
     }
 }

@@ -20,7 +20,6 @@ export default class TileResolver{
         return range;
     }
     getTileByIndex(indexX,indexY){
-        console.log(indexX,indexY);
         const tile= this.matrix.get(indexX,indexY);
  
         if(tile){

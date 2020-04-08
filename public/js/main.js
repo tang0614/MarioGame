@@ -1,9 +1,9 @@
 import {createMario} from './createMario.js';
 import Timer from './time.js';
-import Keyboard from './keyboard.js'; 
+
 import {loadLevel}from './loader.js';
 import {createCollisionLayer} from './layer.js'
-
+import {setupKeyBoard} from './input.js';
 //create variables
 const canvas =document.getElementById('screen');
 const context = canvas.getContext('2d');
@@ -20,24 +20,12 @@ Promise.all([createMario(),loadLevel('1')])
     mario_entity.pos.set(64,64);
     level.compo.layers.push(createCollisionLayer(level));
 
-    //mario_entity.velocity.set(20,-200);
-    
+    // mario_entity.velocity.set(20,-200);
     level.entities.add(mario_entity);
-
-    const SPACE =40;
-    const input =new Keyboard();
-    
-    input.addMapping(SPACE, keyState=>{
-        if(keyState){
-            mario_entity.traits[0].start();
-        }else{
-            mario_entity.traits[0].cancel();
-        }
-    });
+    const input=setupKeyBoard(mario_entity);
     input.listenTo(window);
 
     
-
     ['mousedown','mousemove'].forEach(eventName=>{
         canvas.addEventListener(eventName, event=>{
             if(event.buttons ===1){
