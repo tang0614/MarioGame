@@ -9,10 +9,6 @@ export default class Go extends Trait{
     
     update(entity,dt){
         entity.velocity.x = this.speed * this.dir;
-
-        console.log('x speed is',entity.velocity.x);
-   
-
     }
 
 

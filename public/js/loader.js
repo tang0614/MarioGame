@@ -1,6 +1,8 @@
 import {loadBackGroundSprite} from './sprites.js';
 import Level from './level.js';
 import {getBackgroundLayer,getSpriteLayer} from './layer.js'
+import {createCollisionLayer} from './layer.js'
+
 
 export function loadImage(url){
     //return a correct object
@@ -35,20 +37,24 @@ export function loadLevel(name){
         loadBackGroundSprite()
     ])
     .then(([levelFile,BackGroundSprite])=>{
+
         const level = new Level();
-        //set grid size in grid
-        
+        //lowested layer- set up matrix with range and name
+        //give each element inside the matrix a name/value
         createTilesGrid(level,levelFile.backgrounds);
 
+        //layer one - drawing background on context according to element's name and posiiton in matrix
         const background_draw_function = getBackgroundLayer(level,BackGroundSprite);
         level.compo.layers.push(background_draw_function);
-
-
+        
+        //layer two - drawing entities on context
         const mario_draw_function = getSpriteLayer(level.entities);
         level.compo.layers.push(mario_draw_function);
 
-        // const mario_border_function = createCollisionLayer(level);
-        // level.comp.layers.push(mario_border_function);
+        //layer three -top layer- need entities and backgroud-sprite to draw collision
+        const draw_collision_function =createCollisionLayer(level);
+        level.compo.layers.push(draw_collision_function);
+
         return level;
 
     });

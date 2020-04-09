@@ -11,10 +11,10 @@ export function createMario(){
     .then(mario=>{
         const mario_entity = new Entity('mario',8);
         mario_entity.size.set(16,16);
-       
+
+        mario_entity.addTrait(new Go());
         mario_entity.addTrait(new Jump());
         mario_entity.addTrait(new Position());
-        mario_entity.addTrait(new Go());
         
         
         //add a draw method to mario entity

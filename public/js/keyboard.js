@@ -16,25 +16,25 @@ export default class Keyboard{
 
     handleEvent(event){
         const keyCode = event.keyCode;
-        console.log('you are hitting keycode:',keyCode);
-        console.log(`the current event type is ${event.type}`);
+        // console.log('you are hitting keycode:',keyCode);
+        // console.log(`the current event type is ${event.type}`);
 
         if(this.keyMap.has(keyCode)|keyCode==40){
             event.preventDefault();
         }else{
-            console.log('keyCode is not 13 returning back');
-            return;
+            // console.log('keyCode is not 13 returning back');
+            // return;
         }
         
 
         //Get current state is pressed or released
         const keyState = event.type ==='keydown' ? Pressed:Released;
-        console.log('the new keystate is',keyState);
+        //console.log('the new keystate is',keyState);
 
 
         //is current state same as before = hold
         if(this.keyStates.get(keyCode) ===keyState){
-            console.log('you are pressing same button, returning back');
+            //console.log('you are pressing same button, returning back');
             return;
         }
 

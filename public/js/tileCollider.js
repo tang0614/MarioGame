@@ -3,15 +3,12 @@ import TileResolver from './tileResolver.js'
 
 export default class TileCollider{
     constructor(tileMatrix){
-    
         this.tile_resolver = new TileResolver(tileMatrix);
     }
 
     test(entity){
-        
         this.checkY(entity);
-        this.checkX(entity);
-        
+        this.checkX(entity);    
         //const matchedTile = this.tile_resolver.getTileByPosition(entity.pos.x,entity.pos.y);
     
     }
@@ -26,7 +23,6 @@ export default class TileCollider{
             entity.pos.y, entity.pos.y+ entity.size.x);
 
         matchedTiles.forEach(match=>{
-     
      
             //name is ground
             if(match.tile.name!=='ground'){
@@ -61,8 +57,6 @@ export default class TileCollider{
             entity.pos.y,entity.pos.y+ entity.size.y);
         
         matchedTiles.forEach(match=>{
-            console.log('entity.velocity.y is ....');
-            console.log(entity.velocity.y);
             //name is ground
             if(match.tile.name!=='ground'){
                 return;
