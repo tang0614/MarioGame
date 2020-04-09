@@ -2,8 +2,8 @@
 //lay one
 export function getBackgroundLayer(level,background_sprites){
     const buffer = document.createElement('canvas');
-    buffer.width = 640;
-    buffer.height = 640;
+    buffer.width = 2048;
+    buffer.height = 240;
 
     const buffer_context = buffer.getContext('2d');
     //draw background_sprites on the buffer_context using grid unit x,y 
@@ -13,17 +13,17 @@ export function getBackgroundLayer(level,background_sprites){
     });
   
 
-    return function drawOnContext_background(context){
-        context.drawImage(buffer,0,0);
+    return function drawOnContext_background(context,camera){
+        context.drawImage(buffer,-camera.pos.x,-camera.pos.y);
     }
 }
 
 //layer two
 export function getSpriteLayer(entities){
     //draw entities on context
-    return function drawOnContext_sprite(context){
+    return function drawOnContext_sprite(context,camera){
         entities.forEach((entity)=>{ 
-            entity.draw(context);
+            entity.draw(context,camera); //method for entity created in creatMario
         });  
     }
 }
@@ -46,15 +46,15 @@ export function createCollisionLayer(level){
     }
 
     //draw blue lines in which the sprite fails
-    return function drawCollision(context) {
+    return function drawCollision(context,camera) {
         
         resolvedTiles.forEach(({x_index, y_index}) => {
             context.strokeStyle = 'blue';
            
             context.beginPath();
             context.rect(
-                x_index * tileSize,
-                y_index * tileSize,
+                x_index * tileSize - camera.pos.x,
+                y_index * tileSize - camera.pos.y,
                 tileSize, 
                 tileSize);
             context.stroke();
@@ -64,8 +64,10 @@ export function createCollisionLayer(level){
         level.entities.forEach(entity=>{
             context.strokeStyle = 'red';
             context.beginPath();
-            context.rect(entity.pos.x,entity.pos.y,
-                entity.size.x,entity.size.y);
+            context.rect(entity.pos.x- camera.pos.x,
+                entity.pos.y - camera.pos.y,
+                entity.size.x,
+                entity.size.y);
             context.stroke();
 
         })

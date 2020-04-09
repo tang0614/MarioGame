@@ -2,7 +2,7 @@ import {loadBackGroundSprite} from './sprites.js';
 import Level from './level.js';
 import {getBackgroundLayer,getSpriteLayer} from './layer.js'
 import {createCollisionLayer} from './layer.js'
-
+import {createMario} from './createMario.js';
 
 export function loadImage(url){
     //return a correct object
@@ -34,9 +34,10 @@ export function loadImage(url){
 export function loadLevel(name){
     return Promise.all([
         fetch(`./levels/${name}.json`).then(r=>r.json()),
-        loadBackGroundSprite()
+        loadBackGroundSprite(),
+        createMario(),
     ])
-    .then(([levelFile,BackGroundSprite])=>{
+    .then(([levelFile,BackGroundSprite,mario_entity])=>{
 
         const level = new Level();
         //lowested layer- set up matrix with range and name
@@ -48,6 +49,8 @@ export function loadLevel(name){
         level.compo.layers.push(background_draw_function);
         
         //layer two - drawing entities on context
+        mario_entity.pos.set(64,64);
+        level.entities.add(mario_entity);
         const mario_draw_function = getSpriteLayer(level.entities);
         level.compo.layers.push(mario_draw_function);
 
