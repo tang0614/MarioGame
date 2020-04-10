@@ -11,7 +11,7 @@ export default class Level {
     }
     update(dt){
         this.entities.forEach(entity=>{
-            //first update entity position
+            //first update entity position, then jump and go speed
             entity.update(dt);
             
             this.tile_collider.test(entity); // test X Y collision

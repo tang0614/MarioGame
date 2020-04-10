@@ -18,7 +18,7 @@ export default class Jump extends Trait{
         if(this.jumpTime>0){
             //entity.velocity.y -= entity.acc;
             entity.velocity.y -= this.jump_velocity; //jump upward
-            this.jumpTime -= 2*dt;
+            this.jumpTime -= entity.mass * dt;
         }
 
      

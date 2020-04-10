@@ -25,7 +25,7 @@ export default class TileCollider{
         matchedTiles.forEach(match=>{
      
             //name is ground
-            if(match.tile.name!=='ground'){
+            if(match.tile.type!=='ground'){
                 return;
             }
             //falling to matched tile, speed up   
@@ -58,7 +58,7 @@ export default class TileCollider{
         
         matchedTiles.forEach(match=>{
             //name is ground
-            if(match.tile.name!=='ground'){
+            if(match.tile.type!=='ground'){
                 return;
             }
 

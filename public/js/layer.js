@@ -1,19 +1,32 @@
-
 //lay one
 export function getBackgroundLayer(level,background_sprites){
-    const buffer = document.createElement('canvas');
-    buffer.width = 2048;
-    buffer.height = 240;
+    const tiles = level.tiles_matrix;
+    const resolver = level.tile_collider.tile_resolver;
 
+    const buffer = document.createElement('canvas');
+    buffer.width = 500;
+    buffer.height = 240;
     const buffer_context = buffer.getContext('2d');
     //draw background_sprites on the buffer_context using grid unit x,y 
     // image is stored in buffer
-    level.tiles_matrix.loop((value,x,y)=>{
-        background_sprites.drawTile(value.name,buffer_context,x,y);
-    });
-  
+    function drawBufferInsideCamera(startIndex,endIndex){
+        for(let x =startIndex; x<=endIndex; x++){
+            const col = tiles.grid[x];
+            if(col){
+                col.forEach((value,y)=>{
+                    background_sprites.drawTile(value.name,buffer_context,x,y);
+                })
+            }
+        }
+    }
+ 
 
     return function drawOnContext_background(context,camera){
+        const drawWidth = resolver.toTileIndex(camera.size.x);
+        const drawfrom = resolver.toTileIndex(camera.pos.x);
+        const drawTo = drawfrom + drawWidth;
+        drawBufferInsideCamera(drawfrom,drawTo);
+        //draw buffer inside context
         context.drawImage(buffer,-camera.pos.x,-camera.pos.y);
     }
 }
@@ -80,3 +93,19 @@ export function createCollisionLayer(level){
 
 
 
+// let camera draw on context, 
+export function drawCameraLayer(cameraToDraw){
+   
+    return function drawCameraRect(context,camera) {
+        context.strokeStyle = 'purple';
+        context.beginPath();
+        context.rect(cameraToDraw.pos.x-camera.pos.x,
+            cameraToDraw.pos.y- camera.pos.y,
+            camera.size.x+camera.pos.x,
+            camera.size.y+camera.pos.x);
+        
+        context.stroke();
+        
+    }
+    
+}

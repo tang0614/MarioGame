@@ -1,12 +1,13 @@
 import Vector from './math.js'
 
 export default class Entity{
-    constructor(name,acc){
+    constructor(name,acc,mass){
         this.name =name;
         this.pos=new Vector(0,0);
         this.velocity=new Vector(0,0);
         this.size = new Vector(0,0);
         this.acc=acc;
+        this.mass = mass;
 
         this.traits=[];
     }

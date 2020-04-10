@@ -1,8 +1,9 @@
 import {loadBackGroundSprite} from './sprites.js';
 import Level from './level.js';
 import {getBackgroundLayer,getSpriteLayer} from './layer.js'
-import {createCollisionLayer} from './layer.js'
+import {createCollisionLayer,drawCameraLayer} from './layer.js'
 import {createMario} from './createMario.js';
+import Camera from './camera.js';
 
 export function loadImage(url){
     //return a correct object
@@ -31,9 +32,15 @@ export function loadImage(url){
     });
 }
 
+function loadJSON(url){
+    return fetch(url)
+    .then(r=>r.json());
+
+}
+
 export function loadLevel(name){
     return Promise.all([
-        fetch(`./levels/${name}.json`).then(r=>r.json()),
+        loadJSON(`./levels/${name}.json`),
         loadBackGroundSprite(),
         createMario(),
     ])
@@ -57,6 +64,13 @@ export function loadLevel(name){
         //layer three -top layer- need entities and backgroud-sprite to draw collision
         const draw_collision_function =createCollisionLayer(level);
         level.compo.layers.push(draw_collision_function);
+        //draw camera layer
+        //camera
+        const cameraToDraw = new Camera();
+        
+        const drawCamera_function = drawCameraLayer(cameraToDraw);
+
+        level.compo.layers.push(drawCamera_function);
 
         return level;
 
@@ -66,12 +80,16 @@ export function loadLevel(name){
 
 function createTilesGrid(level,backgrounds){
     backgrounds.forEach(background=>{
-        background.ranges.forEach(([x1,x2,y1,y2])=>{
+        background.ranges.forEach(([x1,xlen,y1,ylen])=>{
+            const x2 = x1 + xlen;
+            const y2 = y1 + ylen;
+
             for(let x=x1; x<x2; x++){
                 for(let y=y1; y<y2;y++){
 
                     level.tiles_matrix.set(x,y,{
                         name: background.tile,
+                        type: background.type
                     });
                 }
             }
