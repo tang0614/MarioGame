@@ -4,7 +4,7 @@ export function getBackgroundLayer(level,background_sprites){
     const resolver = level.tile_collider.tile_resolver;
 
     const buffer = document.createElement('canvas');
-    buffer.width = 260 + 16;
+    buffer.width = 400 + 16;
     buffer.height = 240;
     const buffer_context = buffer.getContext('2d');
     //draw background_sprites on the buffer_context using grid unit x,y 

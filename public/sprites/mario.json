@@ -1,0 +1,11 @@
+{
+    "imageURL": "./image/characters.gif",
+    "frames": [
+        {
+            "name": "mario",
+            "rect": [276, 44, 16, 16]
+        }
+    ]
+}
+
+

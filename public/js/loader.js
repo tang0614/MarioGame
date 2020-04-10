@@ -2,7 +2,6 @@ import Level from './level.js';
 import {getBackgroundLayer,getSpriteLayer} from './layer.js'
 import {createCollisionLayer,drawCameraLayer} from './layer.js'
 import {createMario} from './createMario.js';
-import Camera from './camera.js';
 import SpriteSheet from './SpriteSheet.js';
 import {createTilesGrid} from './createTilesGrid.js'
 
@@ -40,7 +39,7 @@ function loadJSON(url){
 }
 
 
-function loadSpriteSheet(name) {
+export function loadSpriteSheet(name) {
     return loadJSON(`./sprites/${name}.json`)
     .then(sheetSpec => Promise.all([
         sheetSpec,
@@ -52,14 +51,25 @@ function loadSpriteSheet(name) {
             sheetSpec.tileW,
             sheetSpec.tileH);
 
+        if(sheetSpec.tiles){
+            sheetSpec.tiles.forEach(tileSpec => {
+                sprites.defineTile(
+                    tileSpec.name,
+                    tileSpec.index[0],
+                    tileSpec.index[1]);
+            });    
+        }
 
-        sheetSpec.tiles.forEach(tileSpec => {
-            sprites.defineTile(
-                tileSpec.name,
-                tileSpec.index[0],
-                tileSpec.index[1]);
-        });
-
+        if(sheetSpec.frames){
+            sheetSpec.frames.forEach(frame=>{
+                sprites.define(frame.name, 
+                    frame.rect[0],
+                    frame.rect[1],
+                    frame.rect[2],
+                    frame.rect[3]) // ...frame.rect
+            });
+        }
+        
         return sprites;
     });
 }
