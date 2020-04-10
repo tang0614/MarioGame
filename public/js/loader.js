@@ -101,9 +101,9 @@ export function loadLevel(name){
         level.compo.layers.push(mario_draw_function);
 
         //layer three -top layer- need entities and backgroud-sprite to draw collision
-        const draw_collision_function =createCollisionLayer(level);
-        level.compo.layers.push(draw_collision_function);
-        //draw camera layer
+        //const draw_collision_function =createCollisionLayer(level);
+        //level.compo.layers.push(draw_collision_function);
+        
        
         return level;
 

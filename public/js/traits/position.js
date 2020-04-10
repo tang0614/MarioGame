@@ -10,5 +10,6 @@ export default class Position extends Trait{
         //falling also need acc
         entity.velocity.y +=entity.acc; //gravity, so if not move, y velocity is positive
         console.log('y speed is',entity.velocity.y);
+        console.log('x speed is',entity.velocity.x);
     }
 } 
