@@ -8,7 +8,7 @@ export function createMario(){
   
     return loadMarioSprite()
     .then(mario=>{
-        const mario_entity = new Entity('mario',9,1.5);
+        const mario_entity = new Entity('mario',9,2);
         mario_entity.size.set(16,16);
 
         mario_entity.addTrait(new Go());
