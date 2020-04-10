@@ -3,6 +3,8 @@ import Jump from './traits/jump.js'
 import Position from './traits/position.js'
 import Entity from './entity.js'
 import {loadSpriteSheet} from './loader.js'
+import {createAnime} from './anime.js'
+
 
 export function createMario(){
   
@@ -15,11 +17,27 @@ export function createMario(){
         mario_entity.addTrait(new Go());
         mario_entity.addTrait(new Jump());
         mario_entity.addTrait(new Position());
+
+        const anime_run  = createAnime(['run-1','run-2','run-3'],10);
+        const anime_retreat  = createAnime(['retreat-1','retreat-2','retreat-3'],10);
+
+        function routeFrame(mario){
+            console.log(mario.go.dir);
+            if(mario.go.dir == 1){
+                return anime_run(mario.go.distance);
+            }else if(mario.go.dir==0){
+                return 'mario'
+            }else{
+                return anime_retreat(mario.go.distance);
+            }
+    
+        }
         
         //add a draw method to mario entity
         mario_entity.draw = function drawMario(context,camera){
-            //draw method from sprite sheet
-            mario.draw('mario',context,this.pos.x-camera.pos.x,this.pos.y-camera.pos.y);
+            //draw method from sprite sheet (This pointing to the mario)
+            
+            mario.draw(routeFrame(this),context,this.pos.x-camera.pos.x,this.pos.y-camera.pos.y);
         }
         
         return mario_entity

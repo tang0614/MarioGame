@@ -14,6 +14,11 @@ export default class SpriteSheet {
         buffer.width = width;
         buffer.height = height;
 
+        //mirring the sprite
+        // const context = buffer.getContext('2d');
+        // context.scale(-1,1);
+        // context.translate(-width,0);
+
         //buffer image is not showing in html because we didnot put this DOM element in our html
         buffer.getContext('2d').drawImage(
             this.image, x_subset, y_subset, width, height,
