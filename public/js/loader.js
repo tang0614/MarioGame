@@ -1,9 +1,9 @@
-import {loadBackGroundSprite} from './sprites.js';
 import Level from './level.js';
 import {getBackgroundLayer,getSpriteLayer} from './layer.js'
 import {createCollisionLayer,drawCameraLayer} from './layer.js'
 import {createMario} from './createMario.js';
 import Camera from './camera.js';
+import SpriteSheet from './SpriteSheet.js';
 
 export function loadImage(url){
     //return a correct object
@@ -38,14 +38,42 @@ function loadJSON(url){
 
 }
 
-export function loadLevel(name){
-    return Promise.all([
-        loadJSON(`./levels/${name}.json`),
-        loadBackGroundSprite(),
-        createMario(),
-    ])
-    .then(([levelFile,BackGroundSprite,mario_entity])=>{
 
+function loadSpriteSheet(name) {
+    return loadJSON(`./sprites/${name}.json`)
+    .then(sheetSpec => Promise.all([
+        sheetSpec,
+        loadImage(sheetSpec.imageURL),
+    ]))
+    .then(([sheetSpec, image]) => {
+        const sprites = new SpriteSheet(
+            image,
+            sheetSpec.tileW,
+            sheetSpec.tileH);
+
+
+        sheetSpec.tiles.forEach(tileSpec => {
+            sprites.defineTile(
+                tileSpec.name,
+                tileSpec.index[0],
+                tileSpec.index[1]);
+        });
+
+        return sprites;
+    });
+}
+
+
+export function loadLevel(name){
+    return loadJSON(`./levels/${name}.json`)
+    .then(levelFile=>{
+          return Promise.all([
+            levelFile,
+            loadSpriteSheet(levelFile.spriteSheet),
+            createMario(),
+        ]);
+    })
+    .then(([levelFile,BackGroundSprite,mario_entity])=>{
         const level = new Level();
         //lowested layer- set up matrix with range and name
         //give each element inside the matrix a name/value
@@ -79,6 +107,7 @@ export function loadLevel(name){
 
 
 function createTilesGrid(level,backgrounds){
+    
     backgrounds.forEach(background=>{
         background.ranges.forEach(([x1,xlen,y1,ylen])=>{
             const x2 = x1 + xlen;

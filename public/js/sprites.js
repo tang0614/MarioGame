@@ -13,18 +13,6 @@ export function loadMarioSprite() {
 }
 
 
-export function loadBackGroundSprite() {
-
-    return loadImage('./image/tiles.png')//loading image
-            .catch(err => console.error(err.message))
-            .then(image =>{
-                const sprites = new SpriteSheet(image,16,16); //subsetted image size in browser
-                sprites.defineTile('ground',0,0); // subsetting the image
-                sprites.defineTile('sky',3,23); // subsetting the image
-                return sprites
-            });
-}
-
 
 export function loadBackGroundLevel(name) {
     return loadLevel(name)

@@ -31,7 +31,7 @@ export default class SpriteSheet {
 
     //draw the subset on which position
     draw(name, context,x_position,y_position){
-        //map get method to get value from name(key)
+        //map get method to get buffer from name(key)
         const buffer = this.tiles.get(name);
         //location of the subseted image
         context.drawImage(buffer,x_position,y_position);

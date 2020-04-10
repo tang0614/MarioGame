@@ -1,4 +1,4 @@
-{
+{   "spriteSheet":"overworld",
     "backgrounds":[
         {
             "tile":"sky",
@@ -11,6 +11,7 @@
         },
         {
             "tile":"ground",
+            "type":"ground",
             "type":"ground",
             "ranges":[
                 [
@@ -44,6 +45,7 @@
 
         {
             "tile":"ground",
+            "type":"ground",
             "ranges":[
                
                 [
