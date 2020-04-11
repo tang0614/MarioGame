@@ -12,7 +12,6 @@ export default class Go extends Trait{
     
     update(entity,dt){
         entity.velocity.x = this.speed * this.dir;
-        console.log(this.dir);
         if(this.dir==1){
             this.distance += entity.velocity.x * dt;
         }else if (this.dir==-1){

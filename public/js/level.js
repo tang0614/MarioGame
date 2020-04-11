@@ -8,14 +8,19 @@ export default class Level {
         this.entities = new Set();
         this.tiles_matrix = new Matrix();
         this.tile_collider = new TileCollider(this.tiles_matrix);
+        this.duration = 0;
     }
     update(dt){
         this.entities.forEach(entity=>{
             //first update entity position, then jump and go speed
             entity.update(dt);
-            
             this.tile_collider.test(entity); // test X Y collision
+            this.duration +=dt;
+
+        
         })
+        
+   
     }
 }
 

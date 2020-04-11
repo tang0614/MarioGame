@@ -4,6 +4,7 @@ import {createCollisionLayer,drawCameraLayer} from './layer.js'
 import {createMario} from './createMario.js';
 import SpriteSheet from './SpriteSheet.js';
 import {createTilesGrid} from './createTilesGrid.js'
+import {createAnime} from './anime.js';
 
 export function loadImage(url){
     //return a correct object
@@ -46,6 +47,8 @@ export function loadSpriteSheet(name) {
         loadImage(sheetSpec.imageURL),
     ]))
     .then(([sheetSpec, image]) => {
+
+
         const sprites = new SpriteSheet(
             image,
             sheetSpec.tileW,
@@ -59,6 +62,13 @@ export function loadSpriteSheet(name) {
                     tileSpec.index[1]);
             });    
         }
+        if(sheetSpec.animations){
+            
+            sheetSpec.animations.forEach(animation=>{
+                const animation_function = createAnime(animation.frames,animation.frameLen);
+                sprites.defineAnim(animation.name, animation_function);
+            });
+        }
 
         if(sheetSpec.frames){
             sheetSpec.frames.forEach(frame=>{
@@ -69,6 +79,7 @@ export function loadSpriteSheet(name) {
                     frame.rect[3]) // ...frame.rect
             });
         }
+        
         
         return sprites;
     });

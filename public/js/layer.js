@@ -14,7 +14,17 @@ export function getBackgroundLayer(level,background_sprites){
             const col = tiles.grid[x];
             if(col){
                 col.forEach((value,y)=>{
-                    background_sprites.drawTile(value.name,buffer_context,x,y);
+                    if(value.name ==='chance'){
+                        console.log('drawing..');
+                        console.log('level duration is');
+                        console.log(level.duration);
+                        
+                        background_sprites.drawAnime(value.name,buffer_context,x,y,level.duration);
+                        console.log('drawn');
+                    }else{
+                         background_sprites.drawTile(value.name,buffer_context,x,y);
+                    }
+                   
                 })
             }
         }
@@ -22,9 +32,16 @@ export function getBackgroundLayer(level,background_sprites){
  
     //substract image from the whole imaged stored in buffer according to camera position
     return function drawOnContext_background(context,camera){
+       
         const drawWidth = resolver.toTileIndex(camera.size.x);
         const drawfrom = resolver.toTileIndex(camera.pos.x);
         const drawTo = drawfrom + drawWidth;
+
+         //if window is not changing
+        //  if(drawfrom===startIndex && drawTo===endIndex){
+        //      return
+        //  }
+
         drawBufferInsideCamera(drawfrom,drawTo);
         //draw buffer inside context
         context.drawImage(buffer,-camera.pos.x,-camera.pos.y);

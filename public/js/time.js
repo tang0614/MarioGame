@@ -18,6 +18,8 @@ export default class Timer{
             this.enqueue();
         
         }
+
+   
     }
     enqueue(){
         requestAnimationFrame(this.updateProxy);
