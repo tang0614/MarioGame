@@ -1,38 +1,39 @@
 //lay one
-export function getBackgroundLayer(level,background_sprites){
-    const tiles = level.tiles_matrix;
+export function getBackgroundLayer(level,tiles,background_sprites){
+   
     const resolver = level.tile_collider.tile_resolver;
-
     const buffer = document.createElement('canvas');
-    buffer.width = 280 + 16;
+    buffer.width = 256 + 16;
     buffer.height = 240;
     const buffer_context = buffer.getContext('2d');
     //draw background_sprites on the buffer_context using grid unit x,y 
     // whole image is stored in buffer
     function drawBufferInsideCamera(startIndex,endIndex){
+        buffer_context.clearRect(0,0,buffer.width,buffer.height);
+
         for(let x =startIndex; x<=endIndex; x++){
             const col = tiles.grid[x];
             if(col){
                 col.forEach((value,y)=>{
                     if(value.name ==='chance'){
-
-                        background_sprites.drawAnime(value.name,buffer_context,x,y,level.duration);
+                        //be careful, here you need to substruct startIndex, because you draw all background from position x-startIndex
+                        //such that you can make image starting from x+startindex to show on (0,0) on buffer.
+                        background_sprites.drawAnime(value.name,buffer_context,x-startIndex,y,level.duration);
                     }else{
-                         background_sprites.drawTile(value.name,buffer_context,x,y);
+                         background_sprites.drawTile(value.name,buffer_context,x-startIndex,y);
                     }
                    
-                })
+                });
             }
         }
     }
  
     //substract image from the whole imaged stored in buffer according to camera position
     return function drawOnContext_background(context,camera){
-       
+        
         const drawWidth = resolver.toTileIndex(camera.size.x);
         const drawfrom = resolver.toTileIndex(camera.pos.x);
         const drawTo = drawfrom + drawWidth;
-
          //if window is not changing
         //  if(drawfrom===startIndex && drawTo===endIndex){
         //      return
@@ -40,7 +41,12 @@ export function getBackgroundLayer(level,background_sprites){
 
         drawBufferInsideCamera(drawfrom,drawTo);
         //draw buffer inside context
-        context.drawImage(buffer,-camera.pos.x,-camera.pos.y);
+       
+        //%16 to avoid running out of context, the starting drawing positionx always between 0 and 16
+        //choose 16 is because each tile size is 16, making graph consistent
+        context.drawImage(buffer,
+            -camera.pos.x%16,
+            -camera.pos.y);
     }
 }
 

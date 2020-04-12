@@ -12,12 +12,21 @@ export default class Level {
     }
     update(dt){
         this.entities.forEach(entity=>{
-            //first update entity position, then jump and go speed
+            //first update entity jump, go speed and then update position
+            console.log('updating');
             entity.update(dt);
-            this.tile_collider.test(entity); // test X Y collision
+
+            // console.log(entity.velocity.x);
+            // console.log(entity.velocity.y);
+
+            // console.log(entity.pos.x);
+            // console.log(entity.pos.y);
+
+            console.log(entity);
+
+            this.tile_collider.test(entity); // test X Y collision, bottom collision
             this.duration +=dt;
 
-        
         })
         
    

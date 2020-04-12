@@ -102,11 +102,11 @@ export function loadLevel(name){
         createTilesGrid(level,levelFile.backgrounds);
 
         //layer one - drawing background on context according to element's name and posiiton in matrix
-        const background_draw_function = getBackgroundLayer(level,BackGroundSprite);
+        const tiles = level.tiles_matrix;
+        const background_draw_function = getBackgroundLayer(level,tiles,BackGroundSprite);
         level.compo.layers.push(background_draw_function);
         
         //layer two - drawing entities on context
-        mario_entity.pos.set(64,64);
         level.entities.add(mario_entity);
         const mario_draw_function = getSpriteLayer(level.entities);
         level.compo.layers.push(mario_draw_function);

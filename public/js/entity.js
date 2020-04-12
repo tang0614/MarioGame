@@ -16,10 +16,18 @@ export default class Entity{
         //important!!! this pointing to the entity object
     
     }
+    obstruct(side){
+        this.traits.forEach(trait => {
+            //traits are position, jump and go
+            trait.obstruct(this,side);
+        });
+
+    }
     update(dt){
         this.traits.forEach(trait => {
             //traits are position, jump and go
-            trait.update(this,dt)
+            console.log('updating trait',trait)
+            trait.update(this,dt);
         });
     }
 

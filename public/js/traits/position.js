@@ -3,6 +3,9 @@ export default class Position extends Trait{
     constructor(){
         super('position');
     }
+    obstruct(){
+        
+    }
     // update the position of entity after time dt
     update(entity,dt){
         entity.pos.x +=(entity.velocity.x * dt);

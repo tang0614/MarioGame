@@ -13,6 +13,7 @@ export function createMario(){
       
         const mario_entity = new Entity('mario',2);
         mario_entity.size.set(16,16);
+        mario_entity.pos.set(64,64);
 
         mario_entity.addTrait(new Go());
         mario_entity.addTrait(new Jump());
@@ -22,11 +23,22 @@ export function createMario(){
         const anime_retreat  = createAnime(['retreat-1','retreat-2','retreat-3'],10);
 
         function routeFrame(mario){
-            if(mario.go.distance >0){
+          
+            if(!mario.jump.ready){
+                return 'jump';
+            }
+
+            if(mario.go.dir >0){
+                if(mario.velocity.x<0 ){
+                    return 'break';
+                }
                 return anime_run(mario.go.distance);
-            }else if(mario.go.distance==0){
+            }else if(mario.go.dir==0){
                 return 'mario'
             }else{
+                if(mario.velocity.x>0){
+                    return 'break';
+                }
                 return anime_retreat(Math.abs(mario.go.distance));
             }
     
