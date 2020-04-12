@@ -3,8 +3,6 @@ export function createAnime(frames,frameLen){
     return function resolveFrame(distance){
        
         const index = Math.floor(distance/frameLen) % frames.length;
-        console.log('index is');
-        console.log(index);
         const animation_name = frames[index];
         return animation_name;
     };

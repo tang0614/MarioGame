@@ -11,7 +11,7 @@ export function createMario(){
     return loadSpriteSheet('mario')
     .then(mario=>{
       
-        const mario_entity = new Entity('mario',10,2);
+        const mario_entity = new Entity('mario',2);
         mario_entity.size.set(16,16);
 
         mario_entity.addTrait(new Go());
@@ -22,7 +22,6 @@ export function createMario(){
         const anime_retreat  = createAnime(['retreat-1','retreat-2','retreat-3'],10);
 
         function routeFrame(mario){
-        
             if(mario.go.distance >0){
                 return anime_run(mario.go.distance);
             }else if(mario.go.distance==0){

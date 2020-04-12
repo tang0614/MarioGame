@@ -4,20 +4,36 @@ export default class Go extends Trait{
     constructor(){
         super('go');
         this.dir =0;
-        this.speed =80;
+        this.acc_x=200;
         this.distance = 0;
-        this.heading = 1;
-
     }
     
     update(entity,dt){
-        entity.velocity.x = this.speed * this.dir;
+        console.log('entity.velocity.x is ');
+
+        console.log(entity.velocity.x);
         if(this.dir==1){
+
+            if(entity.velocity.x>200){
+                entity.velocity.x += 0;
+            }else{
+                entity.velocity.x += this.acc_x * this.dir * dt;
+            }
             this.distance += entity.velocity.x * dt;
+
         }else if (this.dir==-1){
+
+            if(entity.velocity.x<-200){
+                entity.velocity.x += 0;
+            }else{
+                entity.velocity.x += this.acc_x * this.dir * dt;
+            }
+
             this.distance += entity.velocity.x * dt;
+
         }else{
             this.distance = 0;
+            entity.velocity.x=0;
         }
         
     }

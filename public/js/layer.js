@@ -4,7 +4,7 @@ export function getBackgroundLayer(level,background_sprites){
     const resolver = level.tile_collider.tile_resolver;
 
     const buffer = document.createElement('canvas');
-    buffer.width = 400 + 16;
+    buffer.width = 280 + 16;
     buffer.height = 240;
     const buffer_context = buffer.getContext('2d');
     //draw background_sprites on the buffer_context using grid unit x,y 
@@ -15,12 +15,8 @@ export function getBackgroundLayer(level,background_sprites){
             if(col){
                 col.forEach((value,y)=>{
                     if(value.name ==='chance'){
-                        console.log('drawing..');
-                        console.log('level duration is');
-                        console.log(level.duration);
-                        
+
                         background_sprites.drawAnime(value.name,buffer_context,x,y,level.duration);
-                        console.log('drawn');
                     }else{
                          background_sprites.drawTile(value.name,buffer_context,x,y);
                     }

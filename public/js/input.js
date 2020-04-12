@@ -7,11 +7,11 @@ export function setupKeyBoard(entity){
      input.addMapping(SPACE, keyState=>{
          if(keyState){
              //keystate =1, released
-             console.log('jumping!')
+             //console.log('jumping!')
              entity.jump.start();
          }else{
              //keystate =0, keep pressing
-             console.log('you released down tab')
+             //console.log('you released down tab')
              entity.jump.cancel();
          }
  

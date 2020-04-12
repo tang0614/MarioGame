@@ -7,8 +7,6 @@ export default class Position extends Trait{
     update(entity,dt){
         entity.pos.x +=(entity.velocity.x * dt);
         entity.pos.y +=(entity.velocity.y * dt);
-        //falling also need acc
-        entity.velocity.y +=entity.acc; //gravity, so if not move, y velocity is positive
-
+       
     }
 } 

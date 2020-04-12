@@ -38,6 +38,10 @@ Promise.all([loadLevel('1')])
     const timer = new Timer(1/50);
     //write new method for timer object
     timer.update = function update(dt){
+        //camera position changes when we scroll the canvas 
+        if(mario_entity.pos.x>100){
+            camera.pos.x = mario_entity.pos.x-100;
+        }
         level.compo.draw(context,camera); //drawing background, entities and collision layer
         level.update(dt); // update 
     
