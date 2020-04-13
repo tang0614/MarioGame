@@ -14,6 +14,7 @@ export function createMario(){
         const mario_entity = new Entity('mario',2);
         mario_entity.size.set(16,16);
         mario_entity.pos.set(64,64);
+        mario_entity.velocity.set(0,0);
 
         mario_entity.addTrait(new Go());
         mario_entity.addTrait(new Jump());
@@ -23,7 +24,7 @@ export function createMario(){
         const anime_retreat  = createAnime(['retreat-1','retreat-2','retreat-3'],10);
 
         function routeFrame(mario){
-          
+           // draw jumping when not able to jump(while jumping )
             if(!mario.jump.ready){
                 return 'jump';
             }
@@ -47,7 +48,6 @@ export function createMario(){
         //add a draw method to mario entity
         mario_entity.draw = function drawMario(context,camera){
             //draw method from sprite sheet (This pointing to the mario)
-            
             mario.draw(routeFrame(this),context,this.pos.x-camera.pos.x,this.pos.y-camera.pos.y);
         }
         

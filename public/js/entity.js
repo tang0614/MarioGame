@@ -26,7 +26,6 @@ export default class Entity{
     update(dt){
         this.traits.forEach(trait => {
             //traits are position, jump and go
-            console.log('updating trait',trait)
             trait.update(this,dt);
         });
     }

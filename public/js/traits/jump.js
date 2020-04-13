@@ -43,12 +43,14 @@ export default class Jump extends Trait{
             entity.velocity.y -= this.jump_velocity; //jump upward
             this.jumpTime -= entity.mass * dt;
         }
+        //when update the new entity, set to false
         this.ready=false;
 
      
     }
     obstruct(entity,side){
         if(side=='bottom'){
+            //after checking the collision, setting to true and then draw it 
             this.ready=true;
        
         }

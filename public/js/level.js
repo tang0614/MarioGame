@@ -22,8 +22,6 @@ export default class Level {
             // console.log(entity.pos.x);
             // console.log(entity.pos.y);
 
-            console.log(entity);
-
             this.tile_collider.test(entity); // test X Y collision, bottom collision
             this.duration +=dt;
 
