@@ -99,11 +99,11 @@ export function loadLevel(name){
         const level = new Level();
         //lowested layer- set up matrix with range and name
         //give each element inside the matrix a name/value
-        createTilesGrid(level,levelFile.backgrounds,levelFile.patterns);
+        createTilesGrid(level,levelFile.tiles,levelFile.patterns);
 
         //layer one - drawing background on context according to element's name and posiiton in matrix
-        const tiles = level.tiles_matrix;
-        const background_draw_function = getBackgroundLayer(level,tiles,BackGroundSprite);
+        const tiles_matrix = level.tiles_matrix;
+        const background_draw_function = getBackgroundLayer(level,tiles_matrix,BackGroundSprite);
         level.compo.layers.push(background_draw_function);
         
         //layer two - drawing entities on context
