@@ -99,7 +99,7 @@ export function loadLevel(name){
         const level = new Level();
         //lowested layer- set up matrix with range and name
         //give each element inside the matrix a name/value
-        createTilesGrid(level,levelFile.backgrounds);
+        createTilesGrid(level,levelFile.backgrounds,levelFile.patterns);
 
         //layer one - drawing background on context according to element's name and posiiton in matrix
         const tiles = level.tiles_matrix;
@@ -112,8 +112,8 @@ export function loadLevel(name){
         level.compo.layers.push(mario_draw_function);
 
         //layer three -top layer- need entities and backgroud-sprite to draw collision
-        //const draw_collision_function =createCollisionLayer(level);
-        //level.compo.layers.push(draw_collision_function);
+        const draw_collision_function =createCollisionLayer(level);
+        level.compo.layers.push(draw_collision_function);
         
        
         return level;

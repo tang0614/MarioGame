@@ -15,7 +15,6 @@ export default class TileCollider{
     }
 
     checkX(entity){
-        console.log('Checking X direction ....');
         if(entity.velocity.x==0){
             return;
         }
@@ -50,8 +49,6 @@ export default class TileCollider{
         })
     }
     checkY(entity){
-        console.log('Checking Y direction ....');
-      
     
      
         const matchedTiles = this.tile_resolver.getTileByRange(

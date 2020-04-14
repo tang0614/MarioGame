@@ -4,7 +4,7 @@ export default class Go extends Trait{
     constructor(){
         super('go');
         this.dir =0;
-        this.acc_x=150;
+        this.acc_x=200;
         this.distance = 0;
     }
     
