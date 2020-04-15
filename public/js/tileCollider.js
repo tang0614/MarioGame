@@ -43,16 +43,22 @@ export default class TileCollider{
                 
                 if(entity.pos.x >match.x_left-entity.size.x){
                     entity.pos.x=match.x_left-entity.size.x;
-                       
-                   
+                    entity.velocity.x=0;
+                    
+                    console.log('hitting the right.....');
+                    entity.obstruct('right');
                 }
+                
             } else if(entity.velocity.x<0){
                 if(entity.pos.x<match.x_right){
                     entity.pos.x=match.x_right;
-            
                     entity.velocity.x=0;
 
+                    console.log('hitting the left.....');
+                    entity.obstruct('left');
+
                 }
+                
             } 
         })
     }

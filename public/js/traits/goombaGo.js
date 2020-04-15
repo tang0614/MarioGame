@@ -1,17 +1,17 @@
-import Trait from './trait.js'
+import Trait from './trait.js';
 
-export default class Go extends Trait{
+export default class GoombaGo extends Trait{
     constructor(){
-        super('go');
-        this.dir =0;
-        this.acc_x=200;
+        super('walk');
+        this.dir =1;
+        this.acc_x=30;
         this.distance = 0;
-        this.right_hit =false;
-        this.left_hit =false;
+        this.duration =0;
     }
     
     update(entity,dt){
       
+        //cannot move in x direction if jumping
 
         if(this.dir==1){
             if(entity.velocity.x>100){
@@ -31,15 +31,24 @@ export default class Go extends Trait{
 
             this.distance += entity.velocity.x * dt;
 
-        }else{
-            this.distance = 0;
-            entity.velocity.x=0;
         }
-
+        this.duration += dt;
         
+   
     }
 
-
-
+    obstruct(entity,side){
+        if(side=='left'){
+            //after checking the collision, setting to true and then draw it 
+            this.dir=1;
+       
+        }
+        if(side=='right'){
+            //after checking the collision, setting to true and then draw it 
+            this.dir=-1;
+       
+        }
+        
+    }
 
 }

@@ -24,11 +24,8 @@ export default class Jump extends Trait{
     }
     //update jump velocity after time dt
     update(entity,dt){
-         //gravity
-         entity.velocity.y +=this.acc_y * dt; 
-
-        console.log('entity.velocity.y');
-        console.log(entity.velocity.y);
+        //gravity
+        entity.velocity.y +=this.acc_y * dt; 
 
         if(this.requestTime >0){
             if(this.ready){
