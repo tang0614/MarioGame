@@ -15,16 +15,22 @@ export default class TileCollider{
     }
 
     checkX(entity){
-        if(entity.velocity.x==0){
+        let x;
+        if(entity.velocity.x>0){
+            x=entity.pos.x+ entity.size.x;
+
+        }else if(entity.velocity.x<0){
+            x=entity.pos.x;
+            
+        }else{
             return;
         }
-      
+
+       
         const matchedTilesIndex = this.tile_resolver.getTileByRange(
-            entity.pos.x, entity.pos.x+ entity.size.x,
+            x, x,
             entity.pos.y, entity.pos.y+ entity.size.y);
-        
-        console.log('matched tiles index are ....');
-        console.log(matchedTilesIndex);
+    
         
         matchedTilesIndex.forEach(match=>{
             
@@ -50,16 +56,25 @@ export default class TileCollider{
             } 
         })
     }
+
     checkY(entity){
-      
+        let y;
+        if(entity.velocity.y>0){
+
+            y=entity.pos.y+ entity.size.y;
+        }else if(entity.velocity.y<0){
+            y=entity.pos.y;
+
+        }
      
         const matchedTiles = this.tile_resolver.getTileByRange(
             entity.pos.x, entity.pos.x + entity.size.x,
-            entity.pos.y,entity.pos.y+ entity.size.y);
-        
+            y,y);
         
         
         matchedTiles.forEach(match=>{
+    
+        
             //name is ground
             if(match.tile.type!=='ground'){
                 return;
