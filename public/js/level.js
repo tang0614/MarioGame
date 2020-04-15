@@ -1,14 +1,17 @@
-import Compositor from './compository.js'
-import Matrix from './matrix.js'
-import TileCollider from './tileCollider.js'
+import Compositor from './compository.js';
+
+import TileCollider from './tileCollider.js';
 
 export default class Level {
     constructor(){
         this.compo = new Compositor();
         this.entities = new Set();
-        this.tiles_matrix = new Matrix();
-        this.tile_collider = new TileCollider(this.tiles_matrix);
+        //this.tiles_matrix = new Matrix();
+        this.tile_collider =null;
         this.duration = 0;
+    }
+    setCollisionGrid(matrix){
+        this.tile_collider = new TileCollider(matrix);
     }
     update(dt){
         this.entities.forEach(entity=>{

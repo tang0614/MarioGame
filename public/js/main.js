@@ -1,5 +1,5 @@
 import Timer from './time.js';
-import {loadLevel}from './loader.js';
+import {loadLevel}from './loader/loadLevel.js';
 import {setupKeyBoard} from './input.js';
 import Camera from './camera.js';
 import {drawCameraLayer} from './layer.js';

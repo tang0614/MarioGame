@@ -71,7 +71,6 @@ export default class TileCollider{
                     entity.pos.y=match.y_cell-entity.size.y;
                     entity.velocity.y=0;
                     //tell entity is hitting ground
-                    console.log('Colliding bottom ....');
                     entity.obstruct('bottom');
 
 

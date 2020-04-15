@@ -1,7 +1,9 @@
 //lay one
-export function getBackgroundLayer(level,tiles,background_sprites){
-   
-    const resolver = level.tile_collider.tile_resolver;
+import TileResolver from './tileResolver.js';
+
+export function getBackgroundLayer(level,backgroundGrid,background_sprites){
+
+    const resolver = new TileResolver(backgroundGrid); //new resolver not inside level
     const buffer = document.createElement('canvas');
     buffer.width = 256 + 16;
     buffer.height = 240;
@@ -9,10 +11,12 @@ export function getBackgroundLayer(level,tiles,background_sprites){
     //draw background_sprites on the buffer_context using grid unit x,y 
     // whole image is stored in buffer
     function drawBufferInsideCamera(startIndex,endIndex){
+
         buffer_context.clearRect(0,0,buffer.width,buffer.height);
 
         for(let x =startIndex; x<=endIndex; x++){
-            const col = tiles.grid[x];
+            const col = backgroundGrid.grid[x];
+  
             if(col){
                 col.forEach((value,y)=>{
                     if(value.name ==='chance'){
@@ -20,7 +24,7 @@ export function getBackgroundLayer(level,tiles,background_sprites){
                         //such that you can make image starting from x+startindex to show on (0,0) on buffer.
                         background_sprites.drawAnime(value.name,buffer_context,x-startIndex,y,level.duration);
                     }else{
-                         background_sprites.drawTile(value.name,buffer_context,x-startIndex,y);
+                        background_sprites.drawTile(value.name,buffer_context,x-startIndex,y);
                     }
                    
                 });
@@ -30,15 +34,10 @@ export function getBackgroundLayer(level,tiles,background_sprites){
  
     //substract image from the whole imaged stored in buffer according to camera position
     return function drawOnContext_background(context,camera){
-        
         const drawWidth = resolver.toTileIndex(camera.size.x);
         const drawfrom = resolver.toTileIndex(camera.pos.x);
         const drawTo = drawfrom + drawWidth;
-         //if window is not changing
-        //  if(drawfrom===startIndex && drawTo===endIndex){
-        //      return
-        //  }
-
+ 
         drawBufferInsideCamera(drawfrom,drawTo);
         //draw buffer inside context
        

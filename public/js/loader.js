@@ -1,10 +1,6 @@
-import Level from './level.js';
-import {getBackgroundLayer,getSpriteLayer} from './layer.js'
-import {createCollisionLayer,drawCameraLayer} from './layer.js'
-import {createMario} from './createMario.js';
 import SpriteSheet from './SpriteSheet.js';
-import {createTilesGrid} from './createTilesGrid.js'
 import {createAnime} from './anime.js';
+
 
 export function loadImage(url){
     //return a correct object
@@ -33,7 +29,7 @@ export function loadImage(url){
     });
 }
 
-function loadJSON(url){
+export function loadJSON(url){
     return fetch(url)
     .then(r=>r.json());
 
@@ -82,42 +78,6 @@ export function loadSpriteSheet(name) {
         
         
         return sprites;
-    });
-}
-
-
-export function loadLevel(name){
-    return loadJSON(`./levels/${name}.json`)
-    .then(levelFile=>{
-          return Promise.all([
-            levelFile,
-            loadSpriteSheet(levelFile.spriteSheet),
-            createMario(),
-        ]);
-    })
-    .then(([levelFile,BackGroundSprite,mario_entity])=>{
-        const level = new Level();
-        //lowested layer- set up matrix with range and name
-        //give each element inside the matrix a name/value
-        createTilesGrid(level,levelFile.tiles,levelFile.patterns);
-
-        //layer one - drawing background on context according to element's name and posiiton in matrix
-        const tiles_matrix = level.tiles_matrix;
-        const background_draw_function = getBackgroundLayer(level,tiles_matrix,BackGroundSprite);
-        level.compo.layers.push(background_draw_function);
-        
-        //layer two - drawing entities on context
-        level.entities.add(mario_entity);
-        const mario_draw_function = getSpriteLayer(level.entities);
-        level.compo.layers.push(mario_draw_function);
-
-        //layer three -top layer- need entities and backgroud-sprite to draw collision
-        const draw_collision_function =createCollisionLayer(level);
-        level.compo.layers.push(draw_collision_function);
-        
-       
-        return level;
-
     });
 }
 
