@@ -3,6 +3,7 @@ import {getBackgroundLayer,getSpriteLayer} from '../layer.js'
 import {createCollisionLayer} from '../layer.js'
 import {loadMario} from '../loadMario.js';
 import {loadGoomba} from '../loadGoomba.js';
+import {loadKoopa} from '../loadKoopa.js';
 import {expandTiles} from '../createTilesGrid.js'
 import {loadJSON,loadSpriteSheet} from '../loader.js'
 import Matrix from '../matrix.js';
@@ -15,9 +16,10 @@ export function loadLevel(name){
             loadSpriteSheet(levelFile.spriteSheet),
             loadMario(),
             loadGoomba(),
+            loadKoopa()
         ]);
     })
-    .then(([levelFile,BackGroundSprite,createMario,createGoomba])=>{
+    .then(([levelFile,BackGroundSprite,createMario,createGoomba,createKoopa])=>{
         
         const level = new Level();
  
@@ -37,11 +39,13 @@ export function loadLevel(name){
         //layer two - drawing entities on context
         //createMario return back a function
         const mario_entity = createMario();
-        
         level.entities.add(mario_entity);
 
         const goomba_entity = createGoomba(); 
         level.entities.add(goomba_entity);
+
+        const koopa_entity = createKoopa(); 
+        level.entities.add(koopa_entity);
 
         const draw_function = getSpriteLayer(level.entities);
         level.compo.layers.push(draw_function);

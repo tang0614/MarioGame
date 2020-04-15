@@ -41,6 +41,9 @@ function createGoombaEntity(goomba){
         goomba_entity.addTrait(new Jump());
         goomba_entity.addTrait(new Position());
 
+        goomba_entity.dir =1;
+        goomba_entity.acc_x=20;
+
 
         
         //add a draw method to mario entity
