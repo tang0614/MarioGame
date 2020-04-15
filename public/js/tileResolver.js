@@ -50,6 +50,8 @@ export default class TileResolver{
     getTileByRange(x1,x2,y1,y2){
         const matchedTiles=[];
         this.toIndexRange(x1,x2).forEach(indexX =>{
+            console.log('X index is ...');
+            console.log(indexX);
             this.toIndexRange(y1,y2).forEach(indexY=>{
                 const matched = this.getTileByIndex(indexX,indexY);
                 if(matched){

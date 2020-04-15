@@ -18,9 +18,8 @@ export default class Level {
             //first update entity jump, go speed and then update position
             console.log('updating');
             entity.update(dt);
-
-            // console.log(entity.velocity.x);
-            // console.log(entity.velocity.y);
+            console.log('entity.pos.x');
+            console.log(entity.pos.x);
 
             // console.log(entity.pos.x);
             // console.log(entity.pos.y);
