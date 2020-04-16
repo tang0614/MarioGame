@@ -3,7 +3,7 @@ import Jump from '../traits/jump.js'
 import Position from '../traits/position.js'
 import Entity from '../entity.js'
 import {loadSpriteSheet} from '../loader.js'
-import {createAnime} from '../anime.js'
+
 
 
 export function loadMario(){

@@ -1,11 +1,11 @@
 import Level from '../level.js';
 import {getBackgroundLayer,getSpriteLayer} from '../layer.js'
 import {createCollisionLayer} from '../layer.js'
-import {loadMario} from '../loadMario.js';
-import {loadGoomba} from '../loadGoomba.js';
-import {loadKoopa} from '../loadKoopa.js';
-import {expandTiles} from '../createTilesGrid.js'
-import {loadJSON,loadSpriteSheet} from '../loader.js'
+import {loadMario} from '../entities/loadMario.js';
+import {loadGoomba} from '../entities/loadGoomba.js';
+import {loadKoopa} from '../entities/loadKoopa.js';
+import {expandTiles} from '../createTilesGrid.js';
+import {loadJSON,loadSpriteSheet} from '../loader.js';
 import Matrix from '../matrix.js';
 
 export function loadLevel(name){

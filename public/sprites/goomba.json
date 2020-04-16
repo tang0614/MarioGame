@@ -21,7 +21,7 @@
             "name": "walk",
             "frameLen": 0.2,
             "frames": ["walk-1",
-             "walk-1"]
+             "walk-2"]
          }
     ]
 }

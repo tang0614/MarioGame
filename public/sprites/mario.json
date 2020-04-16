@@ -38,6 +38,26 @@
             "name": "jump",
             "rect": [355,44,16,16]
         }
+    ],
+    "animations": [
+        {
+            "name": "run",
+            "frameLen": 6,
+            "frames": [
+                "run-1",
+                "run-2",
+                "run-3"
+            ]
+        },
+        {
+            "name": "retreat",
+            "frameLen": 6,
+            "frames": [
+                "retreat-1",
+                "retreat-2",
+                "retreat-3"
+            ]
+        }
     ]
 }
 
