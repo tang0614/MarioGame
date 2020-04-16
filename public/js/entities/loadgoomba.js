@@ -28,7 +28,6 @@ function createGoombaEntity(goomba){
     return function createGoombaFunction(){
         const goomba_entity = new Entity('goomba',2);
         goomba_entity.size.set(16,16);
-        goomba_entity.pos.set(90,64);
         goomba_entity.velocity.set(0,0);
 
         goomba_entity.addTrait(new GoombaGo());

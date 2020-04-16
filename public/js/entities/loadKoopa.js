@@ -30,9 +30,9 @@ function createKoopaEntity(koopa){
     //return a function create mario
     return function createKoopaFunction(){
         const koopa_entity = new Entity('koopa',2);
-        koopa_entity.size.set(16,24);
-        koopa_entity.pos.set(200,64);
+        koopa_entity.size.set(16,16);
         koopa_entity.velocity.set(0,0);
+        koopa_entity.offset.set(0,8);
 
         koopa_entity.addTrait(new GoombaGo());
         koopa_entity.addTrait(new Jump());

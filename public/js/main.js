@@ -1,23 +1,26 @@
 import Timer from './time.js';
-import {loadLevel}from './loader/loadLevel.js';
+import {createLoadLevel}from './loader/loadLevel.js';
 import {setupKeyBoard} from './input.js';
 import Camera from './camera.js';
 import {drawCameraLayer} from './layer.js';
 import {setMouseControl} from './control.js';
+import {loadEntities} from './loader/loadEntities.js';
 //loadBackGroundSprite(),loadBackGroundLevel('1')
 //These three should run in parallel
 //returned sprites,levelData are not promise object. They are resolved object.
-const canvas = document.getElementById('screen');
-const context = canvas.getContext('2d');
+
+async function main(canvas){
+    const context = canvas.getContext('2d');
+
+    const entitiyFactories = await loadEntities();
+    const levelfunction = await createLoadLevel(entitiyFactories);
+    const level = await levelfunction('1');
 
 
-Promise.all([loadLevel('1')])
-.then(([level]) =>{
-    //checking properties
-    console.log('level loaded: ', level);
-    const iterator = level.entities.values();
-    const mario_entity=iterator.next().value;
-    
+    const mario_entity = entitiyFactories.mario();
+    mario_entity.pos.set(64,64);
+    level.entities.add(mario_entity);
+
     //camera
     const camera = new Camera();
     window.camera = camera;
@@ -30,9 +33,7 @@ Promise.all([loadLevel('1')])
     //setting up keyboard and setMouseControl
     const input=setupKeyBoard(mario_entity);
     input.listenTo(window);
-    
-   
-   
+
     //Update the mario
     const timer = new Timer(1/50);
     //write new method for timer object
@@ -49,4 +50,14 @@ Promise.all([loadLevel('1')])
     
     }
     timer.start();
-});
+
+}
+
+const canvas = document.getElementById('screen');
+
+//don't need await because we don't need the returned value, only need to fire it
+main(canvas);
+    
+   
+   
+
