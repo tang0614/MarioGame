@@ -17,10 +17,7 @@ Promise.all([loadLevel('1')])
     console.log('level loaded: ', level);
     const iterator = level.entities.values();
     const mario_entity=iterator.next().value;
-    const goomba_entity=iterator.next().value;
-    console.log('mario_entity loaded: ', mario_entity);
-    console.log('goomba_entity loaded: ', goomba_entity);
-
+    
     //camera
     const camera = new Camera();
     window.camera = camera;

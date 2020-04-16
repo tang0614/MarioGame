@@ -1,9 +1,7 @@
 import Level from '../level.js';
-import {getBackgroundLayer,getSpriteLayer} from '../layer.js'
-import {createCollisionLayer} from '../layer.js'
-import {loadMario} from '../entities/loadMario.js';
-import {loadGoomba} from '../entities/loadGoomba.js';
-import {loadKoopa} from '../entities/loadKoopa.js';
+import {getBackgroundLayer,getSpriteLayer} from '../layer.js';
+import {createCollisionLayer} from '../layer.js';
+import {loadEntities} from './loadEntities.js';
 import {expandTiles} from '../createTilesGrid.js';
 import {loadJSON,loadSpriteSheet} from '../loader.js';
 import Matrix from '../matrix.js';
@@ -14,12 +12,10 @@ export function loadLevel(name){
           return Promise.all([
             levelFile,
             loadSpriteSheet(levelFile.spriteSheet),
-            loadMario(),
-            loadGoomba(),
-            loadKoopa()
+            loadEntities(),
         ]);
     })
-    .then(([levelFile,BackGroundSprite,createMario,createGoomba,createKoopa])=>{
+    .then(([levelFile,BackGroundSprite,entitiyFactories])=>{
         
         const level = new Level();
  
@@ -35,16 +31,20 @@ export function loadLevel(name){
             level.compo.layers.push(background_draw_function);
 
         })
-        
+        console.log('entitiyFactories is ....');
+        console.log(entitiyFactories);
         //layer two - drawing entities on context
         //createMario return back a function
-        const mario_entity = createMario();
+        const mario_entity = entitiyFactories.mario();
+        console.log('mario_entity loaded: ', mario_entity);
         level.entities.add(mario_entity);
 
-        const goomba_entity = createGoomba(); 
+        const goomba_entity = entitiyFactories.goomba(); 
+        console.log('goomba_entity loaded: ', goomba_entity);
         level.entities.add(goomba_entity);
 
-        const koopa_entity = createKoopa(); 
+        const koopa_entity = entitiyFactories.koopa(); 
+        console.log('koopa_entity loaded: ', koopa_entity);
         level.entities.add(koopa_entity);
 
         const draw_function = getSpriteLayer(level.entities);

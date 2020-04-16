@@ -40,6 +40,8 @@ function createKoopaEntity(koopa){
 
         koopa_entity.walk.dir =-1;
         koopa_entity.walk.acc_x=10;
+
+        
     
         
         //add a draw method to mario entity
