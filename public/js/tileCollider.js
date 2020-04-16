@@ -1,5 +1,5 @@
-import TileResolver from './tileResolver.js'
-
+import TileResolver from './tileResolver.js';
+import BoundingBox from './boundingBox.js';
 
 export default class TileCollider{
     constructor(tileMatrix){
@@ -10,17 +10,17 @@ export default class TileCollider{
         this.checkY(entity);
         this.checkX(entity); 
         
-        //const matchedTile = this.tile_resolver.getTileByPosition(entity.pos.x,entity.pos.y);
+        //const matchedTile = this.tile_resolver.getTileByPosition(entity.bounds.left,entity.bounds.top);
     
     }
 
     checkX(entity){
         let x;
         if(entity.velocity.x>0){
-            x=entity.pos.x+ entity.size.x;
+            x=entity.bounds.right;
 
         }else if(entity.velocity.x<0){
-            x=entity.pos.x;
+            x=entity.bounds.left;
             
         }else{
             return;
@@ -29,7 +29,7 @@ export default class TileCollider{
        
         const matchedTilesIndex = this.tile_resolver.getTileByRange(
             x, x,
-            entity.pos.y, entity.pos.y+ entity.size.y);
+            entity.bounds.top, entity.bounds.bottom);
     
         
         matchedTilesIndex.forEach(match=>{
@@ -41,20 +41,17 @@ export default class TileCollider{
               
             if(entity.velocity.x>0){
                 
-                if(entity.pos.x >match.x_left-entity.size.x){
-                    entity.pos.x=match.x_left-entity.size.x;
+                if(entity.bounds.right>match.x_left){
+                   
+                    entity.bounds.left=match.x_left-entity.size.x;
                     entity.velocity.x=0;
-                    
-                    console.log('hitting the right.....');
                     entity.obstruct('right');
                 }
                 
             } else if(entity.velocity.x<0){
-                if(entity.pos.x<match.x_right){
-                    entity.pos.x=match.x_right;
+                if(entity.bounds.left<match.x_right){
+                    entity.bounds.left=match.x_right;
                     entity.velocity.x=0;
-
-                    console.log('hitting the left.....');
                     entity.obstruct('left');
 
                 }
@@ -67,14 +64,14 @@ export default class TileCollider{
         let y;
         if(entity.velocity.y>0){
 
-            y=entity.pos.y+ entity.size.y;
+            y=entity.bounds.bottom;
         }else if(entity.velocity.y<0){
-            y=entity.pos.y;
+            y=entity.bounds.top;
 
         }
      
         const matchedTiles = this.tile_resolver.getTileByRange(
-            entity.pos.x, entity.pos.x + entity.size.x,
+            entity.bounds.left, entity.bounds.right,
             y,y);
         
         
@@ -89,11 +86,10 @@ export default class TileCollider{
 
             //falling to matched tile, speed up 
             if(entity.velocity.y>0){
-                if(entity.pos.y>match.y_cell-entity.size.y){
+                if(entity.bounds.bottom>match.y_cell){
 
-                    entity.pos.y=match.y_cell-entity.size.y;
+                    entity.bounds.top=match.y_cell-entity.size.y;
                     entity.velocity.y=0;
-                    //tell entity is hitting ground
                     entity.obstruct('bottom');
 
 
@@ -102,8 +98,8 @@ export default class TileCollider{
             else if(entity.velocity.y<0){
                 //tell entity is hitting ceiling
                
-                if(entity.pos.y<match.y_floor){
-                    entity.pos.y=match.y_floor;
+                if(entity.bounds.top<match.y_floor){
+                    entity.bounds.top=match.y_floor;
                     entity.velocity.y=0;
                 
                  

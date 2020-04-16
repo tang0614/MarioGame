@@ -1,5 +1,6 @@
 //lay one
 import TileResolver from './tileResolver.js';
+import BoundingBox from './boundingBox.js';
 
 export function getBackgroundLayer(level,backgroundGrid,background_sprites){
 
@@ -96,8 +97,8 @@ export function createCollisionLayer(level){
         level.entities.forEach(entity=>{
             context.strokeStyle = 'red';
             context.beginPath();
-            context.rect(entity.pos.x- camera.pos.x,
-                entity.pos.y - camera.pos.y,
+            context.rect(entity.bounds.left- camera.pos.x,
+                entity.bounds.top - camera.pos.y,
                 entity.size.x,
                 entity.size.y);
             context.stroke();

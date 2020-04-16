@@ -53,7 +53,6 @@ function createMarioEntity(mario){
         mario_entity.size.set(16,16);
         mario_entity.pos.set(64,64);
         mario_entity.velocity.set(0,0);
-        
 
         mario_entity.addTrait(new Go());
         mario_entity.addTrait(new Jump());
