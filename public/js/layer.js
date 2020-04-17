@@ -5,7 +5,7 @@ export function getBackgroundLayer(level,backgroundGrid,background_sprites){
 
     const resolver = new TileResolver(backgroundGrid); //new resolver not inside level
     const buffer = document.createElement('canvas');
-    buffer.width = 256 + 16;
+    buffer.width = 456 + 16;
     buffer.height = 240;
     const buffer_context = buffer.getContext('2d');
     //draw background_sprites on the buffer_context using grid unit x,y 
