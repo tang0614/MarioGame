@@ -18,7 +18,7 @@ class GoombaBehavior extends Trait{
         super('behavior');
     }
 
-    collides_entity(us,them){
+    overlaps_entity(us,them){
         if(them.marioCollide){
             if(them.velocity.y>us.velocity.y){
                 them.marioCollide.bounceUp();

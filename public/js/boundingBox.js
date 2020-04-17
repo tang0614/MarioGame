@@ -14,6 +14,11 @@ export default class BoundingBox{
         
     }
 
+  
+
+
+    
+
     get bottom(){
         return this.pos.y +this.size.y+ this.offset.y;
     }

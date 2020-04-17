@@ -32,7 +32,7 @@ export default class GoombaGo extends Trait{
             this.distance += entity.velocity.x * dt;
 
         }else{
-            entity.velocity.x=100;
+            entity.velocity.x=200;
             this.acc_x=300;
         }
         this.duration += dt;

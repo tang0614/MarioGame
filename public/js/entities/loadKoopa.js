@@ -18,22 +18,35 @@ class KoopaBehavior extends Trait{
         super('behavior');
     }
 
-    collides_entity(us,them){
+    overlaps_entity(us,them){
         if(them.marioCollide){
-            if(them.velocity.y>us.velocity.y){
-                them.marioCollide.bounceUp();
-                us.killable.letSleep();
-                us.velocity.y = -200;
-                us.walk.dir =0;
-              
-          
-            }else if(them.velocity.y==us.velocity.y){
-                them.killable.killed();
-                them.go.dir =0;
-            
+
+            if(us.killable.sleep){
+                if(them.velocity.y>us.velocity.y){
+                    us.canOverlap = false;
+                }else if (them.velocity.y==us.velocity.y){
+                    us.canOverlap = true;
+                    us.canPush = true;
+                }
+ 
+            }else{
+                us.canOverlap =true;
+                if(them.velocity.y>us.velocity.y){
+                    them.marioCollide.bounceUp();
+                    us.killable.letSleep();
+                    us.velocity.y = -200;
+                    us.walk.dir =0;
+                
+                }else if(them.velocity.y==us.velocity.y){
+                    them.killable.killed();
+                    them.go.dir =0;
+                
+                }
             }
             
-        }   
+
+            
+        }
     }
 }
 

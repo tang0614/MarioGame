@@ -14,6 +14,8 @@ export default class Entity{
         this.bounds = new BoundingBox(this.pos, this.size, this.offset);
 
         this.traits=[];
+        this.canPush = false;
+        this.canOverlap = true;
     }
     addTrait(trait){
         this.traits.push(trait);
@@ -36,12 +38,20 @@ export default class Entity{
         });
     }
 
+    overlaps(candidate){
+        this.traits.forEach(trait => {
+            //traits are position, jump and go
+            trait.overlaps_entity(this,candidate);
+        });
+    }
+
     collides(candidate){
         this.traits.forEach(trait => {
             //traits are position, jump and go
             trait.collides_entity(this,candidate);
         });
     }
+    
 
 
 }

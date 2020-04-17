@@ -5,11 +5,15 @@ export default class Trait{
     obstruct(){
         
     }
-    collides_entity(us,them){
+    overlaps_entity(us,them){
         
     }
 
     update(entity,dt,level){
+
+    }
+
+    collides_entity(us,them){
 
     }
 }
