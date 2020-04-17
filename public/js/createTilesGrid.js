@@ -33,20 +33,30 @@ export function expandTiles(tiles,patterns){
 }
 
 // it can be changed into generator function
-function expandSpan(x1,xlen,y1,ylen){
+// function expandSpan(x1,xlen,y1,ylen){
+//     const x2 = x1 + xlen;
+//     const y2 = y1 + ylen;
+//     const coord =[];
+
+//     for(let x=x1; x<x2; x++){
+//         for(let y=y1; y<y2;y++){
+//             coord.push({x,y});
+//         }
+//     }
+//     return coord;
+// }
+
+function* expandSpan(x1,xlen,y1,ylen){
     const x2 = x1 + xlen;
     const y2 = y1 + ylen;
-    const coord =[];
 
     for(let x=x1; x<x2; x++){
         for(let y=y1; y<y2;y++){
-            coord.push({x,y});
+            yield{x,y};
         }
     }
-    return coord;
+   
 }
-
-
 
 
 

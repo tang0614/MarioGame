@@ -4,7 +4,7 @@ export default class Killable extends Trait{
     constructor(){
         super('killable');
         this.dead = false;
-        this.time = 2;
+        this.time = 1;
         this.deadTime=0;
     }
 

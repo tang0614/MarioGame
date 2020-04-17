@@ -29,6 +29,7 @@ class GoombaBehavior extends Trait{
                 them.killable.killed();
                 them.velocity.x =0;
                 them.velocity.y=0;
+                them.go.acc_x=0;
 
             }
             

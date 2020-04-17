@@ -1,6 +1,5 @@
-//lay one
 import TileResolver from './tileResolver.js';
-import BoundingBox from './boundingBox.js';
+
 
 export function getBackgroundLayer(level,backgroundGrid,background_sprites){
 
@@ -50,7 +49,7 @@ export function getBackgroundLayer(level,backgroundGrid,background_sprites){
     }
 }
 
-//layer two
+
 export function getSpriteLayer(entities){
     //draw entities on context
     return function drawOnContext_sprite(context,camera){
@@ -61,7 +60,7 @@ export function getSpriteLayer(entities){
     }
 }
 
-//layer three
+
 export function createCollisionLayer(level){
 
     const resolvedTiles = [];
