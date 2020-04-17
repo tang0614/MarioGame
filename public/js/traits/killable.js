@@ -28,6 +28,7 @@ export default class Killable extends Trait{
 
     awake(entity){
         entity.walk.dir =1;
+        entity.velocity.x =0;
         entity.walk.acc_x=6; //kopppa walk acc
     }
 

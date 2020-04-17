@@ -33,7 +33,7 @@ export default class GoombaGo extends Trait{
 
         }else{
             entity.velocity.x=100;
-            this.acc_x=200;
+            this.acc_x=300;
         }
         this.duration += dt;
         
