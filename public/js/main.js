@@ -39,8 +39,12 @@ async function main(canvas){
     //write new method for timer object
     timer.update = function update(dt){
         //camera position changes when we scroll the canvas 
-        
+        if(mario_entity.pos.x<0){
+            mario_entity.pos.x=0;
+
+        }
         camera.pos.x = Math.max(0,mario_entity.pos.x-50);
+       
         level.compo.draw(context,camera); //drawing background, entities and collision layer
         level.update(dt); // update 
     
