@@ -3,6 +3,8 @@ import {loadSpriteSheet} from '../loader.js';
 import GoombaGo from '../traits/goombaGo.js';
 import Jump from '../traits/jump.js';
 import Position from '../traits/position.js'
+import Trait from '../traits/trait.js'
+import Killable from '../traits/killable.js';
 
 export function loadKoopa(){
   
@@ -11,11 +13,36 @@ export function loadKoopa(){
 
 }
 
+class KoopaBehavior extends Trait{
+    constructor(){
+        super('behavior');
+    }
+
+    collides_entity(us,them){
+        if(them.marioCollide){
+            if(them.velocity.y>us.velocity.y){
+                them.marioCollide.bounceUp();
+                us.killable.killed();
+                us.walk.dir =0;
+          
+            }else if(them.velocity.y==us.velocity.y){
+                them.killable.killed();
+            
+            }
+            
+        }   
+    }
+}
+
+
 function createKoopaEntity(koopa){
    
     const anime_run = koopa.animation.get('walk');
    
     function routeFrame(koopa_entity){
+        if(koopa_entity.killable.dead){
+            return 'hiding';
+        }
         //duration increase with time
         return anime_run(koopa_entity.walk.duration);
     }
@@ -37,6 +64,8 @@ function createKoopaEntity(koopa){
         koopa_entity.addTrait(new GoombaGo());
         koopa_entity.addTrait(new Jump());
         koopa_entity.addTrait(new Position());
+        koopa_entity.addTrait(new KoopaBehavior());
+        koopa_entity.addTrait(new Killable())
 
         koopa_entity.walk.dir =-1;
         koopa_entity.walk.acc_x=6;
