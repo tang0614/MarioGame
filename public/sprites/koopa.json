@@ -26,6 +26,12 @@
             "frameLen": 0.2,
             "frames": ["walk-1",
              "walk-2"]
+         },
+         {
+            "name": "sleep",
+            "frameLen": 2,
+            "frames": ["hiding",
+             "hiding-with-legs"]
          }
     ]
 }

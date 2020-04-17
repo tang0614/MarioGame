@@ -22,11 +22,13 @@ class KoopaBehavior extends Trait{
         if(them.marioCollide){
             if(them.velocity.y>us.velocity.y){
                 them.marioCollide.bounceUp();
-                us.killable.killed();
+                us.killable.letSleep();
                 us.walk.dir =0;
+              
           
             }else if(them.velocity.y==us.velocity.y){
                 them.killable.killed();
+                them.go.dir =0;
             
             }
             
@@ -38,10 +40,11 @@ class KoopaBehavior extends Trait{
 function createKoopaEntity(koopa){
    
     const anime_run = koopa.animation.get('walk');
+    const anime_sleep = koopa.animation.get('sleep');
    
     function routeFrame(koopa_entity){
-        if(koopa_entity.killable.dead){
-            return 'hiding';
+        if(koopa_entity.killable.sleep){
+            return anime_sleep(koopa_entity.walk.duration);
         }
         //duration increase with time
         return anime_run(koopa_entity.walk.duration);
@@ -67,7 +70,7 @@ function createKoopaEntity(koopa){
         koopa_entity.addTrait(new KoopaBehavior());
         koopa_entity.addTrait(new Killable())
 
-        koopa_entity.walk.dir =-1;
+        koopa_entity.walk.dir =1;
         koopa_entity.walk.acc_x=6;
 
         

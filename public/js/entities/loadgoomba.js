@@ -27,6 +27,7 @@ class GoombaBehavior extends Trait{
           
             }else if(them.velocity.y==us.velocity.y){
                 them.killable.killed();
+                them.go.dir =0;
             
             }
             
