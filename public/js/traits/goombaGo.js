@@ -9,7 +9,7 @@ export default class GoombaGo extends Trait{
         this.duration =0;
     }
     
-    update(entity,dt){
+    update(entity,dt,level){
       
         //cannot move in x direction if jumping
 
@@ -31,6 +31,9 @@ export default class GoombaGo extends Trait{
 
             this.distance += entity.velocity.x * dt;
 
+        }else{
+            entity.velocity.x=0;
+            this.acc_x=0;
         }
         this.duration += dt;
         

@@ -11,7 +11,6 @@ export default class Entity{
         this.mass = mass;
 
         this.offset =new Vector(0,0);  // offset positive x is moving to left, offset positive y is
-        // moving down
         this.bounds = new BoundingBox(this.pos, this.size, this.offset);
 
         this.traits=[];
@@ -29,12 +28,21 @@ export default class Entity{
         });
 
     }
-    update(dt){
+    update(dt,level){
         this.traits.forEach(trait => {
             //traits are position, jump and go
-            trait.update(this,dt);
+            trait.update(this,dt,level);
+            
         });
     }
+
+    collides(candidate){
+        this.traits.forEach(trait => {
+            //traits are position, jump and go
+            trait.collides_entity(this,candidate);
+        });
+    }
+
 
 }
 

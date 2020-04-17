@@ -1,9 +1,10 @@
 import Go from '../traits/go.js'
+import MarioCollide from '../traits/marioCollide.js'
 import Jump from '../traits/jump.js'
 import Position from '../traits/position.js'
 import Entity from '../entity.js'
 import {loadSpriteSheet} from '../loader.js'
-
+import Killable from '../traits/killable.js';
 
 
 export function loadMario(){
@@ -19,6 +20,7 @@ function createMarioEntity(mario){
     //const anime_run  = createAnime(['run-1','run-2','run-3'],10);
     //const anime_retreat  = createAnime(['retreat-1','retreat-2','retreat-3'],10);
     //create this function only once when loading the game, and then reuse it
+
     function routeFrame(mario_entity){
         // draw jumping when not able to jump(while jumping )
             if(!mario_entity.jump.ready){
@@ -56,6 +58,10 @@ function createMarioEntity(mario){
         mario_entity.addTrait(new Go());
         mario_entity.addTrait(new Jump());
         mario_entity.addTrait(new Position());
+        mario_entity.addTrait(new MarioCollide());
+        mario_entity.addTrait(new Killable());
+
+        
        
         //add a draw method to mario entity
         mario_entity.draw = drawMario;

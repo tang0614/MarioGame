@@ -4,13 +4,13 @@ export default class Go extends Trait{
     constructor(){
         super('go');
         this.dir =0;
-        this.acc_x=200;
+        this.acc_x=250;
         this.distance = 0;
         this.right_hit =false;
         this.left_hit =false;
     }
     
-    update(entity,dt){
+    update(entity,dt,level){
       
 
         if(this.dir==1){

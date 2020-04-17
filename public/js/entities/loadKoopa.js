@@ -39,7 +39,7 @@ function createKoopaEntity(koopa){
         koopa_entity.addTrait(new Position());
 
         koopa_entity.walk.dir =-1;
-        koopa_entity.walk.acc_x=10;
+        koopa_entity.walk.acc_x=6;
 
         
     

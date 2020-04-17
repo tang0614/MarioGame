@@ -23,7 +23,7 @@ export default class Jump extends Trait{
         this.requestTime=0;
     }
     //update jump velocity after time dt
-    update(entity,dt){
+    update(entity,dt,level){
         //gravity
         entity.velocity.y +=this.acc_y * dt; 
 

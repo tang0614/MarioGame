@@ -16,7 +16,6 @@ async function main(canvas){
     const levelfunction = await createLoadLevel(entitiyFactories);
     const level = await levelfunction('1');
 
-
     const mario_entity = entitiyFactories.mario();
     mario_entity.pos.set(64,64);
     level.entities.add(mario_entity);

@@ -3,6 +3,8 @@ import {loadSpriteSheet} from '../loader.js';
 import GoombaGo from '../traits/goombaGo.js';
 import Jump from '../traits/jump.js';
 import Position from '../traits/position.js'
+import Trait from '../traits/trait.js'
+import Killable from '../traits/killable.js';
 
 export function loadGoomba(){
   
@@ -11,10 +13,37 @@ export function loadGoomba(){
 
 }
 
+class GoombaBehavior extends Trait{
+    constructor(){
+        super('behavior');
+    }
+
+    collides_entity(us,them){
+        if(them.marioCollide){
+            if(them.velocity.y>us.velocity.y){
+                them.marioCollide.bounceUp();
+                us.killable.killed();
+                us.walk.dir =0;
+          
+            }else if(them.velocity.y==us.velocity.y){
+                them.killable.killed();
+                them.velocity.x =0;
+                them.velocity.y=0;
+
+            }
+            
+        }   
+    }
+}
+
 function createGoombaEntity(goomba){
     const anime_run = goomba.animation.get('walk');
-   
+  
+    
     function routeFrame(goomba_entity){
+        if(goomba_entity.killable.dead){
+            return 'flat';
+        }
         return anime_run(goomba_entity.walk.duration);
     }
 
@@ -33,9 +62,11 @@ function createGoombaEntity(goomba){
         goomba_entity.addTrait(new GoombaGo());
         goomba_entity.addTrait(new Jump());
         goomba_entity.addTrait(new Position());
+        goomba_entity.addTrait(new GoombaBehavior());
+        goomba_entity.addTrait(new Killable());
 
         goomba_entity.dir =1;
-        goomba_entity.acc_x=20;
+        goomba_entity.acc_x=8;
 
 
         
