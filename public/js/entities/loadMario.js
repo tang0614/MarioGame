@@ -5,6 +5,8 @@ import Position from '../traits/position.js'
 import Entity from '../entity.js'
 import {loadSpriteSheet} from '../loader.js'
 import Killable from '../traits/killable.js';
+import PlayerController from '../traits/playerController.js';
+
 
 
 export function loadMario(){
@@ -60,8 +62,9 @@ function createMarioEntity(mario){
         mario_entity.addTrait(new Position());
         mario_entity.addTrait(new MarioCollide());
         mario_entity.addTrait(new Killable());
+        mario_entity.addTrait(new PlayerController());
+        mario_entity.playerController.setPlayer(mario_entity);
 
-        
        
         //add a draw method to mario entity
         mario_entity.draw = drawMario;

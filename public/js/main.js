@@ -13,7 +13,8 @@ async function main(canvas){
     const context = canvas.getContext('2d');
 
     const entitiyFactories = await loadEntities();
-    const levelfunction = await createLoadLevel(entitiyFactories);
+    const levelfunction = await createLoadLevel(entitiyFactories);     
+    // levelFunction is a callback function inside createLoadLevel
     const level = await levelfunction('1');
 
     const mario_entity = entitiyFactories.mario();
