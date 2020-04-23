@@ -29,7 +29,7 @@
          },
          {
             "name": "sleep",
-            "frameLen": 2,
+            "frameLen": 0.2,
             "frames": ["hiding",
              "hiding-with-legs"]
          }

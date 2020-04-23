@@ -10,7 +10,7 @@ export default class Killable extends Trait{
 
         this.sleep = false;
         this.sleepTime = 0;
-        this.sleepLimit = 3;
+        this.sleepLimit = 5;
         
     }
 
