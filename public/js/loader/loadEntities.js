@@ -5,9 +5,9 @@ import {loadKoopa} from '../entities/loadKoopa.js';
 
 export function loadEntities(){
     const entitiyFactories = {};
-    //return a callback function
+    //closure 
     function add(name){
-        return factory => entitiyFactories[name] = factory
+        return factory => entitiyFactories[name] = factory;
     }
 
     // return Promise.all([
@@ -26,5 +26,5 @@ export function loadEntities(){
         loadGoomba().then(add('goomba')),
         loadKoopa().then(add('koopa')),
     ])
-    .then(()=> {return entitiyFactories});
+    .then(()=> entitiyFactories);
 }

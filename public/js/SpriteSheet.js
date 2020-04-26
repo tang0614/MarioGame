@@ -14,28 +14,29 @@ export default class SpriteSheet {
         buffer.width = width;
         buffer.height = height;
 
-        //mirring the sprite
-        // const context = buffer.getContext('2d');
-        // context.scale(-1,1);
-        // context.translate(-width,0);
-
-        //buffer image is not showing in html because we didnot put this DOM element in our html
         buffer.getContext('2d').drawImage(
-            this.image, x_subset, y_subset, width, height,
+            this.image, 
+            x_subset, y_subset, 
+            width, height,
             0,0,
             width,height);
 
-    
         //add name, butter as key, value pair into Map using map.set method
         this.tiles.set(name,buffer);
     }
     
-    defineTile(name,x_subset,y_subset){
-        this.define(name ,x_subset * this.width, y_subset * this.height,this.width,this.height);
+    defineTile(name,x,y){
+        this.define(
+            name,
+            x * this.width, 
+            y * this.height,
+            this.width,
+            this.height);
     }
 
+
     //draw the subset on which position
-    draw(name, context,x_position,y_position){
+    draw(name, context, x_position,y_position){
         //map get method to get buffer from name(key)
         const buffer = this.tiles.get(name);
         //location of the subseted image
@@ -49,6 +50,7 @@ export default class SpriteSheet {
     defineAnim(name, animation_function){
         this.animation.set(name,animation_function);
     }
+
 
     drawAnime(name,context,x_position,y_position,distance){
         const animation_function = this.animation.get(name);

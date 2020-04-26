@@ -5,14 +5,17 @@ import {expandTiles} from '../createTilesGrid.js';
 import {loadJSON,loadSpriteSheet} from '../loader.js';
 import Matrix from '../matrix.js';
 
+//closure is created, loadlevel is the child function
+
 export function createLoadLevel(entityFactory){
     //callback function is used for async processing
     return function loadLevel(name){
+
         return loadJSON(`./levels/${name}.json`)
         .then(levelFile=>{
             return Promise.all([
                 levelFile,
-                loadSpriteSheet(levelFile.spriteSheet),
+                loadSpriteSheet(levelFile.spriteSheet),  //passing in overworld json file
             ]);
         })
         .then(([levelFile,BackGroundSprite])=>{
@@ -35,8 +38,8 @@ function createCollisionGrid(tiles,patterns){
      
     const collistionGrid = new Matrix();
     const expandedTiles=expandTiles(tiles,patterns);
-    for(const {tile,derivedX,derivedY} of expandedTiles){
-        collistionGrid.set(derivedX,derivedY,{
+    for(const {tile,X,Y} of expandedTiles){
+        collistionGrid.set(X,Y,{
                         type: tile.type
         });
 
@@ -45,27 +48,31 @@ function createCollisionGrid(tiles,patterns){
 
 }
 
-function createBackgroundGrid(tiles,patterns){
+function createBackgroundGridwithTileName(tiles,patterns){
      
     const backgroundGrid = new Matrix();
 
     const expandedTiles=expandTiles(tiles,patterns);
 
-    for(const {tile,derivedX,derivedY} of expandedTiles){
-        backgroundGrid.set(derivedX,derivedY,{
-                        name: tile.name
+    //tile,X,Y are values inside object
+    
+    for(const {tile,X,Y} of expandedTiles){
+        backgroundGrid.set(X,Y,{
+                        "name": tile.name
         });
 
     }
     return backgroundGrid;
-
 }
 
 function pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite){
-    //layer one - drawing background on context according to element's name and posiiton in matrix
     levelFile.layers.forEach(layer=>{
-        const backgroundGrid = createBackgroundGrid(layer.tiles,levelFile.patterns);
+        //layer one - drawing background on context according to element's name and posiiton in matrix
+        const backgroundGrid = createBackgroundGridwithTileName(layer.tiles,levelFile.patterns);
         const background_draw_function = getBackgroundLayer(level,backgroundGrid,BackGroundSprite);
+        //draw background tiles on buffer
+        //draw buffer on context
+        //the returned background_draw_function only called when execute level.compo.layers
         level.compo.layers.push(background_draw_function);
 
     })
@@ -85,9 +92,9 @@ function pushEntitiesOnLevelCompo(levelFile,level,entityFactory){
         level.entities.add(newEntity_object);
     })
 
-    //level.entities is empty at this stage when create this function
-    const draw_function = getSpriteLayer(level.entities);
-    level.compo.layers.push(draw_function);
+    
+    const draw_entity_function = getSpriteLayer(level.entities);
+    level.compo.layers.push(draw_entity_function);
 }
 
 

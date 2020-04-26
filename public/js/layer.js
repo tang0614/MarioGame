@@ -10,7 +10,7 @@ export function getBackgroundLayer(level,backgroundGrid,background_sprites){
     const buffer_context = buffer.getContext('2d');
     //draw background_sprites on the buffer_context using grid unit x,y 
     // whole image is stored in buffer
-    function drawBufferInsideCamera(startIndex,endIndex){
+    function drawBufferBasedOnCamera(startIndex,endIndex){
 
         buffer_context.clearRect(0,0,buffer.width,buffer.height);
 
@@ -38,7 +38,7 @@ export function getBackgroundLayer(level,backgroundGrid,background_sprites){
         const drawfrom = resolver.toTileIndex(camera.pos.x);
         const drawTo = drawfrom + drawWidth;
  
-        drawBufferInsideCamera(drawfrom,drawTo);
+        drawBufferBasedOnCamera(drawfrom,drawTo);
         //draw buffer inside context
        
         //%16 to avoid running out of context, the starting drawing positionx always between 0 and 16

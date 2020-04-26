@@ -1,6 +1,6 @@
 export function expandTiles(tiles,patterns){
 
-    const expandedTiles = [];
+    const expandedTiles = []; // names and x, y position
     function walkTiles(tiles,offsetX,offsetY){
         tiles.forEach(tile=>{
             tile.ranges.forEach(([x1,xlen,y1,ylen])=>{
@@ -12,11 +12,13 @@ export function expandTiles(tiles,patterns){
                         const background_tile = patterns[tile.pattern].tiles;
                         walkTiles(background_tile,x,y);
                     }else{
+                        //key names
                         expandedTiles.push({
-                            tile,
-                            derivedX,
-                            derivedY
+                            "tile":tile,
+                            "X":derivedX,
+                            "Y":derivedY
                         });
+                        
                         // level.tiles_matrix.set(derivedX,derivedY,{
                         //     name: tile.name,
                         //     type: tile.type
@@ -28,7 +30,9 @@ export function expandTiles(tiles,patterns){
         });
 
     }
+    
     walkTiles(tiles,0,0);
+
     return expandedTiles;
 }
 

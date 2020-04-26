@@ -12,7 +12,8 @@ import PlayerController from '../traits/playerController.js';
 export function loadMario(){
   
     return loadSpriteSheet('mario')
-    .then(createMarioEntity);
+    .then(createMarioEntity); //pass in mario as parameter and call createMarioEntity function
+    //return a promise
 
 }
 

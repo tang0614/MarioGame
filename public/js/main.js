@@ -12,10 +12,9 @@ import {loadEntities} from './loader/loadEntities.js';
 async function main(canvas){
     const context = canvas.getContext('2d');
 
-    const entitiyFactories = await loadEntities();
-    const levelfunction = await createLoadLevel(entitiyFactories);     
-    // levelFunction is a callback function inside createLoadLevel
-    const level = await levelfunction('1');
+    const entitiyFactories = await loadEntities(); //return back a promise
+    const levelfunction = await createLoadLevel(entitiyFactories);  //return back a promise
+    const level = await levelfunction('1');//return back a promise
 
     const mario_entity = entitiyFactories.mario();
     mario_entity.pos.set(64,64);
@@ -23,7 +22,6 @@ async function main(canvas){
 
     //camera
     const camera = new Camera();
-    window.camera = camera;
     const drawCamera_function = drawCameraLayer(camera);
     level.compo.layers.push(drawCamera_function);
 

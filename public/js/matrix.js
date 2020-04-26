@@ -12,7 +12,7 @@ export default class Matrix{
         this.grid[x][y]=value;
     }
     get(x,y){
-        const col = this.grid[x]
+        const col = this.grid[x];
         if(col){
             return col[y];
         }else{

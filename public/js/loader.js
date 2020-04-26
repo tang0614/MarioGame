@@ -13,7 +13,7 @@ export function loadImage(url){
         console.log('loading image...');
         image.src=url;
 
-        //return resolve after loading event happens
+        //return resolved image after loading event resolved
         image.addEventListener('load',()=>{
             console.log('resolving images...');
             resolve(image);
@@ -30,8 +30,8 @@ export function loadImage(url){
 }
 
 export function loadJSON(url){
-    return fetch(url)
-    .then(r=>r.json());
+    return fetch(url)  //return a promise object
+    .then(r=>r.json());  //read that object as json file and return it as a promise
 
 }
 
@@ -42,13 +42,13 @@ export function loadSpriteSheet(name) {
         sheetSpec,
         loadImage(sheetSpec.imageURL),
     ]))
-    .then(([sheetSpec, image]) => {
-
+    .then(([sheetSpec, image]) => { 
 
         const sprites = new SpriteSheet(
             image,
             sheetSpec.tileW,
             sheetSpec.tileH);
+        //store name, and buffer in sprite.tiles key value pairs, so can be drawn on context later
 
         if(sheetSpec.tiles){
             sheetSpec.tiles.forEach(tileSpec => {
@@ -68,16 +68,13 @@ export function loadSpriteSheet(name) {
 
         if(sheetSpec.frames){
             sheetSpec.frames.forEach(frame=>{
-                sprites.define(frame.name, 
-                    frame.rect[0],
-                    frame.rect[1],
-                    frame.rect[2],
-                    frame.rect[3]) // ...frame.rect
+                sprites.define(frame.name, ...frame.rect) 
+                // spread operator [frame.rect[0],frame.rect[1],frame.rect[2],frame.rect[3]]
             });
         }
         
         
-        return sprites;
+        return sprites; 
     });
 }
 
