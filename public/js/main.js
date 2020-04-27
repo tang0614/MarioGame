@@ -17,6 +17,9 @@ async function main(canvas){
 
     const mario_entity_reference = entitiyFactories['mario'];
     const mario_entity = mario_entity_reference();
+    //entity position unit is not index, but number of pixel from (0,0);
+    //one tile has 16 pixles, and 64/16 = 4 tile away from 0 
+    //seeing three tile because first tile start at -16 pixels
     mario_entity.pos.set(64,64);
     level.entities.add(mario_entity);
 
@@ -34,9 +37,9 @@ async function main(canvas){
     input.listenTo(window);
 
     //Update the mario
-    const timer = new Timer(1/50);
+    const timer = new Timer();
 
-    //write new method for timer object
+    //write a static method for timer object
     timer.update = function update(dt){
         //camera position changes when we scroll the canvas 
         if(mario_entity.pos.x<0){
@@ -49,10 +52,9 @@ async function main(canvas){
        
         level.compo.draw(context,camera); //drawing background, entities and collision layer
         level.updateEntity(dt); // update 
-    
     }
+    console.log(timer);
     timer.start();
-
 }
 
 const canvas = document.getElementById('screen');

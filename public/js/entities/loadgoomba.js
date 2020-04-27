@@ -13,8 +13,6 @@ export function loadGoomba(){
 
 }
 
-
-
 function createGoombaEntity(goomba){
     const anime_run = goomba.animation.get('walk');
   
