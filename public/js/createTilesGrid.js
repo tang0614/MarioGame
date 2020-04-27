@@ -15,8 +15,8 @@ export function expandTiles(tiles,patterns){
                         //key names
                         expandedTiles.push({
                             "tile":tile,
-                            "X":derivedX,
-                            "Y":derivedY
+                            "colIndex":derivedX,
+                            "rowIndex":derivedY
                         });
                         
                         // level.tiles_matrix.set(derivedX,derivedY,{

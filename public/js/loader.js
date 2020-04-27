@@ -22,7 +22,6 @@ export function loadImage(url){
         image.addEventListener('error', () => {
             console.log('rejecting images...');
             reject(new Error(`Failed to load image's URL: ${url}`));
-        
   
        });
         
@@ -31,7 +30,8 @@ export function loadImage(url){
 
 export function loadJSON(url){
     return fetch(url)  //return a promise object
-    .then(r=>r.json());  //read that object as json file and return it as a promise
+    .then(r=>r.json());  //read that object as json file 
+    //and return A Promise that resolves to a JavaScript object.
 
 }
 
@@ -74,7 +74,7 @@ export function loadSpriteSheet(name) {
         }
         
         
-        return sprites; 
+        return sprites;  //a promise, resolved value is this value inside next then method
     });
 }
 

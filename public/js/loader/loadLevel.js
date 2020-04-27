@@ -21,8 +21,9 @@ export function createLoadLevel(entityFactory){
         .then(([levelFile,BackGroundSprite])=>{
             
             const level = new Level();
+            //load background layer
             pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite);
-        
+            //load koopa goomba entity layer
             pushEntitiesOnLevelCompo(levelFile,level,entityFactory);
 
             pushCollisionOnLevelCompo(levelFile,level);
@@ -34,12 +35,12 @@ export function createLoadLevel(entityFactory){
 }
 
 
-function createCollisionGrid(tiles,patterns){
+function createCollisionGridwithTileType(tiles,patterns){
      
     const collistionGrid = new Matrix();
     const expandedTiles=expandTiles(tiles,patterns);
-    for(const {tile,X,Y} of expandedTiles){
-        collistionGrid.set(X,Y,{
+    for(const {tile,colIndex,rowIndex} of expandedTiles){
+        collistionGrid.set(colIndex,rowIndex,{
                         type: tile.type
         });
 
@@ -56,8 +57,8 @@ function createBackgroundGridwithTileName(tiles,patterns){
 
     //tile,X,Y are values inside object
     
-    for(const {tile,X,Y} of expandedTiles){
-        backgroundGrid.set(X,Y,{
+    for(const {tile,colIndex,rowIndex} of expandedTiles){
+        backgroundGrid.set(colIndex,rowIndex,{
                         "name": tile.name
         });
 
@@ -66,13 +67,16 @@ function createBackgroundGridwithTileName(tiles,patterns){
 }
 
 function pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite){
+    
     levelFile.layers.forEach(layer=>{
-        //layer one - drawing background on context according to element's name and posiiton in matrix
+        //drawing background on context according to element's name and posiiton in matrix
         const backgroundGrid = createBackgroundGridwithTileName(layer.tiles,levelFile.patterns);
         const background_draw_function = getBackgroundLayer(level,backgroundGrid,BackGroundSprite);
-        //draw background tiles on buffer
+        //level passed in as a timer
+        //draw BackGroundSprite according to name on grid 
         //draw buffer on context
         //the returned background_draw_function only called when execute level.compo.layers
+        //three background layers, each drawing at a different fime
         level.compo.layers.push(background_draw_function);
 
     })
@@ -84,15 +88,15 @@ function pushEntitiesOnLevelCompo(levelFile,level,entityFactory){
     
     //levelFile.entities has koopa and goomba
     levelFile.entities.forEach(({name, pos:[x,y]})=>{
-
         const createEntityFunc= entityFactory[name]; 
-        const newEntity_object = createEntityFunc()
+        const newEntity_object = createEntityFunc();
      
         newEntity_object.pos.set(x,y);
+        //level contains entities
         level.entities.add(newEntity_object);
     })
 
-    
+    //entities are drawn on the context after calling level.compo.layers
     const draw_entity_function = getSpriteLayer(level.entities);
     level.compo.layers.push(draw_entity_function);
 }
@@ -104,9 +108,8 @@ function pushCollisionOnLevelCompo(levelFile,level){
         return mergedTiles.concat(layer.tiles); //return values goes back to mergedTiles, mergedTiles starts with []
     },[]);
     
-    //layer three -top layer- need entities and backgroud-sprite to draw collision
-    const collistionGrid = createCollisionGrid(mergedTiles,levelFile.patterns);
-    level.setCollisionGrid(collistionGrid); //become a tile resolver inside level
+    const collistionGrid = createCollisionGridwithTileType(mergedTiles,levelFile.patterns);
+    level.setCollisionGrid(collistionGrid); //become a tile collider inside level
 
     const draw_collision_function =createCollisionLayer(level);
     level.compo.layers.push(draw_collision_function);

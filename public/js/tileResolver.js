@@ -9,6 +9,7 @@ export default class TileResolver{
     }
 
     toIndexRange(pos1,pos2){
+        
         const position_max = Math.ceil(pos2/this.tileSize) * this.tileSize;
         const range =[];
         let pos =pos1;
@@ -20,6 +21,8 @@ export default class TileResolver{
         return range;
     }
     getTileByIndex(indexX,indexY){
+        //console.log(this); this pointing to the tileresolver at collision layer
+     
         const tile= this.matrix.get(indexX,indexY);
  
         if(tile){
@@ -48,6 +51,7 @@ export default class TileResolver{
     }
 
     getTileByRange(x1,x2,y1,y2){
+      
         const matchedTiles=[];
         this.toIndexRange(x1,x2).forEach(indexX =>{
       

@@ -13,23 +13,26 @@ export default class Level {
 
     }
     setCollisionGrid(matrix){
+        //being set up in levelLoader, has three properties
         this.tile_collider = new TileCollider(matrix);
     }
-    update(dt){
+    updateEntity(dt){
         this.entities.forEach(entity=>{
             //first update entity jump, go speed and then update position
-            console.log('updating dt.....');
-            entity.update(dt,this);
-            // test X Y collision, bottom coll 
+            console.log('updating after dt.....');
+            entity.update(dt,this); //this pointing to level 
+
+            
+            //check whether entities collide with tiles
             if(entity.canOverlap){
+                //test=>checkX or Y=>getTilebyRange=>getTilebyIndex
                 this.tile_collider.test(entity);  
             }
             
-            //update collide_entity in each trait
-            //overlap, can collide or cannot
+            //check whether entities collide with mario
             if(entity.canOverlap){
-                this.entity_collider.checkEntityOverlap(entity); 
-                this.entity_collider.checkEntityCollision(entity); 
+                this.entity_collider.checkEntityOverlapMario(entity); 
+                this.entity_collider.checkEntityCollideMario(entity); 
             }
            
             //"this "is pointing to level

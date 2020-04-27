@@ -1,20 +1,19 @@
 
 export function setMouseControl(canvas, entity, camera) {
-    let lastEvent;
+
 
     ['mousedown', 'mousemove'].forEach(eventName => {
         canvas.addEventListener(eventName, event => {
+
+            //if mouse click on context, event.button===1 
             if (event.buttons === 1) {
                 entity.velocity.set(0, 0);
                 entity.pos.set(
                     event.offsetX + camera.pos.x,
                     event.offsetY + camera.pos.y);
-            } else if (event.buttons === 2
-                && lastEvent && lastEvent.buttons === 2
-                && lastEvent.type === 'mousemove') {
-                camera.pos.x -= event.offsetX - lastEvent.offsetX;
-            }
-            lastEvent = event;
+            
+            } 
+          
         });
     });
 

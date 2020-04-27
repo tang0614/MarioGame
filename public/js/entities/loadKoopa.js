@@ -26,7 +26,7 @@ class KoopaBehavior extends Trait{
                     us.canOverlap = false;
                 }else if (them.velocity.y==us.velocity.y){
                     us.canOverlap = true;
-                    us.canPush = true;
+                    us.canBePush = true;
                 }
  
             }else{
@@ -34,7 +34,6 @@ class KoopaBehavior extends Trait{
                 if(them.velocity.y>us.velocity.y){
                     them.marioCollide.bounceUp();
                     us.killable.letSleep();
-                    us.velocity.y = -200;
                     us.walk.dir =0;
                 
                 }else if(them.velocity.y==us.velocity.y){

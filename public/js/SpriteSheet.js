@@ -35,16 +35,13 @@ export default class SpriteSheet {
     }
 
 
-    //draw the subset on which position
-    draw(name, context, x_position,y_position){
-        //map get method to get buffer from name(key)
+    draw(name, context, colIndex, rowIndex){
         const buffer = this.tiles.get(name);
-        //location of the subseted image
-        context.drawImage(buffer,x_position,y_position);
+        context.drawImage(buffer,colIndex, rowIndex);
     }
 
-    drawTile(name,context,x_position,y_position){
-        this.draw(name, context, x_position * this.width, y_position * this.height);
+    drawTile(name,context,colIndex,row_index){
+        this.draw(name, context, colIndex * this.width, row_index * this.height);
     }
 
     defineAnim(name, animation_function){
@@ -52,9 +49,9 @@ export default class SpriteSheet {
     }
 
 
-    drawAnime(name,context,x_position,y_position,distance){
+    drawAnime(name,context, colIndex, row_index, distance){
         const animation_function = this.animation.get(name);
-        this.drawTile(animation_function(distance),context,x_position,y_position);
+        this.drawTile(animation_function(distance),context, colIndex, row_index);
     }
 }
 

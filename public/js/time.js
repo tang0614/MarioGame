@@ -5,9 +5,8 @@ export default class Timer{
     
 
         this.updateProxy = (time) =>{
-        //draw all buffers on the context
-        //replace the buffer in each update, not change redraw the 
-            acc_time += (time-last)/1000;
+
+            acc_time += (time-last)/1000; //divided by one sec
 
             while(acc_time>dt){
                 this.update(dt);

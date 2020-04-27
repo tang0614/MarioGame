@@ -3,7 +3,7 @@ export default class EntityCollider{
         this.entities = entities;
 
     }
-    checkEntityOverlap(me){
+    checkEntityOverlapMario(me){
      
         this.entities.forEach(entity=>{
            if(entity===me){
@@ -19,8 +19,8 @@ export default class EntityCollider{
         });
     }
 
-    checkEntityCollision(me){
-        if(me.canPush){
+    checkEntityCollideMario(me){
+        if(me.canBePush){
             this.entities.forEach(entity=>{
                 if(entity===me){
                     return;
@@ -40,12 +40,12 @@ export default class EntityCollider{
                           
                      }   
                  }
-                 entity.canPush =false;
+                 //entity.canBePush =false;
                  
              });
 
         }
-        me.canPush =false;
+        me.canBePush =false;
     }
 
     

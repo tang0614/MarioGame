@@ -14,7 +14,7 @@ export default class Entity{
         this.bounds = new BoundingBox(this.pos, this.size, this.offset);
 
         this.traits=[];
-        this.canPush = false;
+        this.canBePush = false;
         this.canOverlap = true;
     }
     addTrait(trait){

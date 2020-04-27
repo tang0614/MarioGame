@@ -17,6 +17,7 @@ export function loadMario(){
 
 }
 
+//mario is the parameter returned by loadSpriteSheet
 function createMarioEntity(mario){
     const anime_run = mario.animation.get('run');
     const anime_retreat = mario.animation.get('retreat');
@@ -64,11 +65,10 @@ function createMarioEntity(mario){
         mario_entity.addTrait(new MarioCollide());
         mario_entity.addTrait(new Killable());
         mario_entity.addTrait(new PlayerController());
+        
         mario_entity.playerController.setPlayer(mario_entity);
-
-       
         //add a draw method to mario entity
-        mario_entity.draw = drawMario;
+        mario_entity.draw = drawMario; // this function connect mario entity object with mario sprites object
         return mario_entity;
     }
 }

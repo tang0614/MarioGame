@@ -4,26 +4,29 @@ export default class Matrix{
         this.grid = [];
     }
 
-    set(x,y,value){
-        if(!this.grid[x]){
-            this.grid[x]=[];
+    //x is columns index
+    //y is row index
+    set(columnIndex,rowIndex,value){
+        //if column does not exist, create an empty one
+        if(!this.grid[columnIndex]){
+            this.grid[columnIndex]=[];
         }
 
-        this.grid[x][y]=value;
+        this.grid[columnIndex][rowIndex]=value;
     }
-    get(x,y){
-        const col = this.grid[x];
+    get(columnIndex,rowIndex){
+        const col = this.grid[columnIndex];
         if(col){
-            return col[y];
+            return col[rowIndex];
         }else{
             return undefined;
         }
     }
 
     loop(callback){
-        this.grid.forEach((column,x)=>{
-            column.forEach((value,y)=>{
-                callback(value,x,y);
+        this.grid.forEach((column,columnIndex)=>{
+            column.forEach((value,rowIndex)=>{
+                callback(value,columnIndex,rowIndex);
             });
         }); 
     }
