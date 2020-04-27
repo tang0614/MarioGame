@@ -13,8 +13,8 @@ export default class Trait{
 
     }
 
-    collides_entity(us,them){
+    // collides_entity(us,them){
 
-    }
+    // }
 }
 

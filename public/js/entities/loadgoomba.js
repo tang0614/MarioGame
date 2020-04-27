@@ -3,7 +3,7 @@ import {loadSpriteSheet} from '../loader.js';
 import GoombaGo from '../traits/goombaGo.js';
 import Jump from '../traits/jump.js';
 import Position from '../traits/position.js'
-import Trait from '../traits/trait.js'
+import GoombaBehavior from '../traits/goombaBehavior.js'
 import Killable from '../traits/killable.js';
 
 export function loadGoomba(){
@@ -13,32 +13,11 @@ export function loadGoomba(){
 
 }
 
-class GoombaBehavior extends Trait{
-    constructor(){
-        super('behavior');
-    }
 
-    overlaps_entity(us,them){
-        if(them.marioCollide){
-            if(them.velocity.y>us.velocity.y){
-                them.marioCollide.bounceUp();
-                us.killable.killed();
-                us.walk.dir =0;
-          
-            }else if(them.velocity.y==us.velocity.y){
-                them.killable.killed();
-                them.go.dir =0;
-            
-            }
-            
-        }   
-    }
-}
 
 function createGoombaEntity(goomba){
     const anime_run = goomba.animation.get('walk');
   
-    
     function routeFrame(goomba_entity){
         if(goomba_entity.killable.dead){
             return 'flat';
@@ -54,7 +33,7 @@ function createGoombaEntity(goomba){
 
     //return a function create mario
     return function createGoombaFunction(){
-        const goomba_entity = new Entity('goomba',2);
+        const goomba_entity = new Entity('goomba');
         goomba_entity.size.set(16,16);
         goomba_entity.velocity.set(0,0);
 
@@ -64,11 +43,6 @@ function createGoombaEntity(goomba){
         goomba_entity.addTrait(new GoombaBehavior());
         goomba_entity.addTrait(new Killable());
 
-        goomba_entity.dir =1;
-        goomba_entity.acc_x=8;
-
-
-        
         //add a draw method to mario entity
         goomba_entity.draw = drawGoomba;
         return goomba_entity;

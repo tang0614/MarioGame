@@ -3,7 +3,7 @@ import {loadSpriteSheet} from '../loader.js';
 import GoombaGo from '../traits/goombaGo.js';
 import Jump from '../traits/jump.js';
 import Position from '../traits/position.js'
-import Trait from '../traits/trait.js'
+import KoopaBehavior from '../traits/koopaBehavior.js'
 import Killable from '../traits/killable.js';
 
 export function loadKoopa(){
@@ -12,43 +12,6 @@ export function loadKoopa(){
     .then(createKoopaEntity);
 
 }
-
-class KoopaBehavior extends Trait{
-    constructor(){
-        super('behavior');
-    }
-
-    overlaps_entity(us,them){
-        if(them.marioCollide){
-
-            if(us.killable.sleep){
-                if(them.velocity.y>us.velocity.y){
-                    us.canOverlap = false;
-                }else if (them.velocity.y==us.velocity.y){
-                    us.canOverlap = true;
-                    us.canBePush = true;
-                }
- 
-            }else{
-                us.canOverlap =true;
-                if(them.velocity.y>us.velocity.y){
-                    them.marioCollide.bounceUp();
-                    us.killable.letSleep();
-                    us.walk.dir =0;
-                
-                }else if(them.velocity.y==us.velocity.y){
-                    them.killable.killed();
-                    them.go.dir =0;
-                
-                }
-            }
-            
-
-            
-        }
-    }
-}
-
 
 function createKoopaEntity(koopa){
    
@@ -72,7 +35,7 @@ function createKoopaEntity(koopa){
 
     //return a function create mario
     return function createKoopaFunction(){
-        const koopa_entity = new Entity('koopa',2);
+        const koopa_entity = new Entity('koopa');
         koopa_entity.size.set(16,16);
         koopa_entity.velocity.set(0,0);
         koopa_entity.offset.set(0,8);
@@ -83,12 +46,8 @@ function createKoopaEntity(koopa){
         koopa_entity.addTrait(new KoopaBehavior());
         koopa_entity.addTrait(new Killable())
 
-        koopa_entity.walk.dir =1;
-        koopa_entity.walk.acc_x=6;
+        koopa_entity.walk.acc_x=10;
 
-        
-    
-        
         //add a draw method to mario entity
         koopa_entity.draw = drawKoopa;
         return koopa_entity;

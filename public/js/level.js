@@ -24,13 +24,14 @@ export default class Level {
 
             
             //check whether entities collide with tiles
-            if(entity.canOverlap){
+            if(entity.canDetectTiles){
                 //test=>checkX or Y=>getTilebyRange=>getTilebyIndex
                 this.tile_collider.test(entity);  
             }
             
             //check whether entities collide with mario
-            if(entity.canOverlap){
+            //cannot overlap with tiles means cannot collide with mario
+            if(entity.canDetectTiles){
                 this.entity_collider.checkEntityOverlapMario(entity); 
                 this.entity_collider.checkEntityCollideMario(entity); 
             }

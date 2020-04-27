@@ -55,7 +55,7 @@ function createMarioEntity(mario){
 
     //return a function create mario
     return function createMarioFunction(){
-        const mario_entity = new Entity('mario',2);
+        const mario_entity = new Entity('mario');
         mario_entity.size.set(16,16);
         mario_entity.velocity.set(0,0);
 
@@ -65,7 +65,7 @@ function createMarioEntity(mario){
         mario_entity.addTrait(new MarioCollide());
         mario_entity.addTrait(new Killable());
         mario_entity.addTrait(new PlayerController());
-        
+
         mario_entity.playerController.setPlayer(mario_entity);
         //add a draw method to mario entity
         mario_entity.draw = drawMario; // this function connect mario entity object with mario sprites object
