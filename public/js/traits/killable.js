@@ -10,7 +10,7 @@ export default class Killable extends Trait{
 
         this.sleep = false;
         this.sleepTime = 0;
-        this.sleepLimit = 5;
+        this.sleepLimit = 8;
         
     }
 
@@ -45,6 +45,7 @@ export default class Killable extends Trait{
         if(this.sleep){
             this.sleepTime += dt;
             if(this.sleepTime>this.sleepLimit){
+                console.log('koopa is going to awake..')
                 this.sleep =false; 
                 this.sleepTime = 0;
                 this.awake(entity);

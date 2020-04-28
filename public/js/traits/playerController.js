@@ -5,25 +5,32 @@ export default class PlayerController extends Trait{
         super('playerController');
         this.player =null;
         this.playerTime = 300;
+        this.score =0;
        
     }
     setPlayer(entity){
         this.player =entity;
     }
 
+    
+
     update(entity,dt,level){
-        
+
         if(!level.entities.has(this.player)){
             this.player.killable.revive();
             this.player.pos.set(64,64);
             level.entities.add(this.player);
             this.playerTime =300;
-        }else{
+            this.score =0;
 
+            
+
+        }else{
+        
             this.playerTime -= dt;
-        }
+        
         
     }
 
 
-}
+}}
