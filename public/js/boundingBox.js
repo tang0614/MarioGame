@@ -13,10 +13,6 @@ export default class BoundingBox{
         && this.right > box.left;
         
     }
-
-  
-
-
     
 
     get bottom(){

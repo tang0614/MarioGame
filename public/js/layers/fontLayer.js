@@ -33,11 +33,11 @@ export function drawFont(font,level){
        
 
         font.print('MARIO',context, 16, line1);  
-        font.print('World',context, 160, line1);
-        font.print('@'+coins.toString().padStart(2,0),context, 240, line1);  
-        font.print('TIME',context, 320, line1);  
+        font.print('World',context, 112, line1);
+        font.print('@ X '+coins.toString().padStart(2,0),context,208, line1);  
+        font.print('TIME',context, 304, line1);  
         font.print(score.toString().padStart(6,0),context, 16, line2); 
-        font.print('Level 1',context, 160, line2);  
-        font.print(time.toFixed().toString(),context, 320, line2);  
+        font.print('Level 1',context, 112, line2);  
+        font.print(time.toFixed().toString(),context, 304, line2);  
     }
 }
