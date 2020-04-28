@@ -5,7 +5,7 @@ export function drawFont(font,level){
     const score = 0;
   
     
-    function getPlayerTime(){
+    function getPlayerInfo(){
         let entity_arr = level.entities.values();
         let entity = entity_arr.next().value;
 
@@ -16,16 +16,20 @@ export function drawFont(font,level){
             entity = entity_arr.next().value;
         }
         
-    
         let time = entity.playerController.playerTime;
-        return time;
+        let score = entity.playerController.score;
+        return [time,score];
 
     }
+
+    
 
    
 
  
     return function drawFont(context,camera){  
+        let time = getPlayerInfo()[0];
+        let score = getPlayerInfo()[1];
        
 
         font.print('MARIO',context, 16, line1);  
@@ -34,6 +38,6 @@ export function drawFont(font,level){
         font.print('TIME',context, 320, line1);  
         font.print(score.toString().padStart(6,0),context, 16, line2); 
         font.print('Level 1',context, 160, line2);  
-        font.print(getPlayerTime().toFixed().toString(),context, 320, line2);  
+        font.print(time.toFixed().toString(),context, 320, line2);  
     }
 }

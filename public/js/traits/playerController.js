@@ -28,7 +28,7 @@ export default class PlayerController extends Trait{
         }else{
         
             this.playerTime -= dt;
-        
+  
         
     }
 
