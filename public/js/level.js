@@ -29,15 +29,11 @@ export default class Level {
                 this.tile_collider.test(entity);  
             }
             
-            //check whether entities collide with mario
-            //cannot overlap with tiles means cannot collide with mario
-            if(entity.canDetectTiles){
-                this.entity_collider.checkEntityOverlapMario(entity); 
-                this.entity_collider.checkEntityCollideMario(entity); 
-            }
-           
-            //"this "is pointing to level
+            //check if overlap or collide with mario
+            this.entity_collider.checkEntityOverlapMario(entity); 
+            this.entity_collider.checkEntityCollideMario(entity); 
             
+            //"this "is pointing to level
             this.duration +=dt;
 
         })

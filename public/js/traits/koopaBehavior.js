@@ -11,6 +11,7 @@ export default class KoopaBehavior extends Trait{
             if(me.killable.sleep){
                 if(other.velocity.y>me.velocity.y){
                     me.canDetectTiles = false;
+                    me.canBePush = false;
                 }else if (other.velocity.y==me.velocity.y){
                     me.canDetectTiles = true;
                     me.canBePush = true;

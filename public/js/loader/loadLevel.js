@@ -1,9 +1,11 @@
 import Level from '../level.js';
-import {getBackgroundLayer,getSpriteLayer} from '../layer.js';
-import {createCollisionLayer} from '../layer.js';
+import {getSpriteLayer} from '../layers/drawEntityLayer.js';
+import {getBackgroundLayer,} from '../layers/drawBackgroundLayer.js';
+import {createCollisionLayer} from '../layers/drawCollisionLayer.js';
 import {expandTiles} from '../createTilesGrid.js';
 import {loadJSON,loadSpriteSheet} from '../loader.js';
 import Matrix from '../matrix.js';
+
 
 //closure is created, loadlevel is the child function
 
@@ -21,12 +23,14 @@ export function createLoadLevel(entityFactory){
         .then(([levelFile,BackGroundSprite])=>{
             
             const level = new Level();
-            //load background layer
+              //load background layer
             pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite);
             //load koopa goomba entity layer
             pushEntitiesOnLevelCompo(levelFile,level,entityFactory);
 
             pushCollisionOnLevelCompo(levelFile,level);
+
+            //pushFontOnLevelCompo(font,level);
         
             return level;
 
@@ -66,6 +70,10 @@ function createBackgroundGridwithTileName(tiles,patterns){
     return backgroundGrid;
 }
 
+// function pushFontOnLevelCompo(font,level){
+//     level.compo.layers.push(drawFont(font,level));
+
+// }
 function pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite){
     
     levelFile.layers.forEach(layer=>{

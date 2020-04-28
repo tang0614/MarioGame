@@ -36,6 +36,7 @@ function createKoopaEntity(koopa){
     //return a function create mario
     return function createKoopaFunction(){
         const koopa_entity = new Entity('koopa');
+        
         koopa_entity.size.set(16,16);
         koopa_entity.velocity.set(0,0);
         koopa_entity.offset.set(0,8);

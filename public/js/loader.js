@@ -78,4 +78,34 @@ export function loadSpriteSheet(name) {
     });
 }
 
+const CHARS = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
 
+export function loadFont() {
+    return loadImage('./image/font.png')
+    .then(image => {
+        const fontSprite = new SpriteSheet(image);
+
+        const size = 8;
+        const rowLen = image.width;
+        for (let [index, char] of [...CHARS].entries()) {
+            const xIndex = index * size % rowLen;
+            const yIndex = Math.floor(index * size / rowLen) * size;
+            fontSprite.define(char, xIndex, yIndex, size, size);
+        }
+
+       return new Font(fontSprite,size); 
+    });
+}
+
+class Font{
+    constructor(sprite,size){
+        this.sprite = sprite;
+        this.size =size;
+    }
+
+    print(chars,context,xpos,ypos){
+        [...chars].forEach((char,indexOfthisChars)=>{
+            this.sprite.draw(char,context,xpos + this.size*indexOfthisChars, ypos)
+        }
+    )};
+}

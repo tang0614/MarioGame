@@ -3,7 +3,7 @@ export default class Jump extends Trait{
     constructor(){
         super('jump');
         this.duration =0.05 ;
-        this.jump_velocity = 150;
+        this.jump_velocity = 140;
         this.jumpTime = 0;
         this.acc_y=500;
 

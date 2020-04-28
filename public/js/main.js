@@ -4,26 +4,33 @@ import {setupKeyBoard} from './input.js';
 import Camera from './camera.js';
 import {setMouseControl} from './control.js';
 import {loadEntities} from './loader/loadEntities.js';
+import {drawFont} from './layers/fontLayer.js';
+import {loadFont} from './loader.js';
+
+
 //loadBackGroundSprite(),loadBackGroundLevel('1')
 //These three should run in parallel
 //returned sprites,levelData are not promise object. They are resolved object.
-
+ 
 async function main(canvas){
     const context = canvas.getContext('2d');
-
+    
     const entitiyFactories = await loadEntities(); //return back a promise
     const levelfunction = await createLoadLevel(entitiyFactories);  //return back a promise
     const level = await levelfunction('1');//return back a promise
 
     const mario_entity_reference = entitiyFactories['mario'];
     const mario_entity = mario_entity_reference();
+    mario_entity.pos.set(64,64);
     //entity position unit is not index, but number of pixel from (0,0);
     //one tile has 16 pixles, and 64/16 = 4 tile away from 0 
     //seeing three tile because first tile start at -16 pixels
-    mario_entity.pos.set(64,64);
+    
     level.entities.add(mario_entity);
 
     console.log(level);
+    const font = await loadFont();
+    level.compo.layers.push(drawFont(font,level));
 
     //camera is use to determine the range of layers to draw on context
     const camera = new Camera();
@@ -49,11 +56,10 @@ async function main(canvas){
         //camera is use to determine the range of layers to draw on context
         //it always start to draw from 50 pixel left to the mario
         camera.pos.x = Math.max(0,mario_entity.pos.x-50);
-       
         level.compo.draw(context,camera); //drawing background, entities and collision layer
         level.updateEntity(dt); // update 
+       
     }
-    console.log(timer);
     timer.start();
 }
 

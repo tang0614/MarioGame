@@ -1,4 +1,5 @@
 export default class EntityCollider{
+
     constructor(entities){
         this.entities = entities;
 
@@ -12,8 +13,11 @@ export default class EntityCollider{
             //property check because only mario entity has marioCollide
             if(me.bounds.overlaps(entity.bounds)){
                 if(entity.marioCollide){
-                    me.overlaps(entity);
+                    if(!me.killable.dead){
+                        me.overlaps(entity);
+                    }
                 }   
+
             }
             
         });
@@ -40,12 +44,10 @@ export default class EntityCollider{
                           
                      }   
                  }
-                 //entity.canBePush =false;
                  
              });
 
         }
-        me.canBePush =false;
     }
 
     
