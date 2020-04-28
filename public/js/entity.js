@@ -24,21 +24,26 @@ export default class Entity{
         //important!!! this pointing to the entity object
     
     }
-    obstruct(side){
-        this.traits.forEach(trait => {
-            //traits are position, jump and go
-            trait.obstruct(this,side);
-        });
-
-    }
-    update(dt,level){
+    //update properties that change with time
+    updateBytime(dt,level){
         this.traits.forEach(trait => {
             //traits are position, jump and go
             trait.update(this,dt,level);
             
         });
     }
+    //update properties that change with entity position
+    //during checking collision, if entity obstruct with tile, then update multiple entity properties jump and dir
+    obstruct(side){
+        this.traits.forEach(trait => {
+            //traits are position, jump and go
+            trait.obstruct(side);
+        });
 
+    } 
+    //update properties that change with entity position
+    //during checking entity collision, if entity obstruct with mario, 
+    //then update multiple entity properties such as score.canDetectTiles and canbepush //this is not related to dt, so did not add it into parameter
     overlaps(candidate){
         this.traits.forEach(trait => {
             //traits are position, jump and go

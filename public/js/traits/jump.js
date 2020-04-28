@@ -45,7 +45,7 @@ export default class Jump extends Trait{
 
      
     }
-    obstruct(entity,side){
+    obstruct(side){
         if(side=='bottom'){
             //after checking the collision, setting to true and then draw it 
             this.ready=true;

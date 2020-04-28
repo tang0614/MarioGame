@@ -20,10 +20,10 @@ export default class Level {
         this.entities.forEach(entity=>{
             //first update entity jump, go speed and then update position
             console.log('updating after dt.....');
-            entity.update(dt,this); //this pointing to level 
+            entity.updateBytime(dt,this); //this pointing to level 
 
             
-            //check whether entities collide with tiles
+            //check whether entities collide with tiles, entity position with tile_collider matrix
             if(entity.canDetectTiles){
                 //test=>checkX or Y=>getTilebyRange=>getTilebyIndex
                 this.tile_collider.test(entity);  

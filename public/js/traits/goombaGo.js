@@ -40,7 +40,7 @@ export default class GoombaGo extends Trait{
    
     }
 
-    obstruct(entity,side){
+    obstruct(side){
         if(side=='left'){
             //after checking the collision, setting to true and then draw it 
             this.dir=1;
