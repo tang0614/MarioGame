@@ -8,22 +8,24 @@ export default class Level {
         this.entities = new Set();
         //this.tiles_matrix = new Matrix();
         this.tile_collider =null;
+        //only put in level we can access all entities
         this.entity_collider = new EntityCollider(this.entities);
         this.duration = 0;
 
     }
+    
     setCollisionGrid(matrix){
         //being set up in levelLoader, has three properties
         this.tile_collider = new TileCollider(matrix);
     }
-    updateEntity(dt){
+    updateEntity(dt,audioBoard){
         this.entities.forEach(entity=>{
             //first update entity jump, go speed and then update position
             console.log('updating after dt.....');
-            entity.updateBytime(dt,this); //this pointing to level 
+            entity.updateBytime(dt,this,audioBoard); //this pointing to level 
 
             
-            //check whether entities collide with tiles, entity position with tile_collider matrix
+            //check whether entities collide with tiles
             if(entity.canDetectTiles){
                 //test=>checkX or Y=>getTilebyRange=>getTilebyIndex
                 this.tile_collider.test(entity);  

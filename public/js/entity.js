@@ -9,15 +9,17 @@ export default class Entity{
         this.velocity=new Vector(0,0);
         this.size = new Vector(0,0);
         this.mass = 2.5;
-
+        this.canBePush = false;
+        this.canDetectTiles = true;
         this.offset =new Vector(0,0);  // offset positive x is moving to left, offset positive y is
         this.bounds = new BoundingBox(this.pos, this.size, this.offset);
 
         this.traits=[];
-        this.canBePush = false;
-        this.canDetectTiles = true;
+        
 
     }
+    
+   
     addTrait(trait){
         this.traits.push(trait);
         this[trait.NAME] = trait;
@@ -25,10 +27,10 @@ export default class Entity{
     
     }
     //update properties that change with time
-    updateBytime(dt,level){
+    updateBytime(dt,level,audioBoard){
         this.traits.forEach(trait => {
             //traits are position, jump and go
-            trait.update(this,dt,level);
+            trait.update(this,dt,level,audioBoard);
             
         });
     }

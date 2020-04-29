@@ -6,7 +6,8 @@ import {setMouseControl} from './control.js';
 import {loadEntities} from './loader/loadEntities.js';
 import {drawFont} from './layers/fontLayer.js';
 import {loadFont} from './loader.js';
-
+import AudioBoard from './audioBoard.js';
+import {createAudioLoader} from './loader/audio.js';
 
 //loadBackGroundSprite(),loadBackGroundLevel('1')
 //These three should run in parallel
@@ -14,26 +15,38 @@ import {loadFont} from './loader.js';
  
 async function main(canvas){
     const context = canvas.getContext('2d');
-    
+    const audioContext = new AudioContext();
+    const audioBoard = new AudioBoard(audioContext);
+
+    const loadAudio = await createAudioLoader(audioContext);
+
+
+    loadAudio('./audio/jump.ogg')
+    .then(audio=>{
+        audioBoard.addAudio('jump',audio);
+        audioBoard.playAudio('jump');
+
+    });
+
+    //camera is use to determine the range of layers to draw on context
+    const camera = new Camera();
+
     const entitiyFactories = await loadEntities(); //return back a promise
     const levelfunction = await createLoadLevel(entitiyFactories);  //return back a promise
     const level = await levelfunction('1');//return back a promise
+    const font = await loadFont();
+    level.compo.layers.push(drawFont(font,level));
+    
 
     const mario_entity_reference = entitiyFactories['mario'];
     const mario_entity = mario_entity_reference();
     mario_entity.pos.set(64,64);
+    level.entities.add(mario_entity);
+
     //entity position unit is not index, but number of pixel from (0,0);
     //one tile has 16 pixles, and 64/16 = 4 tile away from 0 
     //seeing three tile because first tile start at -16 pixels
     
-    level.entities.add(mario_entity);
-
-    console.log(level);
-    const font = await loadFont();
-    level.compo.layers.push(drawFont(font,level));
-
-    //camera is use to determine the range of layers to draw on context
-    const camera = new Camera();
 
     //clicking and move mario
     setMouseControl(canvas,mario_entity,camera);
@@ -57,7 +70,7 @@ async function main(canvas){
         //it always start to draw from 50 pixel left to the mario
         camera.pos.x = Math.max(0,mario_entity.pos.x-50);
         level.compo.draw(context,camera); //drawing background, entities and collision layer
-        level.updateEntity(dt); // update 
+        level.updateEntity(dt,audioBoard); // update 
        
     }
     timer.start();
@@ -66,8 +79,12 @@ async function main(canvas){
 const canvas = document.getElementById('screen');
 
 //don't need await because we don't need the returned value, only need to fire it
-main(canvas);
-    
+
+const start = ()=>{
+    window.removeEventListener('click',start);
+    main(canvas);
+}
    
-   
+window.addEventListener('click',start);
+
 
