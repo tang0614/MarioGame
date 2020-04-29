@@ -1,11 +1,11 @@
 {
     "fx":{
         "jump":{
-            "url":"/audio/jump.ogg"
+            "url":"./audio/jump.ogg"
 
         },
         "stomp":{
-            "url":"/audio/stomp.ogg"
+            "url":"./audio/stomp.ogg"
 
         }
     }

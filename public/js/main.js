@@ -6,8 +6,7 @@ import {setMouseControl} from './control.js';
 import {loadEntities} from './loader/loadEntities.js';
 import {drawFont} from './layers/fontLayer.js';
 import {loadFont} from './loader.js';
-import AudioBoard from './audioBoard.js';
-import {createAudioLoader} from './loader/audio.js';
+import {loadAudioBoard} from './loader/audio.js';
 
 //loadBackGroundSprite(),loadBackGroundLevel('1')
 //These three should run in parallel
@@ -16,17 +15,8 @@ import {createAudioLoader} from './loader/audio.js';
 async function main(canvas){
     const context = canvas.getContext('2d');
     const audioContext = new AudioContext();
-    const audioBoard = new AudioBoard(audioContext);
-
-    const loadAudio = await createAudioLoader(audioContext);
-
-    loadAudio('./audio/jump.ogg')
-    .then(audio=>{
-        audioBoard.addAudio('jump',audio);
-        audioBoard.playAudio('jump');
-
-    });
-
+    const audioBoard = await loadAudioBoard('sound',audioContext)
+    console.log(audioBoard);
     //camera is use to determine the range of layers to draw on context
     const camera = new Camera();
     const entitiyFactories = await loadEntities(); //return back a promise

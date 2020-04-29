@@ -12,7 +12,7 @@ export default class GoombaBehavior extends Trait{
                 other.marioCollide.bounceUp();
                 me.killable.killed();
                 me.walk.dir =0;
-                audioBoard.playAudio('jump');
+                audioBoard.playAudio('stomp');
                 other.playerController.score +=200;
           
             }else if(other.velocity.y==me.velocity.y){
