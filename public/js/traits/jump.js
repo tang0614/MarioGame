@@ -23,7 +23,7 @@ export default class Jump extends Trait{
         this.requestTime=0;
     }
     //update jump velocity after time dt
-    update(entity,dt,level,audioBoard){
+    update(entity,dt,level,audioContext){
         
 
         //gravity
@@ -31,7 +31,7 @@ export default class Jump extends Trait{
 
         if(this.requestTime >0){
             if(this.ready){
-                audioBoard.playAudio('jump');
+                entity.audio.playAudio('jump');
                 this.jumpTime=this.duration;
                 this.requestTime =0;
                 

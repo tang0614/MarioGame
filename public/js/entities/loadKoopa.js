@@ -5,15 +5,21 @@ import Jump from '../traits/jump.js';
 import Position from '../traits/position.js'
 import KoopaBehavior from '../traits/koopaBehavior.js'
 import Killable from '../traits/killable.js';
+import {loadAudioBoard} from '../loader/audio.js';
 
-export function loadKoopa(){
-  
-    return loadSpriteSheet('koopa')
-    .then(createKoopaEntity);
+
+
+
+export function loadKoopa(audioContext){
+
+    return Promise.all([loadSpriteSheet('koopa'),loadAudioBoard('sound',audioContext)])
+    
+    .then(result=>{return createKoopaEntity(result[0],result[1])}); 
+ 
 
 }
 
-function createKoopaEntity(koopa){
+function createKoopaEntity(koopa,audioBoard){
    
     const anime_run = koopa.animation.get('walk');
     const anime_sleep = koopa.animation.get('sleep');
@@ -40,6 +46,7 @@ function createKoopaEntity(koopa){
         koopa_entity.size.set(16,16);
         koopa_entity.velocity.set(0,0);
         koopa_entity.offset.set(0,8);
+        koopa_entity.audio=audioBoard;
 
         koopa_entity.addTrait(new GoombaGo());
         koopa_entity.addTrait(new Jump());

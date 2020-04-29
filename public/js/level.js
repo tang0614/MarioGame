@@ -18,11 +18,11 @@ export default class Level {
         //being set up in levelLoader, has three properties
         this.tile_collider = new TileCollider(matrix);
     }
-    updateEntity(dt,audioBoard){
+    updateEntity(dt,audioContext){
         this.entities.forEach(entity=>{
             //first update entity jump, go speed and then update position
             console.log('updating after dt.....');
-            entity.updateBytime(dt,this,audioBoard); //this pointing to level 
+            entity.updateBytime(dt,this,audioContext); //this pointing to level 
 
             
             //check whether entities collide with tiles
@@ -32,8 +32,8 @@ export default class Level {
             }
             
             //check if overlap or collide with mario
-            this.entity_collider.checkEntityOverlapMario(entity,audioBoard); 
-            this.entity_collider.checkEntityCollideMario(entity,audioBoard); 
+            this.entity_collider.checkEntityCollideMario(entity,audioContext); 
+            this.entity_collider.checkEntityPushedByMario(entity); 
             
             //"this "is pointing to level
             this.duration +=dt;

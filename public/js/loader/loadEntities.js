@@ -3,7 +3,7 @@ import {loadGoomba} from '../entities/loadGoomba.js';
 import {loadKoopa} from '../entities/loadKoopa.js';
 
 
-export function loadEntities(){
+export function loadEntities(audioContext){
     const entitiyFactories = {};
     //closure 
     function add(name){
@@ -21,10 +21,11 @@ export function loadEntities(){
     //     loadKoopa().then(koopaEntity=>{add('koopa')(koopaEntity)}),
     // ])
 
+    
     return Promise.all([
-        loadMario().then(add('mario')), // !default put returned value into parameter of callback function
-        loadGoomba().then(add('goomba')),
-        loadKoopa().then(add('koopa')),
+        loadMario(audioContext).then(add('mario')), // !default put returned value into parameter of callback function
+        loadGoomba(audioContext).then(add('goomba')),
+        loadKoopa(audioContext).then(add('koopa')),
     ])
     .then(()=> entitiyFactories);
 }

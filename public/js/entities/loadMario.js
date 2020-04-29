@@ -6,19 +6,19 @@ import Entity from '../entity.js'
 import {loadSpriteSheet} from '../loader.js'
 import Killable from '../traits/killable.js';
 import PlayerController from '../traits/playerController.js';
+import {loadAudioBoard} from '../loader/audio.js';
 
-
-
-export function loadMario(){
+export function loadMario(audioContext){
   
-    return loadSpriteSheet('mario')
-    .then(createMarioEntity); //pass in mario as parameter and call createMarioEntity function
-    //return a promise
-
+    return Promise.all([loadSpriteSheet('mario'),loadAudioBoard('sound',audioContext)])
+    
+    .then(result=>{return createMarioEntity(result[0],result[1])}); 
+    
 }
 
 //mario is the parameter returned by loadSpriteSheet
-function createMarioEntity(mario){
+function createMarioEntity(mario,audioBoard){
+
     const anime_run = mario.animation.get('run');
     const anime_retreat = mario.animation.get('retreat');
     //const anime_run  = createAnime(['run-1','run-2','run-3'],10);
@@ -58,6 +58,7 @@ function createMarioEntity(mario){
         const mario_entity = new Entity('mario');
         mario_entity.size.set(16,16);
         mario_entity.velocity.set(0,0);
+        mario_entity.audio = audioBoard;
 
         mario_entity.addTrait(new Go());
         mario_entity.addTrait(new Jump());
@@ -69,6 +70,7 @@ function createMarioEntity(mario){
         mario_entity.playerController.setPlayer(mario_entity);
         //add a draw method to mario entity
         mario_entity.draw = drawMario; // this function connect mario entity object with mario sprites object
+    
         return mario_entity;
     }
 }

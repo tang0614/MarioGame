@@ -5,15 +5,20 @@ import Jump from '../traits/jump.js';
 import Position from '../traits/position.js'
 import GoombaBehavior from '../traits/goombaBehavior.js'
 import Killable from '../traits/killable.js';
+import {loadAudioBoard} from '../loader/audio.js';
 
-export function loadGoomba(){
-  
-    return loadSpriteSheet('goomba')
-    .then(createGoombaEntity);
 
+
+
+export function loadGoomba(audioContext){
+
+    return Promise.all([loadSpriteSheet('goomba'),loadAudioBoard('sound',audioContext)])
+    
+    .then(result=>{return createGoombaEntity(result[0],result[1])}); 
+ 
 }
 
-function createGoombaEntity(goomba){
+function createGoombaEntity(goomba,audioBoard){
     const anime_run = goomba.animation.get('walk');
   
     function routeFrame(goomba_entity){
@@ -34,6 +39,7 @@ function createGoombaEntity(goomba){
         const goomba_entity = new Entity('goomba');
         goomba_entity.size.set(16,16);
         goomba_entity.velocity.set(0,0);
+        goomba_entity.audio=audioBoard;
 
         goomba_entity.addTrait(new GoombaGo());
         goomba_entity.addTrait(new Jump());

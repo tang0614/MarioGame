@@ -27,10 +27,10 @@ export default class Entity{
     
     }
     //update properties that change with time
-    updateBytime(dt,level,audioBoard){
+    updateBytime(dt,level,audioContext){
         this.traits.forEach(trait => {
             //traits are position, jump and go
-            trait.update(this,dt,level,audioBoard);
+            trait.update(this,dt,level,audioContext);
             
         });
     }
@@ -46,10 +46,10 @@ export default class Entity{
     //update properties that change with entity position
     //during checking entity collision, if entity obstruct with mario, 
     //then update multiple entity properties such as score.canDetectTiles and canbepush //this is not related to dt, so did not add it into parameter
-    collides(candidate,audioBoard){
+    collides(candidate,audioContext){
         this.traits.forEach(trait => {
             //traits are position, jump and go
-            trait.collides_entity(this,candidate,audioBoard);
+            trait.collides_entity(this,candidate,audioContext);
         });
     }
 

@@ -7,7 +7,7 @@ export default class KoopaBehavior extends Trait{
         this.hitsound = false;
     }
 
-    collides_entity(me,other,audioBoard){
+    collides_entity(me,other,audioContext){
         if(other.marioCollide){
 
             if(me.killable.sleepTime){
@@ -16,7 +16,7 @@ export default class KoopaBehavior extends Trait{
                     me.canDetectTiles = false; 
                     me.canBePush = false; 
                     if(this.startKill==0){
-                        audioBoard.playAudio('stomp');
+                        me.audio.playAudio('stomp');
                         other.playerController.score +=200;
                         this.startKill += 1;
                     }
@@ -32,7 +32,7 @@ export default class KoopaBehavior extends Trait{
                     other.marioCollide.bounceUp();
                     me.killable.letSleep();
                     me.walk.dir =0;
-                    audioBoard.playAudio('stomp');
+                    me.audio.playAudio('stomp');
                     other.playerController.score +=100;
                 
                 }else if(other.velocity.y==me.velocity.y){

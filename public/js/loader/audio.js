@@ -25,12 +25,10 @@ export async function loadAudioBoard(name,audioContext){
             
 
         });
+        //scope of following then include audioboard above
+        return Promise.all(jobs).then((jobs)=>audioBoard);
 
-        return Promise.all(jobs).then(()=>audioBoard);
-       
-    })
-
-
+});
 
 }
 

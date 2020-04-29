@@ -6,7 +6,6 @@ import {setMouseControl} from './control.js';
 import {loadEntities} from './loader/loadEntities.js';
 import {drawFont} from './layers/fontLayer.js';
 import {loadFont} from './loader.js';
-import {loadAudioBoard} from './loader/audio.js';
 
 //loadBackGroundSprite(),loadBackGroundLevel('1')
 //These three should run in parallel
@@ -15,11 +14,10 @@ import {loadAudioBoard} from './loader/audio.js';
 async function main(canvas){
     const context = canvas.getContext('2d');
     const audioContext = new AudioContext();
-    const audioBoard = await loadAudioBoard('sound',audioContext)
-    console.log(audioBoard);
+
     //camera is use to determine the range of layers to draw on context
     const camera = new Camera();
-    const entitiyFactories = await loadEntities(); //return back a promise
+    const entitiyFactories = await loadEntities(audioContext); //return back a promise
     const levelfunction = await createLoadLevel(entitiyFactories);  //return back a promise
     const level = await levelfunction('1');//return back a promise
     const font = await loadFont();
@@ -53,7 +51,7 @@ async function main(canvas){
         //it always start to draw from 50 pixel left to the mario
         camera.pos.x = Math.max(0,mario_entity.pos.x-50);
         level.compo.draw(context,camera); //drawing background, entities and collision layer
-        level.updateEntity(dt,audioBoard); // update 
+        level.updateEntity(dt,audioContext); // update 
        
     }
     timer.start();
