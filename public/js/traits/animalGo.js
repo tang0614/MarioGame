@@ -1,6 +1,6 @@
 import Trait from './trait.js';
 
-export default class GoombaGo extends Trait{
+export default class AnimalGo extends Trait{
     constructor(){
         super('walk');
         this.dir =1;

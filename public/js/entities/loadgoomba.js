@@ -1,6 +1,6 @@
 import Entity from '../entity.js';
 import {loadSpriteSheet} from '../loader.js';
-import GoombaGo from '../traits/goombaGo.js';
+import AnimalGo from '../traits/animalGo.js';
 import Jump from '../traits/jump.js';
 import Position from '../traits/position.js'
 import GoombaBehavior from '../traits/goombaBehavior.js'
@@ -41,7 +41,7 @@ function createGoombaEntity(goomba,audioBoard){
         goomba_entity.velocity.set(0,0);
         goomba_entity.audio=audioBoard;
 
-        goomba_entity.addTrait(new GoombaGo());
+        goomba_entity.addTrait(new AnimalGo());
         goomba_entity.addTrait(new Jump());
         goomba_entity.addTrait(new Position());
         goomba_entity.addTrait(new GoombaBehavior());

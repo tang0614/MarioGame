@@ -1,6 +1,6 @@
 import Entity from '../entity.js';
 import {loadSpriteSheet} from '../loader.js';
-import GoombaGo from '../traits/goombaGo.js';
+import AnimalGo from '../traits/animalGo.js';
 import Jump from '../traits/jump.js';
 import Position from '../traits/position.js'
 import KoopaBehavior from '../traits/koopaBehavior.js'
@@ -48,7 +48,7 @@ function createKoopaEntity(koopa,audioBoard){
         koopa_entity.offset.set(0,8);
         koopa_entity.audio=audioBoard;
 
-        koopa_entity.addTrait(new GoombaGo());
+        koopa_entity.addTrait(new AnimalGo());
         koopa_entity.addTrait(new Jump());
         koopa_entity.addTrait(new Position());
         koopa_entity.addTrait(new KoopaBehavior());
