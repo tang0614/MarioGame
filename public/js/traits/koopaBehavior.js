@@ -7,7 +7,7 @@ export default class KoopaBehavior extends Trait{
         this.hitsound = false;
     }
 
-    collides_entity(me,other,audioContext){
+    collides_entity(me,other){
         if(other.marioCollide){
 
             if(me.killable.sleepTime){

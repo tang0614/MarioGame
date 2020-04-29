@@ -1,8 +1,8 @@
 import Trait from './trait.js';
 
-export default class GoombaBehavior extends Trait{
+export default class BulletBehavior extends Trait{
     constructor(){
-        super('goombaBehavior');
+        super('bulletBehavior');
     }
 
     collides_entity(me,other){
@@ -11,16 +11,18 @@ export default class GoombaBehavior extends Trait{
             if(other.velocity.y>me.velocity.y){
                 other.marioCollide.bounceUp();
                 me.killable.killed();
-                me.walk.dir =0;
+                me.velocity.y +=200;
                 me.audio.playAudio('stomp');
-                other.playerController.score +=200;
+                other.playerController.score +=300;
           
-            }else if(other.velocity.y==me.velocity.y){
+            }else if (other.velocity.x<me.velocity.x){
                 other.killable.killed();
                 other.go.dir =0;
-            
             }
             
-        }   
+        } 
+
+        
+       
     }
 }

@@ -1,6 +1,7 @@
 import {loadMario} from '../entities/loadMario.js';
 import {loadGoomba} from '../entities/loadGoomba.js';
 import {loadKoopa} from '../entities/loadKoopa.js';
+import {loadBullet} from '../entities/loadBullet.js';
 
 
 export function loadEntities(audioContext){
@@ -26,6 +27,7 @@ export function loadEntities(audioContext){
         loadMario(audioContext).then(add('mario')), // !default put returned value into parameter of callback function
         loadGoomba(audioContext).then(add('goomba')),
         loadKoopa(audioContext).then(add('koopa')),
+        loadBullet(audioContext).then(add('bullet')),
     ])
     .then(()=> entitiyFactories);
 }

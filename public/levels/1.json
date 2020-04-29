@@ -369,20 +369,15 @@
             "tiles":[
             {
                 "pattern": "cannon-2h",
-                "ranges": [  
-                    
+                "ranges": [   
                     [
                         6, 1,
                         7, 1
                     ]
-                  
-  
-                ]   
-                
+                ]         
             }
 
         ]}
-
     
     ],
     "entities":[
@@ -393,6 +388,11 @@
         {
             "name":"goomba",
             "pos":[100,0]
+        },
+        {
+            "name":"bullet",
+            "pos":[100,112]
+
         }
     ]
     
