@@ -32,8 +32,8 @@ export default class Level {
             }
             
             //check if overlap or collide with mario
-            this.entity_collider.checkEntityOverlapMario(entity); 
-            this.entity_collider.checkEntityCollideMario(entity); 
+            this.entity_collider.checkEntityOverlapMario(entity,audioBoard); 
+            this.entity_collider.checkEntityCollideMario(entity,audioBoard); 
             
             //"this "is pointing to level
             this.duration +=dt;

@@ -4,7 +4,7 @@ export default class EntityCollider{
         this.entities = entities;
 
     }
-    checkEntityOverlapMario(me){
+    checkEntityOverlapMario(me,audioBoard){
      
         this.entities.forEach(entity=>{
            if(entity===me){
@@ -14,7 +14,7 @@ export default class EntityCollider{
             if(me.bounds.overlaps(entity.bounds)){
                 if(entity.marioCollide){
                     if(!me.killable.dead){
-                        me.overlaps(entity);
+                        me.collides(entity,audioBoard);
                     }
                 }   
 
@@ -23,7 +23,7 @@ export default class EntityCollider{
         });
     }
 
-    checkEntityCollideMario(me){
+    checkEntityCollideMario(me,audioBoard){
         if(me.canBePush){
             this.entities.forEach(entity=>{
                 if(entity===me){

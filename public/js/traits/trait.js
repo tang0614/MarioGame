@@ -5,7 +5,7 @@ export default class Trait{
     obstruct(){
         
     }
-    overlaps_entity(us,them){
+    collides_entity(us,them){
         
     }
 

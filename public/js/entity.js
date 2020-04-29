@@ -46,10 +46,10 @@ export default class Entity{
     //update properties that change with entity position
     //during checking entity collision, if entity obstruct with mario, 
     //then update multiple entity properties such as score.canDetectTiles and canbepush //this is not related to dt, so did not add it into parameter
-    overlaps(candidate){
+    collides(candidate,audioBoard){
         this.traits.forEach(trait => {
             //traits are position, jump and go
-            trait.overlaps_entity(this,candidate);
+            trait.collides_entity(this,candidate,audioBoard);
         });
     }
 

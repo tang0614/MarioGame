@@ -4,9 +4,10 @@ export default class KoopaBehavior extends Trait{
     constructor(){
         super('koopaBehavior');
         this.startKill = 0;
+        this.hitsound = false;
     }
 
-    overlaps_entity(me,other){
+    collides_entity(me,other,audioBoard){
         if(other.marioCollide){
 
             if(me.killable.sleepTime){
@@ -15,6 +16,7 @@ export default class KoopaBehavior extends Trait{
                     me.canDetectTiles = false; 
                     me.canBePush = false; 
                     if(this.startKill==0){
+                        audioBoard.playAudio('jump');
                         other.playerController.score +=200;
                         this.startKill += 1;
                     }
@@ -26,9 +28,11 @@ export default class KoopaBehavior extends Trait{
             }else{
                 me.canDetectTiles =true;
                 if(other.velocity.y>me.velocity.y){
+                    
                     other.marioCollide.bounceUp();
                     me.killable.letSleep();
                     me.walk.dir =0;
+                    audioBoard.playAudio('jump');
                     other.playerController.score +=100;
                 
                 }else if(other.velocity.y==me.velocity.y){
@@ -42,4 +46,5 @@ export default class KoopaBehavior extends Trait{
             
         }
     }
+    
 }
