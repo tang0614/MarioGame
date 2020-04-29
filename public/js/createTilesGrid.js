@@ -10,6 +10,7 @@ export function expandTiles(tiles,patterns){
                     const derivedY = y + offsetY;
                     if(tile.pattern){ 
                         const background_tile = patterns[tile.pattern].tiles;
+
                         walkTiles(background_tile,x,y);
                     }else{
                         //key names

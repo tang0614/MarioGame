@@ -21,7 +21,7 @@ export function createLoadLevel(entityFactory){
             ]);
         })
         .then(([levelFile,BackGroundSprite])=>{
-            
+            console.log(BackGroundSprite);
             const level = new Level();
               //load background layer
             pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite);
@@ -55,9 +55,10 @@ function createCollisionGridwithTileType(tiles,patterns){
 
 function createBackgroundGridwithTileName(tiles,patterns){
      
-    const backgroundGrid = new Matrix();
+    const backgroundGrid = new Matrix();;
 
     const expandedTiles=expandTiles(tiles,patterns);
+    
 
     //tile,X,Y are values inside object
     
@@ -79,6 +80,7 @@ function pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite){
     levelFile.layers.forEach(layer=>{
         //drawing background on context according to element's name and posiiton in matrix
         const backgroundGrid = createBackgroundGridwithTileName(layer.tiles,levelFile.patterns);
+        console.log(backgroundGrid);
         const background_draw_function = getBackgroundLayer(level,backgroundGrid,BackGroundSprite);
         //level passed in as a timer
         //draw BackGroundSprite according to name on grid 

@@ -8,6 +8,7 @@ export default class EventEmitter {
         this.listeners.push(listener);
     }
     //envoke callback by name
+    //...arg represent the rest of the parameter goes into call back function
     emit(name,...args){
         this.listeners.forEach(listener=>{
             if(listener.eventName==name){
