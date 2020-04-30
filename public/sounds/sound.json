@@ -10,6 +10,9 @@
         },
         "shoot": {
             "url": "./audio/thwomp.ogg"
+        },
+        "over": {
+            "url": "./audio/over.ogg"
         }
     }
 }

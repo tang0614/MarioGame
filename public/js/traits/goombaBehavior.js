@@ -17,6 +17,7 @@ export default class GoombaBehavior extends Trait{
           
             }else if(other.velocity.y==me.velocity.y){
                 other.killable.killed();
+                //other.audio.playAudio('over');
                 other.go.dir =0;
             
             }
