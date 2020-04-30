@@ -1,6 +1,7 @@
 import {loadMario} from '../entities/loadMario.js';
 import {loadGoomba} from '../entities/loadGoomba.js';
 import {loadKoopa} from '../entities/loadKoopa.js';
+import {loadCannon} from '../entities/loadCannon.js';
 import {loadBullet} from '../entities/loadBullet.js';
 
 
@@ -28,6 +29,7 @@ export function loadEntities(audioContext){
         loadGoomba(audioContext).then(add('goomba')),
         loadKoopa(audioContext).then(add('koopa')),
         loadBullet(audioContext).then(add('bullet')),
+        loadCannon(audioContext,entitiyFactories).then(add('cannon'))
     ])
     .then(()=> entitiyFactories);
 }

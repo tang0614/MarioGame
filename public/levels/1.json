@@ -371,8 +371,8 @@
                 "pattern": "cannon-2h",
                 "ranges": [   
                     [
-                        6, 1,
-                        7, 1
+                        20, 1,
+                        11, 1
                     ]
                 ]         
             }
@@ -389,9 +389,10 @@
             "name":"goomba",
             "pos":[100,0]
         },
+      
         {
-            "name":"bullet",
-            "pos":[100,112]
+            "name":"cannon",
+            "pos":[336,176]
 
         }
     ]

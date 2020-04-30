@@ -23,7 +23,7 @@ async function main(canvas){
     const level = await levelfunction('1');//return back a promise
     const font = await loadFont();
     level.compo.layers.push(drawFont(font,level));
-    console.log(level);
+   
     
     //entity position unit is not index, but number of pixel from (0,0);
     //one tile has 16 pixles, and 64/16 = 4 tile away from 0 
@@ -40,6 +40,7 @@ async function main(canvas){
     setMouseControl(canvas,mario_entity,camera);
     const input=setupKeyBoard(mario_entity);
     input.listenTo(window);
+
 
 
     const timer = new Timer();
@@ -69,6 +70,6 @@ const start = ()=>{
 window.addEventListener('click',start);
 
 
-const eventEmitter = new EventEmitter();
-console.log(eventEmitter);
+//const eventEmitter = new EventEmitter();
+
 

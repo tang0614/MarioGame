@@ -21,7 +21,7 @@ export function createLoadLevel(entityFactory){
             ]);
         })
         .then(([levelFile,BackGroundSprite])=>{
-            console.log(BackGroundSprite);
+            
             const level = new Level();
               //load background layer
             pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite);
@@ -80,7 +80,6 @@ function pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite){
     levelFile.layers.forEach(layer=>{
         //drawing background on context according to element's name and posiiton in matrix
         const backgroundGrid = createBackgroundGridwithTileName(layer.tiles,levelFile.patterns);
-        console.log(backgroundGrid);
         const background_draw_function = getBackgroundLayer(level,backgroundGrid,BackGroundSprite);
         //level passed in as a timer
         //draw BackGroundSprite according to name on grid 
@@ -95,9 +94,9 @@ function pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite){
 
 function pushEntitiesOnLevelCompo(levelFile,level,entityFactory){
     //entityFactory has mario,koopa and goomba entities
-    
     //levelFile.entities has koopa and goomba
     levelFile.entities.forEach(({name, pos:[x,y]})=>{
+        console.log(name);
         const createEntityFunc= entityFactory[name]; 
         const newEntity_object = createEntityFunc();
      

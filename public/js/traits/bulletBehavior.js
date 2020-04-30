@@ -15,7 +15,7 @@ export default class BulletBehavior extends Trait{
                 me.audio.playAudio('stomp');
                 other.playerController.score +=300;
           
-            }else if (other.velocity.x<me.velocity.x){
+            }else{
                 other.killable.killed();
                 other.go.dir =0;
             }
