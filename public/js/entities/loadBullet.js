@@ -1,5 +1,5 @@
 import AnimalGo from '../traits/animalGo.js';
-import Position from '../traits/position.js'
+import Position from '../traits/position.js';
 import Entity from '../entity.js';
 import {loadSpriteSheet} from '../loader.js'
 import Killable from '../traits/killable.js';

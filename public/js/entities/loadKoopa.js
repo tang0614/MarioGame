@@ -1,7 +1,7 @@
 import Entity from '../entity.js';
 import {loadSpriteSheet} from '../loader.js';
 import AnimalGo from '../traits/animalGo.js';
-import AnimalJump from '../traits/animalJump.js';
+import AnimalFly from '../traits/animalFly.js';
 import Jump from '../traits/jump.js';
 import Position from '../traits/position.js'
 import KoopaBehavior from '../traits/koopaBehavior.js'
@@ -75,14 +75,13 @@ function createKoopaEntity(koopa,audioBoard){
         koopa_entity.audio=audioBoard;
 
         koopa_entity.addTrait(new AnimalGo());
-        koopa_entity.addTrait(new AnimalJump());
+        koopa_entity.addTrait(new AnimalFly());
         koopa_entity.addTrait(new Jump());
         koopa_entity.addTrait(new Position());
         koopa_entity.addTrait(new KoopaBehavior());
         koopa_entity.addTrait(new Killable());
 
-
-
+      
         koopa_entity.walk.acc_x=10;
 
         //add a draw method to mario entity

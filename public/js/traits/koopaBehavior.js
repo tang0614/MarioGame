@@ -47,8 +47,8 @@ export default class KoopaBehavior extends Trait{
 
                     }else{
                         me.killable.transform();
-                        me.animalJump.jump_velocity =0;
-                        me.animalJump.acc_y =0;
+                        me.animalFly.jump_velocity =0;
+                        me.animalFly.acc_y =0;
                         other.marioCollide.bounceUp();
                         me.audio.playAudio('stomp');
                         other.playerController.score +=100;
