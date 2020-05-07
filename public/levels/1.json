@@ -382,12 +382,25 @@
     ],
     "entities":[
         {
-            "name":"koopa",
-            "pos":[355,0]
+            "name":"goomba",
+            "pos":[160,0]
         },
         {
             "name":"goomba",
-            "pos":[100,0]
+            "pos":[816,0]
+        },
+        {
+            "name":"koopa",
+            "pos":[320,0]
+        },
+    
+        {
+            "name":"koopa",
+            "pos":[640,0]
+        },
+        {
+            "name":"koopa",
+            "pos":[800,0]
         },
       
         {
@@ -397,7 +410,15 @@
         },
         {
             "name":"flower",
-            "pos":[560,150]
+            "pos":[480,184]
+        },
+        {
+            "name":"flower",
+            "pos":[1600,184]
+        },
+        {
+            "name":"flower",
+            "pos":[3200,184]
         }
     ]
     

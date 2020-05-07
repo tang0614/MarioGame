@@ -5,7 +5,7 @@ import {loadSpriteSheet} from '../loader.js';
 import Entity from '../entity.js';
 import Position from '../traits/position.js';
 import FlowerBehavior from '../traits/flowerBehavior.js'
-import AnimalFly from '../traits/animalFly.js';
+
 
 export function loadFlower(audioContext){
 
@@ -33,17 +33,20 @@ function createFlowerEntity(flower,audioBoard){
     return function createFlowerFunction(){
         const flower_entity = new Entity('flower');
         flower_entity.size.set(16,16);
+        flower_entity.offset.set(0,8);
         flower_entity.velocity.set(0,0);
         flower_entity.audio=audioBoard;
+
         flower_entity.addTrait(new Position());
         flower_entity.addTrait(new AnimalGo());
-        flower_entity.addTrait(new AnimalFly());
+  
+      
         flower_entity.addTrait(new FlowerBehavior());
         flower_entity.addTrait(new Killable());
 
-
+   
         flower_entity.walk.acc_x=0;
-        flower_entity.animalFly.acc_y = 1100;
+        
       
 
         //add a draw method to mario entity
