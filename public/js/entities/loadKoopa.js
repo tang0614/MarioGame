@@ -1,6 +1,7 @@
 import Entity from '../entity.js';
 import {loadSpriteSheet} from '../loader.js';
 import AnimalGo from '../traits/animalGo.js';
+import AnimalJump from '../traits/animalJump.js';
 import Jump from '../traits/jump.js';
 import Position from '../traits/position.js'
 import KoopaBehavior from '../traits/koopaBehavior.js'
@@ -21,16 +22,33 @@ export function loadKoopa(audioContext){
 
 function createKoopaEntity(koopa,audioBoard){
    
-    const anime_run = koopa.animation.get('walk');
+    const anime_walk_f = koopa.animation.get('walk-forward');
+    const anime_walk_b = koopa.animation.get('walk-backward');
+
+    const anime_fly_f = koopa.animation.get('fly-forward');
+    const anime_fly_b = koopa.animation.get('fly-backward');
+
     const anime_sleep = koopa.animation.get('sleep');
    
     function routeFrame(koopa_entity){
         if(koopa_entity.killable.sleep){
             return anime_sleep(koopa_entity.walk.duration);
+        
+
+        }else{
+
+            if(koopa_entity.walk.dir == 1){
+                return anime_walk_f(koopa_entity.walk.duration);
+            }else{
+                return anime_walk_b(koopa_entity.walk.duration);
+            }
         }
-        //duration increase with time
-        return anime_run(koopa_entity.walk.duration);
+        
+
+        
     }
+        //duration increase with time
+        
 
 
     //create this function only once when loading the game, and then reuse it
@@ -49,10 +67,13 @@ function createKoopaEntity(koopa,audioBoard){
         koopa_entity.audio=audioBoard;
 
         koopa_entity.addTrait(new AnimalGo());
+        //koopa_entity.addTrait(new AnimalJump());
         koopa_entity.addTrait(new Jump());
         koopa_entity.addTrait(new Position());
         koopa_entity.addTrait(new KoopaBehavior());
-        koopa_entity.addTrait(new Killable())
+        koopa_entity.addTrait(new Killable());
+
+
 
         koopa_entity.walk.acc_x=10;
 

@@ -5,6 +5,8 @@ export default class KoopaBehavior extends Trait{
         super('koopaBehavior');
         this.startKill = 0;
         this.hitsound = false;
+        
+       
     }
 
     collides_entity(me,other){
@@ -13,13 +15,17 @@ export default class KoopaBehavior extends Trait{
             if(me.killable.sleepTime){
                 
                 if(other.velocity.y>me.velocity.y){
+
                     me.canDetectTiles = false; 
                     me.canBePush = false; 
+                    
                     if(this.startKill==0){
                         me.audio.playAudio('stomp');
                         other.playerController.score +=200;
                         this.startKill += 1;
+
                     }
+                    
                 }else if (other.velocity.y==me.velocity.y){
                     me.canDetectTiles = true;
                     me.canBePush = true;
@@ -28,13 +34,14 @@ export default class KoopaBehavior extends Trait{
             }else{
                 me.canDetectTiles =true;
                 if(other.velocity.y>me.velocity.y){
-                    
+                   
                     other.marioCollide.bounceUp();
                     me.killable.letSleep();
                     me.walk.dir =0;
                     me.audio.playAudio('stomp');
                     other.playerController.score +=100;
-                
+  
+   
                 }else if(other.velocity.y==me.velocity.y){
                     other.killable.killed();
                     //other.audio.playAudio('over');

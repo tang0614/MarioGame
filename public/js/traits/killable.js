@@ -11,11 +11,15 @@ export default class Killable extends Trait{
         this.sleep = false;
         this.sleepTime = 0;
         this.sleepLimit = 8;
+
+     
         
     }
 
     killed(){
-        this.dead = true;
+        if(this.state=='walk'){
+            this.dead = true;
+        }
     }
 
     revive(){
@@ -23,8 +27,18 @@ export default class Killable extends Trait{
         this.deadTime=0;
     }
     letSleep(){
+        
         this.sleep =true;
+       
     }
+    letChange(){
+      
+        this.state ="walk";
+      
+
+    }
+
+    
 
     awake(entity){
         entity.walk.dir =1;
@@ -34,14 +48,8 @@ export default class Killable extends Trait{
 
 
     update(entity,dt,level){
-        if(this.dead){
-            this.deadTime += dt;
-            if(this.deadTime>this.removeTime){
-                level.entities.delete(entity);
-                
-            }
-        }
- 
+      
+
         if(this.sleep){
             this.sleepTime += dt;
             if(this.sleepTime>this.sleepLimit){
@@ -51,6 +59,16 @@ export default class Killable extends Trait{
                 this.awake(entity);
             }
         }
+
+        if(this.dead){
+            this.deadTime += dt;
+            if(this.deadTime>this.removeTime){
+                level.entities.delete(entity);
+                
+            }
+        }
+        
+
      
     }
 
