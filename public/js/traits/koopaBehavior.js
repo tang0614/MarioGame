@@ -32,14 +32,32 @@ export default class KoopaBehavior extends Trait{
                 }
  
             }else{
+                //if not sleep
                 me.canDetectTiles =true;
                 if(other.velocity.y>me.velocity.y){
+                    //transform shape
                    
-                    other.marioCollide.bounceUp();
-                    me.killable.letSleep();
-                    me.walk.dir =0;
-                    me.audio.playAudio('stomp');
-                    other.playerController.score +=100;
+
+                    if(me.killable.state == 'walk'){
+                        other.marioCollide.bounceUp();
+                        me.killable.letSleep();
+                        me.walk.dir =0;
+                        me.audio.playAudio('stomp');
+                        other.playerController.score +=100;
+
+                    }else{
+                        me.killable.transform();
+                        me.animalJump.jump_velocity =0;
+                        me.animalJump.acc_y =0;
+                        other.marioCollide.bounceUp();
+                        me.audio.playAudio('stomp');
+                        other.playerController.score +=100;
+
+                    }
+                    
+                   
+                  
+                    
   
    
                 }else if(other.velocity.y==me.velocity.y){

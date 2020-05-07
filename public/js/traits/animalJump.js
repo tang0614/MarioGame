@@ -3,7 +3,7 @@ export default class AnimalJump extends Trait{
     constructor(){
         super('animalJump');
         this.duration =0.05 ;
-        this.jump_velocity = 20;
+        this.jump_velocity = 22;
         this.jumpTime = 0;
         this.acc_y=600;
         //this.ready=false;

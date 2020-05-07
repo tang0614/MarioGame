@@ -35,13 +35,21 @@ function createKoopaEntity(koopa,audioBoard){
             return anime_sleep(koopa_entity.walk.duration);
         
 
-        }else{
+        }else if (koopa_entity.killable.state=="walk"){
 
             if(koopa_entity.walk.dir == 1){
                 return anime_walk_f(koopa_entity.walk.duration);
             }else{
                 return anime_walk_b(koopa_entity.walk.duration);
             }
+        }else{
+
+            if(koopa_entity.walk.dir == 1){
+                return anime_fly_f(koopa_entity.walk.duration);
+            }else{
+                return anime_fly_b(koopa_entity.walk.duration);
+            }
+
         }
         
 
@@ -67,7 +75,7 @@ function createKoopaEntity(koopa,audioBoard){
         koopa_entity.audio=audioBoard;
 
         koopa_entity.addTrait(new AnimalGo());
-        //koopa_entity.addTrait(new AnimalJump());
+        koopa_entity.addTrait(new AnimalJump());
         koopa_entity.addTrait(new Jump());
         koopa_entity.addTrait(new Position());
         koopa_entity.addTrait(new KoopaBehavior());

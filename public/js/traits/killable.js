@@ -11,15 +11,18 @@ export default class Killable extends Trait{
         this.sleep = false;
         this.sleepTime = 0;
         this.sleepLimit = 8;
+        this.state ="fly";
 
      
         
     }
 
+    transform(){
+        this.state ="walk";
+    }
+
     killed(){
-        if(this.state=='walk'){
-            this.dead = true;
-        }
+        this.dead = true;
     }
 
     revive(){
