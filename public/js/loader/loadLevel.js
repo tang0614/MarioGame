@@ -86,6 +86,7 @@ function pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite){
         //draw buffer on context
         //the returned background_draw_function only called when execute level.compo.layers
         //three background layers, each drawing at a different fime
+
         level.compo.layers.push(background_draw_function);
 
     })
@@ -121,6 +122,6 @@ function pushCollisionOnLevelCompo(levelFile,level){
     level.setCollisionGrid(collistionGrid); //become a tile collider inside level
 
     const draw_collision_function =createCollisionLayer(level);
-    level.compo.layers.push(draw_collision_function);
+    //level.compo.layers.push(draw_collision_function);
 }
 

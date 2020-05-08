@@ -55,12 +55,12 @@ export default class KoopaBehavior extends Trait{
 
                     }
                     
-                   
-                  
-                    
+                     
   
    
-                }else if(other.velocity.y==me.velocity.y){
+                }else{
+
+
                     other.killable.killed();
                     //other.audio.playAudio('over');
                     other.go.dir =0;
