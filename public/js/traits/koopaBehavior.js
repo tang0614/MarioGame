@@ -32,40 +32,54 @@ export default class KoopaBehavior extends Trait{
                 }
  
             }else{
-                //if not sleep
                 me.canDetectTiles =true;
-                if(other.velocity.y>me.velocity.y){
-                    //transform shape
-                   
 
-                    if(me.killable.state == 'walk'){
+                if(me.killable.state == 'walk'){
+
+                    if(other.velocity.y>me.velocity.y ){
                         other.marioCollide.bounceUp();
                         me.killable.letSleep();
                         me.walk.dir =0;
                         me.audio.playAudio('stomp');
                         other.playerController.score +=100;
 
-                    }else{
-                        me.killable.transform();
-                        me.animalFly.jump_velocity =0;
-                        me.animalFly.acc_y =0;
-                        other.marioCollide.bounceUp();
-                        me.audio.playAudio('stomp');
-                        other.playerController.score +=100;
+                    }else if (other.velocity.y==me.velocity.y){
+                        console.log('Mario DIE......');
+                        other.killable.killed();
+                        other.go.dir =0;
+                    }         
 
-                    }
-                    
-                     
-  
-   
                 }else{
+                    if(other.velocity.y>me.velocity.y){
+                        console.log('Mario y speed is GREATER than koopa...')
+                         //transform shape
+                         me.killable.transform();
+                         me.animalFly.jump_velocity =0;
+                        
+                         me.animalFly.acc_y =0;
+                         other.marioCollide.bounceUp();
+                         me.audio.playAudio('stomp');
+                         other.playerController.score +=100;
+ 
+                    
+                    } else if (other.velocity.y<me.velocity.y){
+                        console.log('Mario y speed is SMALLER than koopa...')
+                        console.log('Mario DIE...')
+                        
+                        other.killable.killed();
+                        other.go.dir =0;
+                    
+       
+                    }
 
-
-                    other.killable.killed();
-                    //other.audio.playAudio('over');
-                    other.go.dir =0;
-                
                 }
+
+
+
+
+                //if not sleep
+                
+                
             }
             
 

@@ -85,7 +85,20 @@
         {
             "name": "cannon-3",
             "index": [9, 1]
+        },
+        {
+            "name": "shrub-1",
+            "index": [11, 9]
+        },
+        {
+            "name": "shrub-2",
+            "index": [12, 9]
+        },
+        {
+            "name": "shrub-3",
+            "index": [13, 9]
         }
+        
     
         
 
