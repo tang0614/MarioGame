@@ -4,6 +4,7 @@ import {loadKoopa} from '../entities/loadKoopa.js';
 import {loadCannon} from '../entities/loadCannon.js';
 import {loadBullet} from '../entities/loadBullet.js';
 import {loadFlower} from '../entities/loadFlower.js';
+import {loadLakitu} from '../entities/loadLakitu.js';
 
 
 export function loadEntities(audioContext){
@@ -32,6 +33,7 @@ export function loadEntities(audioContext){
         loadBullet(audioContext).then(add('bullet')),
         loadCannon(audioContext,entitiyFactories).then(add('cannon')),
         loadFlower(audioContext).then(add('flower')),
+        loadLakitu(audioContext,entitiyFactories).then(add('lakitu')),
     ])
     .then(()=> entitiyFactories);
 }

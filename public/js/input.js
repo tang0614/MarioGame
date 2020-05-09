@@ -22,6 +22,7 @@ export function setupKeyBoard(entity){
      // right button is 39
      input.addMapping(39, keyState=>{
          entity.go.dir =keyState;
+        
          
      });
      // left button is 37

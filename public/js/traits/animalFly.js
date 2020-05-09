@@ -18,7 +18,6 @@ export default class AnimalFly extends Trait{
         entity.velocity.y +=this.acc_y * dt; 
        
 
-
         if(this.jumpTime>0){
             //entity.velocity.y -= entity.acc;
             entity.velocity.y -= this.jump_velocity; //jump upward

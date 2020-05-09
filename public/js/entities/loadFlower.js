@@ -39,8 +39,7 @@ function createFlowerEntity(flower,audioBoard){
 
         flower_entity.addTrait(new Position());
         flower_entity.addTrait(new AnimalGo());
-  
-      
+   
         flower_entity.addTrait(new FlowerBehavior());
         flower_entity.addTrait(new Killable());
 

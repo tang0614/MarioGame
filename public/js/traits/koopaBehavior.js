@@ -44,14 +44,14 @@ export default class KoopaBehavior extends Trait{
                         other.playerController.score +=100;
 
                     }else if (other.velocity.y==me.velocity.y){
-                        console.log('Mario DIE......');
+                        
                         other.killable.killed();
                         other.go.dir =0;
                     }         
 
                 }else{
                     if(other.velocity.y>me.velocity.y){
-                        console.log('Mario y speed is GREATER than koopa...')
+                       
                          //transform shape
                          me.killable.transform();
                          me.animalFly.jump_velocity =0;
@@ -63,8 +63,7 @@ export default class KoopaBehavior extends Trait{
  
                     
                     } else if (other.velocity.y<me.velocity.y){
-                        console.log('Mario y speed is SMALLER than koopa...')
-                        console.log('Mario DIE...')
+                    
                         
                         other.killable.killed();
                         other.go.dir =0;

@@ -23,7 +23,7 @@ export default class Level {
             //first update entity jump, go speed and then update position
             console.log('updating after dt.....');
             entity.updateBytime(dt,this,audioContext); //this pointing to level 
-
+          
             
             //check whether entities collide with tiles
             if(entity.canDetectTiles){
