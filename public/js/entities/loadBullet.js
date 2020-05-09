@@ -15,13 +15,13 @@ export function loadBullet(audioContext){
 }
 
 //mario is the parameter returned by loadSpriteSheet
-function createBulletEntity(bullet_entity,audioBoard){
+function createBulletEntity(bullet,audioBoard){
 
    
     //create this function only once when loading the game, and then reuse it
     function drawBullet(context,camera){
         //draw method from sprite sheet (This pointing to the mario entity not mario sprites)
-        bullet_entity.draw('bullet-1',context,this.pos.x-camera.pos.x,this.pos.y-camera.pos.y);
+        bullet.draw('bullet-1',context,this.pos.x-camera.pos.x,this.pos.y-camera.pos.y);
     }
 
   

@@ -3,6 +3,7 @@ import {loadGoomba} from '../entities/loadGoomba.js';
 import {loadKoopa} from '../entities/loadKoopa.js';
 import {loadCannon} from '../entities/loadCannon.js';
 import {loadBullet} from '../entities/loadBullet.js';
+import {loadJugem} from '../entities/loadJugem.js';
 import {loadFlower} from '../entities/loadFlower.js';
 import {loadLakitu} from '../entities/loadLakitu.js';
 
@@ -31,6 +32,7 @@ export function loadEntities(audioContext){
         loadGoomba(audioContext).then(add('goomba')),
         loadKoopa(audioContext).then(add('koopa')),
         loadBullet(audioContext).then(add('bullet')),
+        loadJugem(audioContext,entitiyFactories).then(add('jugem')),
         loadCannon(audioContext,entitiyFactories).then(add('cannon')),
         loadFlower(audioContext).then(add('flower')),
         loadLakitu(audioContext,entitiyFactories).then(add('lakitu')),

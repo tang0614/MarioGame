@@ -4,7 +4,8 @@ import Entity from '../entity.js';
 import {loadSpriteSheet} from '../loader.js';
 import AnimalGo from '../traits/animalGo.js';
 import Jump from '../traits/jump.js';
-import Position from '../traits/position.js'
+import Position from '../traits/position.js';
+import SynPosition from '../traits/synposition.js';
 
 
 export function loadLakitu(audioContext,entitiyFactories){
@@ -38,20 +39,28 @@ function createLakituEntity(lakitu,audioBoard,entitiyFactories){
     //create this function only once when loading the game, and then reuse it
     function drawLakitu(context,camera){
         //draw method from sprite sheet (This pointing to the mario entity not mario sprites)
-        lakitu.draw(routeFrame(this),context,this.pos.x + 100,this.pos.y);
+        lakitu.draw(routeFrame(this),context,this.pos.x-camera.pos.x,this.pos.y-camera.pos.y);
     }
 
-  
-    
-    
 
-    // function emitBullet(entity,level){
-    //     const bullet = entitiyFactories.bullet();
-    //     bullet.pos.x = entity.pos.x;
-    //     bullet.pos.y = entity.pos.y;
-    //     level.entities.add(bullet);
+    function emitJugem(entity,level){
+        const jugem_entity = entitiyFactories.jugem();
+        jugem_entity.pos.x = entity.pos.x; 
+        level.entities.add(jugem_entity);
 
-    // }
+    }
+
+    function updatePosition(lakitu_entity,level){
+        const entities = level.entities;
+        entities.forEach(entity=>{
+            if(entity.marioCollide){
+                lakitu_entity.pos.x=entity.pos.x;
+            }
+        })
+        
+
+    }
+
 
     //return a function create mario
     return function createLakituFunction(){
@@ -59,6 +68,22 @@ function createLakituEntity(lakitu,audioBoard,entitiyFactories){
         lakitu_entity.addTrait(new AnimalGo());
         lakitu_entity.addTrait(new Jump());
         lakitu_entity.addTrait(new Position());
+        // const new_pos = new SynPosition();
+        // new_pos.updatePosition = function updatePosition(lakitu_entity,level,dt){
+
+      
+        //     level.entities.forEach(entity=>{
+        //         if(entity.marioCollide){
+        //             lakitu_entity.pos.x=entity.pos.x;
+        //         }
+        //     })
+            
+    
+        // }
+
+        // lakitu_entity.addTrait(new_pos);
+
+        
 
         const mario_entity = entitiyFactories.mario();
         lakitu_entity.pos.x = mario_entity.pos.x;
@@ -77,9 +102,11 @@ function createLakituEntity(lakitu,audioBoard,entitiyFactories){
         lakitu_entity.audio = audioBoard;
        
 
-        // const emit = new Emit();
-        // emit.bullet_list.push(emitBullet);
-        // lakitu_entity.addTrait(emit);
+        const emit = new Emit();
+        emit.coolDown =2;
+        emit.bullet_list.push(emitJugem);
+        lakitu_entity.addTrait(emit);
+        
         
         lakitu_entity.draw = drawLakitu; 
 

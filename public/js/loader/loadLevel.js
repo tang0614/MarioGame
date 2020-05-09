@@ -97,7 +97,6 @@ function pushEntitiesOnLevelCompo(levelFile,level,entityFactory){
     //entityFactory has mario,koopa and goomba entities
     //levelFile.entities has koopa and goomba
     levelFile.entities.forEach(({name, pos:[x,y]})=>{
-        console.log(name);
         const createEntityFunc= entityFactory[name]; 
         const newEntity_object = createEntityFunc();
      

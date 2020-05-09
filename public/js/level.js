@@ -22,6 +22,8 @@ export default class Level {
         this.entities.forEach(entity=>{
             //first update entity jump, go speed and then update position
             console.log('updating after dt.....');
+           
+          
             entity.updateBytime(dt,this,audioContext); //this pointing to level 
           
             
@@ -33,7 +35,9 @@ export default class Level {
             
             //check if overlap or collide with mario
             this.entity_collider.checkEntityCollideMario(entity,audioContext); 
-            this.entity_collider.checkEntityPushedByMario(entity); 
+            this.entity_collider.checkEntityPushedByMario(entity);
+           
+            
             
             //"this "is pointing to level
             this.duration +=dt;

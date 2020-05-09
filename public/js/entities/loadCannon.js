@@ -1,7 +1,7 @@
 import Emit from '../traits/emit.js';
 import {loadAudioBoard} from '../loader/audio.js';
 import Entity from '../entity.js';
-import {loadSpriteSheet} from '../loader.js'
+import {loadSpriteSheet} from '../loader.js';
 export function loadCannon(audioContext,entitiyFactories){
 
     return Promise.all([loadSpriteSheet('cannon'),loadAudioBoard('sound',audioContext)])
@@ -22,8 +22,10 @@ function createCannonEntity(cannon,audioBoard,entitiyFactories){
 
     function emitBullet(entity,level){
         const bullet = entitiyFactories.bullet();
+        
         bullet.pos.x = entity.pos.x;
-        bullet.pos.y = entity.pos.y;
+        bullet.pos.y = entity.pos.y; 
+
         level.entities.add(bullet);
 
     }
@@ -34,9 +36,9 @@ function createCannonEntity(cannon,audioBoard,entitiyFactories){
 
         cannon_entity.audio = audioBoard;
 
-        const emit = new Emit();
-        emit.bullet_list.push(emitBullet);
-        cannon_entity.addTrait(emit);
+        const emit_object = new Emit();
+        emit_object.bullet_list.push(emitBullet);
+        cannon_entity.addTrait(emit_object);
         cannon_entity.draw = drawCannon; 
 
         return cannon_entity;

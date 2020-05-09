@@ -5,6 +5,7 @@ export default class Emit extends Trait{
         super('emit');
         this.coolDown =3;
         this.bullet_list = [];
+       
         
     }
   
@@ -22,9 +23,13 @@ export default class Emit extends Trait{
     }
 
     emit(entity,level){
+
+        
         for (let emitter of this.bullet_list){
             emitter(entity,level);
         }
     }
+
+    
 
 }
