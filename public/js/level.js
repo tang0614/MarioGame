@@ -25,7 +25,6 @@ export default class Level {
            
           
             entity.updateBytime(dt,this,audioContext); //this pointing to level 
-          
             
             //check whether entities collide with tiles
             if(entity.canDetectTiles){

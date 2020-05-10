@@ -15,7 +15,11 @@ export default class Emit extends Trait{
         if(this.coolDown >0){
             this.coolDown-=dt;
         }else{
-            entity.audio.playAudio('shoot');
+            if(entity.name=='cannon'){
+                entity.audio.playAudio('shoot');
+
+            }
+            
             this.emit(entity,level);
             this.coolDown =3;
         }

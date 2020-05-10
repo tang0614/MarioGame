@@ -51,6 +51,9 @@ export default class AnimalGo extends Trait{
             this.dir=-1;
        
         }
+       
+
+        
         
     }
 

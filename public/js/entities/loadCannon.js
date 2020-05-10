@@ -35,9 +35,11 @@ function createCannonEntity(cannon,audioBoard,entitiyFactories){
         const cannon_entity = new Entity('cannon');
 
         cannon_entity.audio = audioBoard;
+        
 
         const emit_object = new Emit();
         emit_object.bullet_list.push(emitBullet);
+       
         cannon_entity.addTrait(emit_object);
         cannon_entity.draw = drawCannon; 
 

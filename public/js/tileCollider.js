@@ -90,7 +90,14 @@ export default class TileCollider{
 
                     entity.bounds.top=match.y_cell-entity.size.y;
                     entity.velocity.y=0;
-                    entity.obstruct('bottom');
+
+                    if(entity.name=='jugem'){
+                        entity.jump.jugem_obstruct(entity);
+                    }else{
+                        entity.obstruct('bottom');
+                    }
+
+                    
 
 
                 }

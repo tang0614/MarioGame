@@ -6,7 +6,7 @@ import AnimalGo from '../traits/animalGo.js';
 import Jump from '../traits/jump.js';
 import Position from '../traits/position.js';
 import SynPosition from '../traits/synposition.js';
-
+import Killable from '../traits/killable.js';
 
 export function loadLakitu(audioContext,entitiyFactories){
 
@@ -50,46 +50,21 @@ function createLakituEntity(lakitu,audioBoard,entitiyFactories){
 
     }
 
-    function updatePosition(lakitu_entity,level){
-        const entities = level.entities;
-        entities.forEach(entity=>{
-            if(entity.marioCollide){
-                lakitu_entity.pos.x=entity.pos.x;
-            }
-        })
-        
+    
 
-    }
+   
 
 
     //return a function create mario
     return function createLakituFunction(){
         const lakitu_entity = new Entity('lakitu');
+        lakitu_entity.addTrait(new Position());
+        lakitu_entity.addTrait(new SynPosition());
         lakitu_entity.addTrait(new AnimalGo());
         lakitu_entity.addTrait(new Jump());
-        lakitu_entity.addTrait(new Position());
-        // const new_pos = new SynPosition();
-        // new_pos.updatePosition = function updatePosition(lakitu_entity,level,dt){
-
-      
-        //     level.entities.forEach(entity=>{
-        //         if(entity.marioCollide){
-        //             lakitu_entity.pos.x=entity.pos.x;
-        //         }
-        //     })
-            
-    
-        // }
-
-        // lakitu_entity.addTrait(new_pos);
-
+        lakitu_entity.addTrait(new Killable());
         
-
-        const mario_entity = entitiyFactories.mario();
-        lakitu_entity.pos.x = mario_entity.pos.x;
-        lakitu_entity.pos.y = mario_entity.pos.y;
-
-       
+ 
         lakitu_entity.size.set(16,16);
         lakitu_entity.offset.set(0,8);
         lakitu_entity.velocity.set(0,0);
@@ -103,7 +78,7 @@ function createLakituEntity(lakitu,audioBoard,entitiyFactories){
        
 
         const emit = new Emit();
-        emit.coolDown =2;
+        emit.coolDown =4;
         emit.bullet_list.push(emitJugem);
         lakitu_entity.addTrait(emit);
         

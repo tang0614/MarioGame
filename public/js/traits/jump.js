@@ -47,8 +47,12 @@ export default class Jump extends Trait{
         //when update the new entity, set to false
         this.ready=false;
 
+        
+
+        
      
     }
+    
     obstruct(side){
         if(side=='bottom'){
             //after checking the collision, setting to true and then draw it 
@@ -58,5 +62,12 @@ export default class Jump extends Trait{
         
     }
 
+    jugem_obstruct(entity){
+        //after checking the collision, setting to true and then draw it 
+        entity.walk.acc_x=30;
+
+    }
+
+  
 
 }

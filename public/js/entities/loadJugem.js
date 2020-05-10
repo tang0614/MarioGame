@@ -19,25 +19,25 @@ export function loadJugem(audioContext,entitiyFactories){
 }
 
 function createJugemEntity(jugem,audioBoard,entitiyFactories){
-    // const anime_walk_f = jugem.animation.get('walk-f');
-    // const anime_walk_b = jugem.animation.get('walk-b');
+    const anime_walk_f = jugem.animation.get('walk-f');
+    const anime_walk_b = jugem.animation.get('walk-b');
   
   
-    // function routeFrame(jugem_entity){
+    function routeFrame(jugem_entity){
         
-    //     if(jugem_entity.walk.dir == 1){
-    //         return anime_walk_f(jugem_entity.walk.duration);
-    //     }else{
-    //         return anime_walk_b(jugem_entity.walk.duration);
-    //     }
+        if(jugem_entity.walk.dir == 1){
+            return anime_walk_f(jugem_entity.walk.duration);
+        }else if (jugem_entity.walk.dir == -1){
+            return anime_walk_b(jugem_entity.walk.duration);
+        }
 
-    //     return 'fly';
-    // }
+        return 'fly';
+    }
 
     //create this function only once when loading the game, and then reuse it
     function drawJugem(context,camera){
         //draw method from sprite sheet (This pointing to the goomba entity)
-        jugem.draw('fly',context,this.pos.x-camera.pos.x,this.pos.y-camera.pos.y);
+        jugem.draw(routeFrame(this),context,this.pos.x-camera.pos.x,this.pos.y-camera.pos.y);
     }
 
     //return a function create mario
