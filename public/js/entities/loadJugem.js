@@ -25,13 +25,18 @@ function createJugemEntity(jugem,audioBoard,entitiyFactories){
   
     function routeFrame(jugem_entity){
         
-        if(jugem_entity.walk.dir == 1){
+        if(jugem_entity.walk.acc_x >0){
+            console.log('walking forward....');
             return anime_walk_f(jugem_entity.walk.duration);
-        }else if (jugem_entity.walk.dir == -1){
+        }else if (jugem_entity.walk.acc_x <0){
+            console.log('walking backward....');
             return anime_walk_b(jugem_entity.walk.duration);
-        }
+        }else{
+            console.log('dropping....');
+            return 'fly';
 
-        return 'fly';
+        }
+       
     }
 
     //create this function only once when loading the game, and then reuse it

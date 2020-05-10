@@ -65,7 +65,7 @@ export default class Jump extends Trait{
     jugem_obstruct(entity){
         //after checking the collision, setting to true and then draw it 
         entity.walk.acc_x=30;
-
+       
     }
 
   
