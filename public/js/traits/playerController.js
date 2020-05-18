@@ -1,5 +1,6 @@
 import Trait from './trait.js';
 
+const COIN_MAX = 100;
 export default class PlayerController extends Trait{
     constructor(){
         super('playerController');
@@ -7,6 +8,7 @@ export default class PlayerController extends Trait{
         this.playerTime = 300;
         this.score =0;
         this.coin = 0;
+        this.lives = 1;
        
     }
     setPlayer(entity){
@@ -15,6 +17,16 @@ export default class PlayerController extends Trait{
 
     addCoins(count){
         this.coin +=count;
+        if(this.coin >= COIN_MAX){
+          
+
+            const lifeCount = Math.floor(this.coin/COIN_MAX);
+            this.addLives(lifeCount);
+        }
+    }
+    addLives(num){
+        this.lives += num;
+
     }
 
     
@@ -27,6 +39,8 @@ export default class PlayerController extends Trait{
             level.entities.add(this.player);
             this.playerTime =300;
             this.score =0;
+            this.coin = 0;
+            this.lives -=1;
 
             
 

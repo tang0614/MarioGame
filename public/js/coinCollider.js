@@ -46,7 +46,7 @@ export default class CoinCollider{
                     grid.delete(match.indexX,match.indexY);
                 
 
-                    entity.playerController.addCoins(1);
+                    entity.playerController.addCoins(100);
                 
 
                 }
