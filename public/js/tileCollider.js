@@ -2,8 +2,13 @@ import TileResolver from './tileResolver.js';
 
 
 export default class TileCollider{
-    constructor(tileMatrix){
-        this.tile_resolver = new TileResolver(tileMatrix);
+    constructor(){
+        this.tile_resolver = [];
+    }
+
+    addGrid(tileMatrix){
+        this.tile_resolver.push(new TileResolver(tileMatrix));
+
     }
 
 
@@ -29,12 +34,11 @@ export default class TileCollider{
            
             
         
-      
+        for (let resolver of this.tile_resolver){
 
-            const matchedTilesIndex = this.tile_resolver.getTileByRange(
+            const matchedTilesIndex = resolver.getTileByRange(
                 x, x,
                 entity.bounds.top, entity.bounds.bottom);
-            
 
             matchedTilesIndex.forEach(match=>{
 
@@ -60,12 +64,24 @@ export default class TileCollider{
                         
                     } 
                 }
-                else{
-                    return;
-                    
 
-                }    
+
+                else if(match.tile.name==='coin'){
+                    if(entity.marioCollide){
+                        const grid = resolver.matrix;
+                        grid.delete(match.indexX,match.indexY);
+                    
+                        //cannot pass in entity as paramether
+                        entity.playerController.addCoins(1);
+                        entity.audio.playAudio('coin'); 
+    
+                    }
+    
+                }
+                  
             });
+
+        }  
         
     }
 
@@ -79,17 +95,13 @@ export default class TileCollider{
 
         }
 
-    
-
-            const matchedTiles = this.tile_resolver.getTileByRange(
+        for (let resolver of this.tile_resolver){
+            const matchedTiles = resolver.getTileByRange(
                 entity.bounds.left, entity.bounds.right,
                 y,y);
-
-
             
             matchedTiles.forEach(match=>{
         
-                
                 //name is ground
                 if(match.tile.type==='ground'){
                     //falling to matched tile, speed up 
@@ -105,33 +117,37 @@ export default class TileCollider{
                                 entity.obstruct('bottom');
                             }
 
-
-
                         }
                     } 
                     else if(entity.velocity.y<0){
                         //tell entity is hitting ceiling
-                    
                         if(entity.bounds.top<match.y_floor){
                             entity.bounds.top=match.y_floor;
                             entity.velocity.y=0;
-                        
-                        
+                    
                         }
         
-                    } 
-
-                    
+                    }      
                 }
-                else{
-                    return;
 
+                else if(match.tile.name==='coin'){   
+                    if(entity.marioCollide){
+                        const grid = resolver.matrix;
+                        grid.delete(match.indexX,match.indexY);
+                    
+                        entity.playerController.addCoins(1);
+                        entity.audio.playAudio('coin');
+                    }
+                
                 }
 
             });
       
-        
-        
+
+
+        }
+
+
         
        
     }

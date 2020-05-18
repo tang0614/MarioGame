@@ -62,7 +62,6 @@ function pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite){
     levelFile.layers.forEach(layer=>{
         //drawing background on context according to element's name and posiiton in matrix
         const backgroundGrid = createBackgroundGrid(layer.tiles,levelFile.patterns);
-       
         const background_draw_function = getBackgroundLayer(level,backgroundGrid,BackGroundSprite);
         //level passed in as a timer
         //draw BackGroundSprite according to name on grid 
@@ -71,9 +70,8 @@ function pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite){
         //three background layers, each drawing at a different fime
 
         level.compo.layers.push(background_draw_function);
-        level.setCoinCollisionGrid(backgroundGrid);
-        //level.tileCollider.addGrid(backgroundGrid);
-
+        level.tileCollider.addGrid(backgroundGrid);
+        
     })
 }
 
@@ -103,11 +101,10 @@ function pushCollisionOnLevelCompo(levelFile,level){
     },[]);
     
     const collistionGrid = createBackgroundGrid(mergedTiles,levelFile.patterns);
-    
-    //level.tileCollider.addGrid(collistionGrid);
+    level.tileCollider.addGrid(collistionGrid);
 
-    level.setCollisionGrid(collistionGrid); //become a tile collider inside level
+    //level.setCollisionGrid(collistionGrid); 
     const draw_collision_function =createCollisionLayer(level);
-    //level.compo.layers.push(draw_collision_function);
+    level.compo.layers.push(draw_collision_function);
 }
 

@@ -1,7 +1,8 @@
 export function createCollisionLayer(level){
 
     const resolvedTiles = [];
-    const tileResolver = level.tile_collider.tile_resolver;
+    console.log(level.tileCollider.tile_resolver);
+    const tileResolver = level.tileCollider.tile_resolver[0];
     
     const tileSize = tileResolver.tileSize;
     const getByIndexOriginal = tileResolver.getTileByIndex;
