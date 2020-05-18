@@ -39,34 +39,15 @@ export function createLoadLevel(entityFactory){
 }
 
 
-function createCollisionGridwithTileType(tiles,patterns){
-     
-    const collistionGrid = new Matrix();
-    const expandedTiles=expandTiles(tiles,patterns);
-    for(const {tile,colIndex,rowIndex} of expandedTiles){
-        collistionGrid.set(colIndex,rowIndex,{
-                        type: tile.type
-        });
 
-    }
-    return collistionGrid;
 
-}
-
-function createBackgroundGridwithTileName(tiles,patterns){
+function createBackgroundGrid(tiles,patterns){
      
     const backgroundGrid = new Matrix();
-
     const expandedTiles=expandTiles(tiles,patterns);
-    
-
     //tile,X,Y are values inside object
-    
     for(const {tile,colIndex,rowIndex} of expandedTiles){
-        backgroundGrid.set(colIndex,rowIndex,{
-                        "name": tile.name
-        });
-
+        backgroundGrid.set(colIndex,rowIndex,tile);
     }
 
     return backgroundGrid;
@@ -80,7 +61,7 @@ function pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite){
     
     levelFile.layers.forEach(layer=>{
         //drawing background on context according to element's name and posiiton in matrix
-        const backgroundGrid = createBackgroundGridwithTileName(layer.tiles,levelFile.patterns);
+        const backgroundGrid = createBackgroundGrid(layer.tiles,levelFile.patterns);
        
         const background_draw_function = getBackgroundLayer(level,backgroundGrid,BackGroundSprite);
         //level passed in as a timer
@@ -90,10 +71,7 @@ function pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite){
         //three background layers, each drawing at a different fime
 
         level.compo.layers.push(background_draw_function);
-
         level.setCoinCollisionGrid(backgroundGrid);
-       
-
         //level.tileCollider.addGrid(backgroundGrid);
 
     })
@@ -124,7 +102,7 @@ function pushCollisionOnLevelCompo(levelFile,level){
         return mergedTiles.concat(layer.tiles); //return values goes back to mergedTiles, mergedTiles starts with []
     },[]);
     
-    const collistionGrid = createCollisionGridwithTileType(mergedTiles,levelFile.patterns);
+    const collistionGrid = createBackgroundGrid(mergedTiles,levelFile.patterns);
     
     //level.tileCollider.addGrid(collistionGrid);
 

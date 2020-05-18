@@ -60,20 +60,6 @@ export default class TileCollider{
                         
                     } 
                 }
-                else if(match.tile.type==='coin'){
-                
-
-                    if(entity.marioCollide){
-                        const grid = this.tile_resolver.matrix;
-                        grid.delete(match.indexX,match.indexY);
-                    
-
-                        entity.playerController.addCoins(1);
-                    
-
-                    }
-
-                }
                 else{
                     return;
                     
@@ -136,19 +122,6 @@ export default class TileCollider{
                     } 
 
                     
-                }
-                else if(match.tile.type==='coin'){
-                
-                    if(entity.marioCollide){
-                
-                        const grid = this.tile_resolver.matrix;
-                        grid.delete(match.indexX,match.indexY);
-                    
-                        entity.playerController.addCoins(1);
-
-                    }
-                    
-
                 }
                 else{
                     return;

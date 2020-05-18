@@ -20,6 +20,8 @@ export function getBackgroundLayer(level,backgroundGrid,background_sprites){
   
             if(col){
                 col.forEach((value,rowIndex)=>{
+       
+                    
                     if(value.name ==='chance' || value.name ==='coin'){
                         background_sprites.drawAnime(value.name,buffer_context,colIndex-startIndex,rowIndex,level.duration);
                     }else{

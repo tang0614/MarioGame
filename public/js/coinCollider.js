@@ -25,39 +25,28 @@ export default class CoinCollider{
             
         }else{
             return;
-        }
-           
+        }   
 
         const matchedTilesIndex = this.tile_resolver.getTileByRange(
             x, x,
             entity.bounds.top, entity.bounds.bottom);
         
-
         matchedTilesIndex.forEach(match=>{
-
-            
-            //name is ground
-            
+            //name is ground  
             if(match.tile.name==='coin'){
-            
-
                 if(entity.marioCollide){
                     const grid = this.tile_resolver.matrix;
                     grid.delete(match.indexX,match.indexY);
                 
                     //cannot pass in entity as paramether
                     entity.playerController.addCoins(1);
-                    entity.audio.playAudio('coin');
-                
+                    entity.audio.playAudio('coin'); 
 
                 }
 
             }
-            else{
-                return;
-                
 
-            }    
+            
         });
     
     }
@@ -72,39 +61,26 @@ export default class CoinCollider{
 
         }
 
-    
-
         const matchedTiles = this.tile_resolver.getTileByRange(
             entity.bounds.left, entity.bounds.right,
             y,y);
 
-
-        
-        matchedTiles.forEach(match=>{
-      
-            if(match.tile.name==='coin'){
-            
+        matchedTiles.forEach(match=>{  
+            if(match.tile.name==='coin'){   
                 if(entity.marioCollide){
-            
                     const grid = this.tile_resolver.matrix;
                     grid.delete(match.indexX,match.indexY);
                 
                     entity.playerController.addCoins(1);
                     entity.audio.playAudio('coin');
-
                 }
             
             }
-            else{
-                return;
+            
+       
+            
 
-            }
-
-        });
-    
-        
-        
-        
+        });  
        
     }
 
