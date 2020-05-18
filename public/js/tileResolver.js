@@ -37,6 +37,8 @@ export default class TileResolver{
                 y_floor,
                 x_left,
                 x_right,
+                indexX,
+                indexY
                 
             };
         }

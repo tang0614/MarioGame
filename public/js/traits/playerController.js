@@ -6,10 +6,15 @@ export default class PlayerController extends Trait{
         this.player =null;
         this.playerTime = 300;
         this.score =0;
+        this.coin = 0;
        
     }
     setPlayer(entity){
         this.player =entity;
+    }
+
+    addCoins(count){
+        this.coin +=count;
     }
 
     

@@ -12,8 +12,6 @@ export default class Killable extends Trait{
         this.sleepTime = 0;
         this.sleepLimit = 8;
         this.state ="fly";
-
-     
         
     }
 

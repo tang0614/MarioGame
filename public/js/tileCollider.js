@@ -1,10 +1,11 @@
 import TileResolver from './tileResolver.js';
-import BoundingBox from './boundingBox.js';
+
 
 export default class TileCollider{
     constructor(tileMatrix){
         this.tile_resolver = new TileResolver(tileMatrix);
     }
+
 
     test(entity){
         this.checkY(entity);
@@ -25,39 +26,61 @@ export default class TileCollider{
         }else{
             return;
         }
-
-       
-        const matchedTilesIndex = this.tile_resolver.getTileByRange(
-            x, x,
-            entity.bounds.top, entity.bounds.bottom);
-    
-        
-        matchedTilesIndex.forEach(match=>{
+           
             
-            //name is ground
-            if(match.tile.type!=='ground'){
-                return;
-            }
-              
-            if(entity.velocity.x>0){
+        
+      
+
+            const matchedTilesIndex = this.tile_resolver.getTileByRange(
+                x, x,
+                entity.bounds.top, entity.bounds.bottom);
+            
+
+            matchedTilesIndex.forEach(match=>{
+
                 
-                if(entity.bounds.right>match.x_left){
-                   
-                    entity.bounds.left=match.x_left-entity.size.x;
-                    entity.velocity.x=0;
-                    entity.obstruct('right');
+                //name is ground
+                if(match.tile.type==='ground'){
+                    if(entity.velocity.x>0){
+                    
+                        if(entity.bounds.right>match.x_left){
+                        
+                            entity.bounds.left=match.x_left-entity.size.x;
+                            entity.velocity.x=0;
+                            entity.obstruct('right');
+                        }
+                        
+                    } else if(entity.velocity.x<0){
+                        if(entity.bounds.left<match.x_right){
+                            entity.bounds.left=match.x_right;
+                            entity.velocity.x=0;
+                            entity.obstruct('left');
+        
+                        }
+                        
+                    } 
                 }
+                else if(match.tile.type==='coin'){
                 
-            } else if(entity.velocity.x<0){
-                if(entity.bounds.left<match.x_right){
-                    entity.bounds.left=match.x_right;
-                    entity.velocity.x=0;
-                    entity.obstruct('left');
+
+                    if(entity.marioCollide){
+                        const grid = this.tile_resolver.matrix;
+                        grid.delete(match.indexX,match.indexY);
+                    
+
+                        entity.playerController.addCoins(1);
+                    
+
+                    }
 
                 }
-                
-            } 
-        })
+                else{
+                    return;
+                    
+
+                }    
+            });
+        
     }
 
     checkY(entity){
@@ -69,55 +92,72 @@ export default class TileCollider{
             y=entity.bounds.top;
 
         }
-     
-        const matchedTiles = this.tile_resolver.getTileByRange(
-            entity.bounds.left, entity.bounds.right,
-            y,y);
-        
-        
-        matchedTiles.forEach(match=>{
+
     
-        
-            //name is ground
-            if(match.tile.type!=='ground'){
-                return;
-            }
+
+            const matchedTiles = this.tile_resolver.getTileByRange(
+                entity.bounds.left, entity.bounds.right,
+                y,y);
+
+
             
+            matchedTiles.forEach(match=>{
+        
+                
+                //name is ground
+                if(match.tile.type==='ground'){
+                    //falling to matched tile, speed up 
+                    if(entity.velocity.y>0){
+                        if(entity.bounds.bottom>match.y_cell){
 
-            //falling to matched tile, speed up 
-            if(entity.velocity.y>0){
-                if(entity.bounds.bottom>match.y_cell){
+                            entity.bounds.top=match.y_cell-entity.size.y;
+                            entity.velocity.y=0;
 
-                    entity.bounds.top=match.y_cell-entity.size.y;
-                    entity.velocity.y=0;
+                            if(entity.name=='jugem'){
+                                entity.jump.jugem_obstruct(entity);
+                            }else{
+                                entity.obstruct('bottom');
+                            }
 
-                    if(entity.name=='jugem'){
-                        entity.jump.jugem_obstruct(entity);
-                    }else{
-                        entity.obstruct('bottom');
-                    }
+
+
+                        }
+                    } 
+                    else if(entity.velocity.y<0){
+                        //tell entity is hitting ceiling
+                    
+                        if(entity.bounds.top<match.y_floor){
+                            entity.bounds.top=match.y_floor;
+                            entity.velocity.y=0;
+                        
+                        
+                        }
+        
+                    } 
 
                     
-
-
                 }
-            } 
-            else if(entity.velocity.y<0){
-                //tell entity is hitting ceiling
-               
-                if(entity.bounds.top<match.y_floor){
-                    entity.bounds.top=match.y_floor;
-                    entity.velocity.y=0;
+                else if(match.tile.type==='coin'){
                 
-                 
+                    if(entity.marioCollide){
+                
+                        const grid = this.tile_resolver.matrix;
+                        grid.delete(match.indexX,match.indexY);
+                    
+                        entity.playerController.addCoins(1);
+
+                    }
+                    
+
                 }
- 
-            } 
+                else{
+                    return;
 
+                }
 
-        })
+            });
       
-
+        
         
         
        

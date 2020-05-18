@@ -13,7 +13,6 @@ export default class JugemBehavior extends Trait{
             other.go.dir =0;
             
             
-            
         }   
     }
 

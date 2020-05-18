@@ -30,6 +30,14 @@ export default class Matrix{
             });
         }); 
     }
+
+    delete(columnIndex,rowIndex) {
+        console.log('deleting coins....');
+        const col = this.grid[columnIndex];
+        if (col) {
+            delete col[rowIndex];
+        }
+    }
 }
 
 

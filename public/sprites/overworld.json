@@ -33,6 +33,19 @@
             "name": "chance-3",
             "index": [26, 0]
         },
+
+        {
+            "name": "coin-1",
+            "index": [24, 1]
+        },
+        {
+            "name": "coin-2",
+            "index": [25, 1]
+        },
+        {
+            "name": "coin-3",
+            "index": [26, 1]
+        },
   
         {
             "name": "pip-insert-vert-left",
@@ -112,6 +125,13 @@
             "chance-2",
             "chance-3",
             "chance-3"]
-        }
+        },
+        {
+            "name": "coin",
+            "frameLen": 0.15,
+            "frames": ["coin-1",
+             "coin-2",
+             "coin-3"]
+         }
     ]
 }
