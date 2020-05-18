@@ -11,8 +11,8 @@
         "shoot": {
             "url": "./audio/thwomp.ogg"
         },
-        "over": {
-            "url": "./audio/over.ogg"
+        "coin": {
+            "url": "./audio/coin.ogg"
         }
     }
 }

@@ -130,6 +130,6 @@ function pushCollisionOnLevelCompo(levelFile,level){
 
     level.setCollisionGrid(collistionGrid); //become a tile collider inside level
     const draw_collision_function =createCollisionLayer(level);
-    level.compo.layers.push(draw_collision_function);
+    //level.compo.layers.push(draw_collision_function);
 }
 

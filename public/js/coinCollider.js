@@ -45,8 +45,9 @@ export default class CoinCollider{
                     const grid = this.tile_resolver.matrix;
                     grid.delete(match.indexX,match.indexY);
                 
-
-                    entity.playerController.addCoins(100);
+                    //cannot pass in entity as paramether
+                    entity.playerController.addCoins(1);
+                    entity.audio.playAudio('coin');
                 
 
                 }
@@ -89,6 +90,7 @@ export default class CoinCollider{
                     grid.delete(match.indexX,match.indexY);
                 
                     entity.playerController.addCoins(1);
+                    entity.audio.playAudio('coin');
 
                 }
             

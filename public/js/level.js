@@ -42,7 +42,7 @@ export default class Level {
             }
             
             //check if overlap or collide with mario
-            this.entity_collider.checkEntityCollideMario(entity,audioContext); 
+            this.entity_collider.checkEntityCollideMario(entity); 
             this.entity_collider.checkEntityPushedByMario(entity);
            
             

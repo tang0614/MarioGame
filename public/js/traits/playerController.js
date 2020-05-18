@@ -17,6 +17,8 @@ export default class PlayerController extends Trait{
 
     addCoins(count){
         this.coin +=count;
+       
+
         if(this.coin >= COIN_MAX){
           
 
