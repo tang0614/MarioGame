@@ -297,7 +297,7 @@
             
             {
                 "name": "bricks",
-                "type": "bricks",
+                "type": "ground",
                 "ranges": [
                     [
                         27, 5,

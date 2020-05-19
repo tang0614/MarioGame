@@ -1,4 +1,13 @@
 import TileResolver from './tileResolver.js';
+import { ground } from '../tiles/ground.js';
+import { coin } from '../tiles/coin.js';
+
+
+const tileTypes = {
+    coin,
+    ground,
+}
+
 
 
 export default class TileCollider{
@@ -18,6 +27,23 @@ export default class TileCollider{
         
         //const matchedTile = this.tile_resolver.getTileByPosition(entity.bounds.left,entity.bounds.top);
     
+    }
+
+    handle(index,match,entity,resolver){
+
+        const tileCollisionContext = {
+            match,
+            entity,
+            resolver,
+
+        };
+
+
+        const tileType = tileTypes[match.tile.type];
+        if (tileType) {
+            tileType[index](tileCollisionContext);
+        }
+
     }
 
     checkX(entity){
@@ -40,45 +66,9 @@ export default class TileCollider{
                 x, x,
                 entity.bounds.top, entity.bounds.bottom);
 
-            matchedTilesIndex.forEach(match=>{
-
-                
-                //name is ground
-                if(match.tile.type==='ground'){
-                    if(entity.velocity.x>0){
-                    
-                        if(entity.bounds.right>match.x_left){
-                        
-                            entity.bounds.left=match.x_left-entity.size.x;
-                            entity.velocity.x=0;
-                            entity.obstruct('right');
-                        }
-                        
-                    } else if(entity.velocity.x<0){
-                        if(entity.bounds.left<match.x_right){
-                            entity.bounds.left=match.x_right;
-                            entity.velocity.x=0;
-                            entity.obstruct('left');
-        
-                        }
-                        
-                    } 
-                }
-
-
-                else if(match.tile.name==='coin'){
-                    if(entity.marioCollide){
-                        const grid = resolver.matrix;
-                        grid.delete(match.indexX,match.indexY);
-                    
-                        //cannot pass in entity as paramether
-                        entity.playerController.addCoins(1);
-                        entity.audio.playAudio('coin'); 
-    
-                    }
-    
-                }
-                  
+            matchedTilesIndex.forEach(match=>{         
+                this.handle(0, match,entity,resolver);
+              
             });
 
         }  
@@ -101,55 +91,12 @@ export default class TileCollider{
                 y,y);
             
             matchedTiles.forEach(match=>{
-        
-                //name is ground
-                if(match.tile.type==='ground'){
-                    //falling to matched tile, speed up 
-                    if(entity.velocity.y>0){
-                        if(entity.bounds.bottom>match.y_cell){
 
-                            entity.bounds.top=match.y_cell-entity.size.y;
-                            entity.velocity.y=0;
-
-                            if(entity.name=='jugem'){
-                                entity.jump.jugem_obstruct(entity);
-                            }else{
-                                entity.obstruct('bottom');
-                            }
-
-                        }
-                    } 
-                    else if(entity.velocity.y<0){
-                        //tell entity is hitting ceiling
-                        if(entity.bounds.top<match.y_floor){
-                            entity.bounds.top=match.y_floor;
-                            entity.velocity.y=0;
-                    
-                        }
-        
-                    }      
-                }
-
-                else if(match.tile.name==='coin'){   
-                    if(entity.marioCollide){
-                        const grid = resolver.matrix;
-                        grid.delete(match.indexX,match.indexY);
-                    
-                        entity.playerController.addCoins(1);
-                        entity.audio.playAudio('coin');
-                    }
-                
-                }
+                this.handle(1, match,entity,resolver);
 
             });
       
-
-
-        }
-
-
-        
-       
+        }    
     }
 
 }

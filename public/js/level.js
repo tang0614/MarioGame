@@ -1,7 +1,7 @@
 import Compositor from './compository.js';
 import EntityCollider from './entityCollider.js';
 import TileCollider from './tileCollider.js';
-import CoinCollider from './coinCollider.js';
+
 
 export default class Level {
     constructor(){
