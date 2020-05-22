@@ -35,7 +35,7 @@ export default class Go extends Trait{
 
         }else{
            
-            this.distance = 0;
+            //this.distance = 0;
             entity.velocity.x=0;
         }
 

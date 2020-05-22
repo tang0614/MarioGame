@@ -6,6 +6,10 @@
             "rect": [276, 43, 16, 16]
         },
         {
+            "name": "super-mario",
+            "rect": [278, 0, 16, 32]
+        },
+        {
             "name": "run-1",
             "rect": [290, 44, 16, 16]
         },
@@ -18,15 +22,15 @@
             "rect": [321, 44, 16, 16]
         },
         {
-            "name": "super-run-1",
+            "name": "super-run-2",
             "rect": [297, 0, 16, 32]
         },
         {
-            "name": "super-run-2",
+            "name": "super-run-3",
             "rect": [313, 0, 16, 32]
         },
         {
-            "name": "super-run-3",
+            "name": "super-run-1",
             "rect": [331, 0, 16, 32]
         },
         {
@@ -54,25 +58,37 @@
             "rect": [164, 0, 16, 32]
         },
         {
-            "name": "break",
-            "rect": [321,44,16,16]
+            "name": "break-forward",
+            "rect": [338,44,16,16]
+        },
+        {
+            "name": "break-backward",
+            "rect": [161,44,16,16]
         }
         ,
         {
-            "name": "jump",
+            "name": "jump-forward",
             "rect": [355,44,16,16]
         },
         {
-            "name": "super-mario",
-            "rect": [258, 0, 16, 32]
+            "name": "jump-backward",
+            "rect": [141,44,16,16]
         },
         {
-            "name": "super-jump",
+            "name": "super-jump-forward",
             "rect": [370, 0, 16, 32]
         },
         {
-            "name": "super-break",
-            "rect": [257, 0, 16, 32]
+            "name": "super-jump-backward",
+            "rect": [128, 0, 16, 32]
+        },
+        {
+            "name": "super-break-forward",
+            "rect": [350, 0, 16, 32]
+        },
+        {
+            "name": "super-break-backward",
+            "rect": [148, 0, 16, 32]
         }
     ],
     "animations": [

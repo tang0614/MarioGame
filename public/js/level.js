@@ -29,6 +29,12 @@ export default class Level {
             if(entity.canDetectTiles){
                 this.tileCollider.test(entity); 
             }
+
+            if(entity.marioCollide){
+                console.log(entity.go.dir);
+                console.log(entity.velocity.x);
+                console.log(entity.go.distance);
+            }
             
             //check if overlap or collide with mario
             this.entity_collider.checkEntityCollideMario(entity); 

@@ -32,43 +32,58 @@ function createMarioEntity(mario,audioBoard){
         // draw jumping when not able to jump(while jumping )
         if(mario_entity.playerController.super){
             if(!mario_entity.jump.ready){
-                return 'super-jump';
-            }
-
-            if(mario_entity.go.dir >0){
-                if(mario_entity.velocity.x<0 ){
-                    return 'super-break';
+                if(mario_entity.go.dir >=0){
+                    return 'super-jump-forward';
+                }else{
+                    return 'super-jump-backward';
                 }
-                return super_anime_run(mario_entity.go.distance);
-            }else if(mario_entity.go.dir==0){
-                return 'super-mario'
             }else{
-                if(mario_entity.velocity.x>0){
-                    return 'super-break';
-                }
-                return super_anime_retreat(Math.abs(mario_entity.go.distance));
-            }
+                if(mario_entity.go.dir >0){
+                    if(mario_entity.velocity.x<0 ){
+                        return 'super-break-backward';
+                    }
 
-        }else{
-            if(!mario_entity.jump.ready){
-                return 'jump';
-            }
+                    return super_anime_run(mario_entity.go.distance);
+                }else if(mario_entity.go.dir <0){
+                    if(mario_entity.velocity.x>0 ){
+                        return 'super-break-forward';
+                    }
+                    return super_anime_retreat(Math.abs(mario_entity.go.distance));
+                }else {
+                    return 'super-mario'     
+                }
 
-            if(mario_entity.go.dir >0){
-                if(mario_entity.velocity.x<0 ){
-                    return 'break';
-                }
-                return anime_run(mario_entity.go.distance);
-            }else if(mario_entity.go.dir==0){
-                return 'mario'
-            }else{
-                if(mario_entity.velocity.x>0){
-                    return 'break';
-                }
-                return anime_retreat(Math.abs(mario_entity.go.distance));
             }
+           
 
         }
+            if(!mario_entity.jump.ready){
+                if(mario_entity.go.dir >=0){
+                    return 'jump-forward';
+                }else{
+                    return 'jump-backward';
+                }
+                
+            }else{
+
+                if(mario_entity.go.dir >0){
+                    if(mario_entity.velocity.x<0 ){
+                        return 'break-backward';
+                    }
+                    return anime_run(mario_entity.go.distance);
+                }else if(mario_entity.go.dir <0){
+                    if(mario_entity.velocity.x>0 ){
+                        return 'break-forward';
+                    }
+                    return anime_retreat(Math.abs(mario_entity.go.distance));
+                }else{
+                    return 'mario'     
+                } 
+
+            }
+
+            
+        
             
     
     }
