@@ -33,6 +33,7 @@ async function main(canvas){
     const mario_entity = mario_entity_reference();
     mario_entity.pos.set(64,64);
     level.entities.add(mario_entity);
+    console.log(level);
 
     //clicking and move mario
     //setting up keyboard,enter enable jump 

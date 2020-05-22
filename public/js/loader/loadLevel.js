@@ -25,17 +25,18 @@ export function createLoadLevel(entityFactory){
             
             const level = new Level();
 
-
             //load background layer
             pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite);
+
+            
             //load koopa goomba entity layer
             pushEntitiesOnLevelCompo(levelFile,level,entityFactory);
 
+           
             pushCollisionOnLevelCompo(levelFile,level);
 
             //pushFontOnLevelCompo(font,level);
 
-            console.log(level);
         
             return level;
 

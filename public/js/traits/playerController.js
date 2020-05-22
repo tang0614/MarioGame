@@ -32,7 +32,6 @@ export default class PlayerController extends Trait{
 
     deleteLives(num){
         this.lives -= num;
-        console.log(this.lives);
 
     }
 
@@ -48,9 +47,15 @@ export default class PlayerController extends Trait{
 
 
         if(!level.entities.has(this.player)){
+            
             this.player.killable.revive();
-            this.player.pos.set(64,64);
             level.entities.add(this.player);
+            console.log('reviving....');
+            //restarting the window
+            this.player.go.dir = 0;
+            this.player.velocity.set(0,0);
+            this.player.pos.set(64,64);
+          
             this.playerTime =300;
             this.score =0;
             this.coin = 0;
