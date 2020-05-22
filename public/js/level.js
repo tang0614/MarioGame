@@ -22,7 +22,6 @@ export default class Level {
             //first update entity jump, go speed and then update position
             console.log('updating after dt.....');
            
-          
             entity.updateBytime(dt,this,audioContext); //this pointing to level 
             
             //check whether entities collide with tiles
@@ -30,12 +29,6 @@ export default class Level {
                 this.tileCollider.test(entity); 
             }
 
-            if(entity.marioCollide){
-                console.log(entity.go.dir);
-                console.log(entity.velocity.x);
-                console.log(entity.go.distance);
-            }
-            
             //check if overlap or collide with mario
             this.entity_collider.checkEntityCollideMario(entity); 
 
@@ -43,7 +36,6 @@ export default class Level {
             this.duration +=dt;
 
         })
-        
    
     }
 }

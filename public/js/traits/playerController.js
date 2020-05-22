@@ -19,17 +19,24 @@ export default class PlayerController extends Trait{
 
     addCoins(count){
         this.coin +=count;
-       
-
         if(this.coin >= COIN_MAX){
           
-
             const lifeCount = Math.floor(this.coin/COIN_MAX);
             this.addLives(lifeCount);
         }
     }
+    
     addLives(num){
+        console.log('adding life');
         this.lives += num;
+        console.log(this.lives);
+
+    }
+
+    deleteLives(num){
+        console.log('deleting lives');
+        this.lives -= num;
+        console.log(this.lives);
 
     }
 
@@ -44,6 +51,7 @@ export default class PlayerController extends Trait{
 
     update(entity,dt,level){
 
+
         if(!level.entities.has(this.player)){
             this.player.killable.revive();
             this.player.pos.set(64,64);
@@ -51,9 +59,7 @@ export default class PlayerController extends Trait{
             this.playerTime =300;
             this.score =0;
             this.coin = 0;
-            this.lives -=1;
-        
-
+            this.lives = 1;
             
 
         }else{
@@ -68,9 +74,6 @@ export default class PlayerController extends Trait{
                     this.super = false; 
                 }
             }
-
-            console.log(this.superTime);
-  
         
     }
 

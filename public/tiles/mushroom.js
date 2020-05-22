@@ -6,6 +6,7 @@ function mushroomX({match,entity,resolver}){
         grid.delete(match.indexX,match.indexY);
     
         //cannot pass in entity as paramether
+        entity.playerController.addLives(1);
         entity.playerController.grow(1);
         entity.audio.playAudio('coin'); 
 
@@ -22,9 +23,9 @@ function mushroomY({match,entity,resolver}){
             const grid = resolver.matrix;
             grid.delete(match.indexX,match.indexY);
             entity.playerController.grow();
+            entity.playerController.addLives(1);
             entity.audio.playAudio('coin'); 
            
-
 
         }
 

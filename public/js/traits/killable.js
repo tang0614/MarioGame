@@ -19,8 +19,8 @@ export default class Killable extends Trait{
         this.state ="walk";
     }
 
-    killed(){
-        this.dead = true;
+    killed(){  
+        this.dead = true;  
     }
 
     revive(){
@@ -63,10 +63,11 @@ export default class Killable extends Trait{
 
         if(this.dead){
             this.deadTime += dt;
+           
             if(this.deadTime>this.removeTime){
                 level.entities.delete(entity);
-                
             }
+          
         }
         
 
