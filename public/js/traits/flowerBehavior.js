@@ -16,9 +16,16 @@ export default class FlowerBehavior extends Trait{
                 
           
             }else if(other.velocity.y==me.velocity.y){
-                other.killable.killed();
-                //other.audio.playAudio('over');
-                other.go.dir =0;
+                if(!other.playerController.super){
+                    other.marioCollide.bounceUp();
+                    other.playerController.deleteLives(1);
+
+                    if(other.playerController.lives==0){
+                        other.killable.killed();
+                        other.go.dir =0;
+                    }
+
+                }
             
             }
             

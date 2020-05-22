@@ -9,8 +9,16 @@ export default class JugemBehavior extends Trait{
         if(other.marioCollide){
             //if mario jump on me, me bounce up and being killed
           
-            other.killable.killed();
-            other.go.dir =0;
+            if(!other.playerController.super){
+                other.marioCollide.bounceUp();
+                other.playerController.deleteLives(1);
+
+                if(other.playerController.lives==0){
+                    other.killable.killed();
+                    other.go.dir =0;
+                }
+
+            }
             
             
         }   

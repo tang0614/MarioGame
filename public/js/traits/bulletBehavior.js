@@ -16,9 +16,16 @@ export default class BulletBehavior extends Trait{
                 other.playerController.score +=300;
           
             }else{
-                other.killable.killed();
-                //other.audio.playAudio('over');
-                other.go.dir =0;
+                if(!other.playerController.super){
+                    other.marioCollide.bounceUp();
+                    other.playerController.deleteLives(1);
+
+                    if(other.playerController.lives==0){
+                        other.killable.killed();
+                        other.go.dir =0;
+                    }
+
+                }
             }
             
         } 

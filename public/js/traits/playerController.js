@@ -27,14 +27,10 @@ export default class PlayerController extends Trait{
     }
     
     addLives(num){
-        console.log('adding life');
         this.lives += num;
-        console.log(this.lives);
-
     }
 
     deleteLives(num){
-        console.log('deleting lives');
         this.lives -= num;
         console.log(this.lives);
 
@@ -43,7 +39,6 @@ export default class PlayerController extends Trait{
     grow(){
         this.superTime = 10000;
         this.super = true;
-
       
     }
 
@@ -63,7 +58,7 @@ export default class PlayerController extends Trait{
             
 
         }else{
-        
+           
             this.playerTime -= dt;
             if(this.super){
                 if(this.superTime>0){
@@ -72,6 +67,7 @@ export default class PlayerController extends Trait{
                 }else{
                     this.player.offset.set(0,0);
                     this.super = false; 
+                    
                 }
             }
         

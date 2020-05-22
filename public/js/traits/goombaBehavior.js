@@ -3,6 +3,7 @@ import Trait from './trait.js';
 export default class GoombaBehavior extends Trait{
     constructor(){
         super('goombaBehavior');
+     
     }
 
     collides_entity(me,other){
@@ -16,12 +17,17 @@ export default class GoombaBehavior extends Trait{
                 other.playerController.score +=200;
           
             }else if(other.velocity.y==me.velocity.y){
-                if(other.playerController.lives==0){
-                    other.killable.killed();
-                    other.go.dir =0;
+
+                if(!other.playerController.super){
+                    other.marioCollide.bounceUp();
+                    other.playerController.deleteLives(1);
+
+                    if(other.playerController.lives==0){
+                        other.killable.killed();
+                        other.go.dir =0;
+                    }
 
                 }
-                
             
             }
             

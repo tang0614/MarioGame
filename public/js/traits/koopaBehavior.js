@@ -44,9 +44,19 @@ export default class KoopaBehavior extends Trait{
                         other.playerController.score +=100;
 
                     }else if (other.velocity.y==me.velocity.y){
+
+                        if(!other.playerController.super){
+                            other.marioCollide.bounceUp();
+                            other.playerController.deleteLives(1);
+        
+                            if(other.playerController.lives==0){
+                                other.killable.killed();
+                                other.go.dir =0;
+                            }
+        
+                        }
                         
-                        other.killable.killed();
-                        other.go.dir =0;
+                        
                     }         
 
                 }else{
@@ -65,8 +75,16 @@ export default class KoopaBehavior extends Trait{
                     } else if (other.velocity.y<me.velocity.y){
                     
                         
-                        other.killable.killed();
-                        other.go.dir =0;
+                        if(!other.playerController.super){
+                            other.marioCollide.bounceUp();
+                            other.playerController.deleteLives(1);
+        
+                            if(other.playerController.lives==0){
+                                other.killable.killed();
+                                other.go.dir =0;
+                            }
+        
+                        }
                     
        
                     }
