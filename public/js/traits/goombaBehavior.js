@@ -15,7 +15,7 @@ export default class GoombaBehavior extends Trait{
                 me.killable.killed();
                 me.walk.dir =0;
                 me.audio.playAudio('stomp');
-                other.playerController.score +=200;
+                other.playerController.score +=100;
           
             }else if(other.velocity.y==me.velocity.y){
 

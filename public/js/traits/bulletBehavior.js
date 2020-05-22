@@ -11,7 +11,7 @@ export default class BulletBehavior extends Trait{
             if(other.velocity.y>me.velocity.y){
                 other.marioCollide.bounceUp();
                 me.killable.killed();
-                me.velocity.y +=200;
+                me.velocity.y +=100;
                 me.audio.playAudio('stomp');
                 other.playerController.score +=300;
           
