@@ -18,6 +18,18 @@
             "rect": [321, 44, 16, 16]
         },
         {
+            "name": "super-run-1",
+            "rect": [297, 0, 16, 32]
+        },
+        {
+            "name": "super-run-2",
+            "rect": [313, 0, 16, 32]
+        },
+        {
+            "name": "super-run-3",
+            "rect": [331, 0, 16, 32]
+        },
+        {
             "name": "retreat-1",
             "rect": [208, 44, 16, 16]
         },
@@ -30,6 +42,18 @@
             "rect": [176, 44, 16, 16]
         },
         {
+            "name": "super-retreat-1",
+            "rect": [199, 0, 16, 32]
+        },
+        {
+            "name": "super-retreat-2",
+            "rect": [183, 0, 16, 32]
+        },
+        {
+            "name": "super-retreat-3",
+            "rect": [164, 0, 16, 32]
+        },
+        {
             "name": "break",
             "rect": [321,44,16,16]
         }
@@ -37,6 +61,18 @@
         {
             "name": "jump",
             "rect": [355,44,16,16]
+        },
+        {
+            "name": "super-mario",
+            "rect": [258, 0, 16, 32]
+        },
+        {
+            "name": "super-jump",
+            "rect": [370, 0, 16, 32]
+        },
+        {
+            "name": "super-break",
+            "rect": [257, 0, 16, 32]
         }
     ],
     "animations": [
@@ -56,6 +92,24 @@
                 "retreat-1",
                 "retreat-2",
                 "retreat-3"
+            ]
+        },
+        {
+            "name": "super-run",
+            "frameLen": 6,
+            "frames": [
+                "super-run-1",
+                "super-run-2",
+                "super-run-3"
+            ]
+        },
+        {
+            "name": "super-retreat",
+            "frameLen": 6,
+            "frames": [
+                "super-retreat-1",
+                "super-retreat-2",
+                "super-retreat-3"
             ]
         }
     ]

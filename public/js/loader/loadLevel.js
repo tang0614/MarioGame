@@ -18,12 +18,15 @@ export function createLoadLevel(entityFactory){
             return Promise.all([
                 levelFile,
                 loadSpriteSheet(levelFile.spriteSheet),  //passing in overworld json file
+           
             ]);
         })
         .then(([levelFile,BackGroundSprite])=>{
             
             const level = new Level();
-              //load background layer
+
+
+            //load background layer
             pushBackgroundOnLevelCompo(levelFile,level,BackGroundSprite);
             //load koopa goomba entity layer
             pushEntitiesOnLevelCompo(levelFile,level,entityFactory);
@@ -31,6 +34,8 @@ export function createLoadLevel(entityFactory){
             pushCollisionOnLevelCompo(levelFile,level);
 
             //pushFontOnLevelCompo(font,level);
+
+            console.log(level);
         
             return level;
 

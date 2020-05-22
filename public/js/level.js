@@ -27,7 +27,6 @@ export default class Level {
             
             //check whether entities collide with tiles
             if(entity.canDetectTiles){
-                //test=>checkX or Y=>getTilebyRange=>getTilebyIndex
                 this.tileCollider.test(entity); 
             }
             

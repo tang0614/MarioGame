@@ -11,7 +11,7 @@ export default class Matrix{
         if(!this.grid[columnIndex]){
             this.grid[columnIndex]=[];
         }
-
+       
         this.grid[columnIndex][rowIndex]=value;
     }
     get(columnIndex,rowIndex){
@@ -32,12 +32,13 @@ export default class Matrix{
     }
 
     delete(columnIndex,rowIndex) {
-        console.log('deleting coins....');
         const col = this.grid[columnIndex];
         if (col) {
             delete col[rowIndex];
         }
     }
+
+    
 }
 
 

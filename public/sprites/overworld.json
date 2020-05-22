@@ -110,7 +110,16 @@
         {
             "name": "shrub-3",
             "index": [13, 9]
+        },
+        {
+            "name": "mushroom",
+            "index": [16, 0]
+        },
+        {
+            "name": "after-chance",
+            "index": [3, 0]
         }
+        
         
     
         

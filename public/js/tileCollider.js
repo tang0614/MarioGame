@@ -1,11 +1,15 @@
 import TileResolver from './tileResolver.js';
 import { ground } from '../tiles/ground.js';
 import { coin } from '../tiles/coin.js';
+import { chance } from '../tiles/chance.js';
+import { mushroom } from '../tiles/mushroom.js';
 
 
 const tileTypes = {
     coin,
     ground,
+    chance,
+    mushroom,
 }
 
 
@@ -24,9 +28,7 @@ export default class TileCollider{
     test(entity){
         this.checkY(entity);
         this.checkX(entity); 
-        
-        //const matchedTile = this.tile_resolver.getTileByPosition(entity.bounds.left,entity.bounds.top);
-    
+       
     }
 
     handle(index,match,entity,resolver){
@@ -35,7 +37,6 @@ export default class TileCollider{
             match,
             entity,
             resolver,
-
         };
 
 
@@ -57,8 +58,7 @@ export default class TileCollider{
         }else{
             return;
         }
-           
-            
+             
         
         for (let resolver of this.tile_resolver){
 
@@ -78,7 +78,6 @@ export default class TileCollider{
     checkY(entity){
         let y;
         if(entity.velocity.y>0){
-
             y=entity.bounds.bottom;
         }else if(entity.velocity.y<0){
             y=entity.bounds.top;
@@ -91,7 +90,6 @@ export default class TileCollider{
                 y,y);
             
             matchedTiles.forEach(match=>{
-
                 this.handle(1, match,entity,resolver);
 
             });

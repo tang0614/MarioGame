@@ -21,12 +21,35 @@ function createMarioEntity(mario,audioBoard){
 
     const anime_run = mario.animation.get('run');
     const anime_retreat = mario.animation.get('retreat');
+
+    const super_anime_run = mario.animation.get('super-run');
+    const super_anime_retreat = mario.animation.get('super-retreat');
     //const anime_run  = createAnime(['run-1','run-2','run-3'],10);
     //const anime_retreat  = createAnime(['retreat-1','retreat-2','retreat-3'],10);
     //create this function only once when loading the game, and then reuse it
 
     function routeFrame(mario_entity){
         // draw jumping when not able to jump(while jumping )
+        if(mario_entity.playerController.super){
+            if(!mario_entity.jump.ready){
+                return 'super-jump';
+            }
+
+            if(mario_entity.go.dir >0){
+                if(mario_entity.velocity.x<0 ){
+                    return 'super-break';
+                }
+                return super_anime_run(mario_entity.go.distance);
+            }else if(mario_entity.go.dir==0){
+                return 'super-mario'
+            }else{
+                if(mario_entity.velocity.x>0){
+                    return 'super-break';
+                }
+                return super_anime_retreat(Math.abs(mario_entity.go.distance));
+            }
+
+        }else{
             if(!mario_entity.jump.ready){
                 return 'jump';
             }
@@ -44,14 +67,21 @@ function createMarioEntity(mario,audioBoard){
                 }
                 return anime_retreat(Math.abs(mario_entity.go.distance));
             }
-    
+
         }
+            
+    
+    }
+
+    
 
     //create this function only once when loading the game, and then reuse it
     function drawMario(context,camera){
         //draw method from sprite sheet (This pointing to the mario entity not mario sprites)
         mario.draw(routeFrame(this),context,this.pos.x-camera.pos.x,this.pos.y-camera.pos.y);
     }
+
+  
 
     //return a function create mario
     return function createMarioFunction(){
@@ -68,9 +98,11 @@ function createMarioEntity(mario,audioBoard){
         mario_entity.addTrait(new PlayerController());
 
         mario_entity.playerController.setPlayer(mario_entity);
+
         //add a draw method to mario entity
         mario_entity.draw = drawMario; // this function connect mario entity object with mario sprites object
-    
+
+ 
         return mario_entity;
     }
 }

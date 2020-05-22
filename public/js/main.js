@@ -6,7 +6,7 @@ import {setMouseControl} from './control.js';
 import {loadEntities} from './loader/loadEntities.js';
 import {drawFont} from './layers/fontLayer.js';
 import {loadFont} from './loader.js';
-import EventEmitter from './eventEmitter.js'
+
 
 //loadBackGroundSprite(),loadBackGroundLevel('1')
 //These three should run in parallel
