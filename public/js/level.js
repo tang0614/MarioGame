@@ -23,7 +23,6 @@ export default class Level {
             console.log('updating after dt.....');
            
             entity.updateBytime(dt,this,audioContext); //this pointing to level 
-            
             //check whether entities collide with tiles
             if(entity.canDetectTiles){
                 this.tileCollider.test(entity); 

@@ -2,6 +2,8 @@ import Trait from './trait.js'
 export default class SynPosition extends Trait{
     constructor(){
         super('synposition');
+        this.forward_pos_limit = 200;
+        this.backward_pos_limit = 50;
     }
   
     // update the position of entity after time dt
@@ -15,12 +17,26 @@ export default class SynPosition extends Trait{
      
         level.entities.forEach(entity=>{
             if(entity.marioCollide){
-                if(entity.go.dir>=0){
-                    lakitu_entity.pos.x = entity.pos.x + 100;
+                if(entity.go.dir >=0){
+                    if(lakitu_entity.pos.x<entity.pos.x + this.forward_pos_limit){
+                        lakitu_entity.pos.x += 1;
+                    }else{
+                        lakitu_entity.pos.x= entity.pos.x + this.forward_pos_limit;
 
-                }else{
-                    lakitu_entity.pos.x = entity.pos.x - 20;
+                    }
+                    
+                    
+
+                }else if(entity.go.dir<0){
+                    if(lakitu_entity.pos.x >entity.pos.x - this.backward_pos_limit){
+                        lakitu_entity.pos.x -= 1;
+                    }else{
+                        lakitu_entity.pos.x= entity.pos.x - this.backward_pos_limit;
+
+                    }
+                    
                 }
+                
                 
               
             }

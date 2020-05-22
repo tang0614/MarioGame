@@ -68,6 +68,7 @@ function createLakituEntity(lakitu,audioBoard,entitiyFactories){
         lakitu_entity.size.set(16,16);
         lakitu_entity.offset.set(0,8);
         lakitu_entity.velocity.set(0,0);
+        lakitu_entity.pos.set(0,0);
 
         lakitu_entity.walk.acc_x=0;
         lakitu_entity.jump.acc_y=0;

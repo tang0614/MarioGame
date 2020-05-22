@@ -50,7 +50,7 @@ export default class PlayerController extends Trait{
             
             this.player.killable.revive();
             level.entities.add(this.player);
-            console.log('reviving....');
+            
             //restarting the window
             this.player.go.dir = 0;
             this.player.velocity.set(0,0);
