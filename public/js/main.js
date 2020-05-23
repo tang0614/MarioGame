@@ -47,15 +47,23 @@ async function main(canvas){
     const timer = new Timer();
     //write a static method for timer object
     timer.update = function update(dt){
+       
         //camera position changes when we scroll the canvas 
         if(mario_entity.pos.x<0){
             mario_entity.pos.x=0;
         }
         //camera is use to determine the range of layers to draw on context
         //it always start to draw from 50 pixel left to the mario
-        camera.pos.x = Math.max(0,mario_entity.pos.x-50);
+        camera.pos.x = Math.max(0,mario_entity.pos.x-48);
+
+      
         level.compo.draw(context,camera); //drawing background, entities and collision layer
         level.updateEntity(dt,audioContext); // update 
+
+        if(level.stop){
+            alert("Game Over!!");
+            throw "exit";
+        } 
        
     }
     timer.start();
@@ -65,7 +73,8 @@ const canvas = document.getElementById('screen');
 
 const start = ()=>{
     window.removeEventListener('click',start);
-    main(canvas);
+    main(canvas)
+   
 }
    
 window.addEventListener('click',start);

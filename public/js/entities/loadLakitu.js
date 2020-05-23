@@ -79,11 +79,10 @@ function createLakituEntity(lakitu,audioBoard,entitiyFactories){
        
 
         const emit = new Emit();
-        emit.coolDown =4;
+        emit.coolDown =5;
         emit.bullet_list.push(emitJugem);
         lakitu_entity.addTrait(emit);
-        
-        
+
         lakitu_entity.draw = drawLakitu; 
 
 

@@ -7,6 +7,7 @@ export default class GoombaBehavior extends Trait{
     }
 
     collides_entity(me,other){
+        
       
         if(other.marioCollide){
             //if mario jump on me, me bounce up and being killed
@@ -20,14 +21,9 @@ export default class GoombaBehavior extends Trait{
             }else if(other.velocity.y==me.velocity.y){
 
                 if(!other.playerController.super){
-                    other.marioCollide.bounceUp();
-                    other.playerController.deleteLives(1);
                     
-                    if(other.playerController.lives==0){
-                        other.killable.killed();
-                        other.go.dir =0;
-                    }
-                    
+                
+                    other.killable.killed();       
 
                 }
             

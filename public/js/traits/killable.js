@@ -12,6 +12,7 @@ export default class Killable extends Trait{
         this.sleepTime = 0;
         this.sleepLimit = 8;
         this.state ="fly";
+      
         
     }
 
@@ -22,7 +23,6 @@ export default class Killable extends Trait{
     killed(){  
         this.dead = true;  
     }
-
     revive(){
         this.dead = false;
         this.deadTime=0;
@@ -32,14 +32,12 @@ export default class Killable extends Trait{
         this.sleep =true;
        
     }
-    letChange(){
+    // letChange(){
       
-        this.state ="walk";
-      
-
-    }
-
+    //     this.state ="walk";
     
+    // }
+ 
 
     awake(entity){
         entity.walk.dir =1;

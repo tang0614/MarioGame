@@ -3,7 +3,7 @@ export default class SynPosition extends Trait{
     constructor(){
         super('synposition');
         this.forward_pos_limit = 200;
-        this.backward_pos_limit = 50;
+        this.backward_pos_limit = 5;
     }
   
     // update the position of entity after time dt
@@ -19,7 +19,7 @@ export default class SynPosition extends Trait{
             if(entity.marioCollide){
                 if(entity.go.dir >=0){
                     if(lakitu_entity.pos.x<entity.pos.x + this.forward_pos_limit){
-                        lakitu_entity.pos.x += 1;
+                        lakitu_entity.pos.x += 2;
                     }else{
                         lakitu_entity.pos.x= entity.pos.x + this.forward_pos_limit;
 
@@ -29,7 +29,7 @@ export default class SynPosition extends Trait{
 
                 }else if(entity.go.dir<0){
                     if(lakitu_entity.pos.x >entity.pos.x - this.backward_pos_limit){
-                        lakitu_entity.pos.x -= 1;
+                        lakitu_entity.pos.x -= 2;
                     }else{
                         lakitu_entity.pos.x= entity.pos.x - this.backward_pos_limit;
 

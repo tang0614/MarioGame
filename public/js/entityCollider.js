@@ -14,6 +14,7 @@ export default class EntityCollider{
             if(me.bounds.overlaps(entity.bounds)){
                 if(entity.marioCollide){
                     if(!me.killable.dead){
+                       
                         me.collides(entity);
                     }
                 }   

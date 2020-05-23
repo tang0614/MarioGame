@@ -3,7 +3,7 @@ import Trait from './trait.js'
 export default class Emit extends Trait{
     constructor(){
         super('emit');
-        this.coolDown =3;
+        this.coolDown =5;
         this.bullet_list = [];
        
         
@@ -21,7 +21,7 @@ export default class Emit extends Trait{
             }
             
             this.emit(entity,level);
-            this.coolDown =3;
+            this.coolDown =5;
         }
      
     }

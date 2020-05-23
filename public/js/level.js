@@ -11,6 +11,7 @@ export default class Level {
         //only put in level we can access all entities
         this.entity_collider = new EntityCollider(this.entities);
         this.duration = 0;
+        this.stop = false;
    
 
     }
@@ -27,6 +28,7 @@ export default class Level {
             if(entity.canDetectTiles){
                 this.tileCollider.test(entity); 
             }
+
 
             //check if overlap or collide with mario
             this.entity_collider.checkEntityCollideMario(entity); 

@@ -1,5 +1,6 @@
 import Trait from './trait.js';
 
+
 const COIN_MAX = 100;
 export default class PlayerController extends Trait{
     constructor(){
@@ -9,12 +10,13 @@ export default class PlayerController extends Trait{
         this.superTime = null;
         this.score =0;
         this.coin = 0;
-        this.lives = 1;
+        this.lives = 3;
         this.super = false;
        
     }
     setPlayer(entity){
         this.player =entity;
+       
     }
 
     addCoins(count){
@@ -47,20 +49,22 @@ export default class PlayerController extends Trait{
 
 
         if(!level.entities.has(this.player)){
-            
-            this.player.killable.revive();
-            level.entities.add(this.player);
-            
-            //restarting the window
-            this.player.go.dir = 0;
-            this.player.velocity.set(0,0);
-            this.player.pos.set(64,64);
-          
-            this.playerTime =300;
-            this.score =0;
-            this.coin = 0;
-            this.lives = 1;
-            
+            if(this.lives>0){
+                this.player.killable.revive();
+                //restarting the window
+                this.player.pos.set(64,64);
+                this.player.velocity.set(0,0);
+                this.player.go.distance = 0;
+                this.playerTime = 300;
+                this.lives -=1
+                level.entities.add(this.player);
+
+            }
+
+            if(this.lives==0){
+                level.stop= true;
+
+            }     
 
         }else{
            

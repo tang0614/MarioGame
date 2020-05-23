@@ -17,13 +17,8 @@ export default class BulletBehavior extends Trait{
           
             }else{
                 if(!other.playerController.super){
-                    other.marioCollide.bounceUp();
-                    other.playerController.deleteLives(1);
-
-                    if(other.playerController.lives==0){
-                        other.killable.killed();
-                        other.go.dir =0;
-                    }
+                    other.killable.killed();
+             
 
                 }
             }

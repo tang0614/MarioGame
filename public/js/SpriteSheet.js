@@ -37,6 +37,12 @@ export default class SpriteSheet {
 
     draw(name, context, colIndex, rowIndex){
         const buffer = this.tiles.get(name);
+        if(name=='mario'){
+            console.log(colIndex);
+        
+        }
+        
+        
         context.drawImage(buffer,colIndex, rowIndex);
     }
 
