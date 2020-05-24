@@ -41,12 +41,15 @@ export default class KoopaBehavior extends Trait{
                         me.killable.letSleep();
                         me.walk.dir =0;
                         me.audio.playAudio('stomp');
-                        other.playerController.score +=100;
+                        other.playerController.score +=200;
 
                     }else if (other.velocity.y==me.velocity.y){
                         if(!other.playerController.super){
 
                             other.killable.killed();
+                        }else{
+                            other.playerController.disgrow();
+                        
                         }
                     
                         
@@ -63,13 +66,16 @@ export default class KoopaBehavior extends Trait{
                          me.animalFly.acc_y =0;
                          other.marioCollide.bounceUp();
                          me.audio.playAudio('stomp');
-                         other.playerController.score +=100;
+                         other.playerController.score +=200;
  
                     
                     } else if (other.velocity.y<me.velocity.y){
                         if(!other.playerController.super){
                     
                             other.killable.killed();
+                        }else{
+                            other.playerController.disgrow();
+                        
                         }
                    
                     

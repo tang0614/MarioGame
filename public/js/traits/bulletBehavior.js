@@ -13,13 +13,13 @@ export default class BulletBehavior extends Trait{
                 me.killable.killed();
                 me.velocity.y +=100;
                 me.audio.playAudio('stomp');
-                other.playerController.score +=300;
+                other.playerController.score +=200;
           
             }else{
                 if(!other.playerController.super){
                     other.killable.killed();
-             
-
+                }else{
+                    other.playerController.disgrow();
                 }
             }
             

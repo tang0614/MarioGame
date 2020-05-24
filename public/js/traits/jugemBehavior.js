@@ -11,11 +11,12 @@ export default class JugemBehavior extends Trait{
            
           
             if(!other.playerController.super){
-                
-              
-                other.killable.killed();
-               
+            
+                other.killable.killed(); 
 
+            }else{
+                other.playerController.disgrow();
+            
             }
             
             
