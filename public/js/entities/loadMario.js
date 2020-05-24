@@ -68,15 +68,18 @@ function createMarioEntity(mario,audioBoard){
 
                 if(mario_entity.go.dir >0){
                     if(mario_entity.velocity.x<0 ){
+                    
                         return 'break-backward';
                     }
                     return anime_run(mario_entity.go.distance);
                 }else if(mario_entity.go.dir <0){
                     if(mario_entity.velocity.x>0 ){
+                       
                         return 'break-forward';
                     }
                     return anime_retreat(Math.abs(mario_entity.go.distance));
                 }else{
+                   
                     return 'mario'     
                 } 
 
@@ -93,6 +96,7 @@ function createMarioEntity(mario,audioBoard){
     //create this function only once when loading the game, and then reuse it
     function drawMario(context,camera){
         //draw method from sprite sheet (This pointing to the mario entity not mario sprites)
+      
         mario.draw(routeFrame(this),context,this.pos.x-camera.pos.x,this.pos.y-camera.pos.y);
     }
 

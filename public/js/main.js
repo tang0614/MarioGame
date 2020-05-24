@@ -31,7 +31,7 @@ async function main(canvas){
 
     const mario_entity_reference = entitiyFactories['mario'];
     const mario_entity = mario_entity_reference();
-    mario_entity.pos.set(64,64);
+    mario_entity.pos.set(0,0);
     level.entities.add(mario_entity);
     console.log(level);
 
@@ -43,7 +43,6 @@ async function main(canvas){
     input.listenTo(window);
 
 
-
     const timer = new Timer();
     //write a static method for timer object
     timer.update = function update(dt){
@@ -51,12 +50,13 @@ async function main(canvas){
         //camera position changes when we scroll the canvas 
         if(mario_entity.pos.x<0){
             mario_entity.pos.x=0;
+           
         }
+
         //camera is use to determine the range of layers to draw on context
         //it always start to draw from 50 pixel left to the mario
-        camera.pos.x = Math.max(0,mario_entity.pos.x-48);
+        camera.pos.x = Math.max(0,mario_entity.pos.x-64);
 
-      
         level.compo.draw(context,camera); //drawing background, entities and collision layer
         level.updateEntity(dt,audioContext); // update 
 

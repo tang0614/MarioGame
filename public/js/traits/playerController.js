@@ -57,7 +57,7 @@ export default class PlayerController extends Trait{
             if(this.lives>0){
                 this.player.killable.revive();
                 //restarting the window
-                this.player.pos.set(64,64);
+                this.player.pos.set(0,0);
                 this.player.velocity.set(0,0);
                 this.player.go.distance = 0;
                 this.playerTime = 400;
