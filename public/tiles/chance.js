@@ -49,7 +49,7 @@ function chanceY({match,entity,resolver,level}){
                 let value = 0;
                 const num = Math.random();
     
-                if(num<0.2){
+                if(num<0.6){
                     value = {
                         name: "coin",
                         type: "coin",
