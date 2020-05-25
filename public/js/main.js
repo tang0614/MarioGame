@@ -53,9 +53,14 @@ async function main(canvas){
            
         }
 
+       
         //camera is use to determine the range of layers to draw on context
         //it always start to draw from 50 pixel left to the mario
         camera.pos.x = Math.max(0,mario_entity.pos.x-64);
+        camera.pos.x = Math.min(2900,mario_entity.pos.x);
+
+        console.log(mario_entity.pos.x);
+        console.log(camera.pos.x);
 
         level.compo.draw(context,camera); //drawing background, entities and collision layer
         level.updateEntity(dt,audioContext); // update 
