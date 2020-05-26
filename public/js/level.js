@@ -1,10 +1,11 @@
 import Compositor from './compository.js';
 import EntityCollider from './entityCollider.js';
 import TileCollider from './tileCollider.js';
+import CompositionScene from './compositionScene.js';
 
-
-export default class Level {
+export default class Level extends CompositionScene{
     constructor(){
+        super();
         this.compo = new Compositor();
         this.entities = new Set();
         this.tileCollider = new TileCollider();

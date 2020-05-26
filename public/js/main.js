@@ -5,8 +5,10 @@ import Camera from './camera.js';
 import {setMouseControl} from './control.js';
 import {loadEntities} from './loader/loadEntities.js';
 import {drawFont} from './layers/fontLayer.js';
+import {drawWaitLayer} from './layers/waitLayer.js';
 import {loadFont} from './loader.js';
 import SceneRunner from './scene.js';
+import CompositionLevel from './compositionLevel.js'
 
 
 //loadBackGroundSprite(),loadBackGroundLevel('1')
@@ -25,19 +27,26 @@ async function main(canvas){
     const font = await loadFont();
     const sceneRunner= new SceneRunner();
     
-   
-   
+    const composedLevel = new CompositionLevel();
+    composedLevel.compo.layers.push(drawWaitLayer(font,level));
+    composedLevel.compo.layers.push(drawFont(font,level));
     
+  
     //entity position unit is not index, but number of pixel from (0,0);
     //one tile has 16 pixles, and 64/16 = 4 tile away from 0 
     //seeing three tile because first tile start at -16 pixel
-    level.compo.layers.push(drawFont(font,level));
+   
+   
     const mario_entity_reference = entitiyFactories['mario'];
     const mario_entity = mario_entity_reference();
     mario_entity.pos.set(0,0);
     level.entities.add(mario_entity);
-    console.log(level);
+    
+    
+    sceneRunner.addScene(composedLevel);
     sceneRunner.addScene(level);
+
+    console.log(level);
 
     //clicking and move mario
     //setting up keyboard,enter enable jump 

@@ -42,7 +42,7 @@ export function drawFont(font,level){
         font.print('+'+lives.toString(),context,208, line1);  
         font.print('TIME',context, 304, line1);  
         font.print(score.toString().padStart(6,0),context, 16, line2); 
-        font.print('Level 1',context, 112, line2);  
+        font.print('Level X',context, 112, line2);  
         font.print(time.toFixed().toString(),context, 304, line2);  
     }
 }
