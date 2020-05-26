@@ -36,7 +36,7 @@ async function main(canvas){
     //one tile has 16 pixles, and 64/16 = 4 tile away from 0 
     //seeing three tile because first tile start at -16 pixel
    
-   
+    level.compo.layers.push(drawFont(font,level));
     const mario_entity_reference = entitiyFactories['mario'];
     const mario_entity = mario_entity_reference();
     mario_entity.pos.set(0,0);
