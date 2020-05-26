@@ -6,6 +6,7 @@ import {setMouseControl} from './control.js';
 import {loadEntities} from './loader/loadEntities.js';
 import {drawFont} from './layers/fontLayer.js';
 import {loadFont} from './loader.js';
+import SceneRunner from './scene.js';
 
 
 //loadBackGroundSprite(),loadBackGroundLevel('1')
@@ -22,18 +23,21 @@ async function main(canvas){
     const levelfunction = await createLoadLevel(entitiyFactories);  //return back a promise
     const level = await levelfunction('1');//return back a promise
     const font = await loadFont();
-    level.compo.layers.push(drawFont(font,level));
+    const sceneRunner= new SceneRunner();
+    
+   
    
     
     //entity position unit is not index, but number of pixel from (0,0);
     //one tile has 16 pixles, and 64/16 = 4 tile away from 0 
     //seeing three tile because first tile start at -16 pixel
-
+    level.compo.layers.push(drawFont(font,level));
     const mario_entity_reference = entitiyFactories['mario'];
     const mario_entity = mario_entity_reference();
     mario_entity.pos.set(0,0);
     level.entities.add(mario_entity);
     console.log(level);
+    sceneRunner.addScene(level);
 
     //clicking and move mario
     //setting up keyboard,enter enable jump 
@@ -44,6 +48,7 @@ async function main(canvas){
 
 
     const timer = new Timer();
+    sceneRunner.runNext();
     //write a static method for timer object
     timer.update = function update(dt){
        
@@ -52,26 +57,27 @@ async function main(canvas){
             mario_entity.pos.x=0;
            
         }
-
        
         //camera is use to determine the range of layers to draw on context
         //it always start to draw from 50 pixel left to the mario
-        camera.pos.x = Math.max(0,mario_entity.pos.x-64);
-        camera.pos.x = Math.min(2900,mario_entity.pos.x);
+        camera.pos.x = Math.max(0,mario_entity.pos.x-50);
+        if(mario_entity.pos.x>=2900){
+            camera.pos.x = 2900;
 
-        console.log(mario_entity.pos.x);
-        console.log(camera.pos.x);
+        }
 
-        level.compo.draw(context,camera); //drawing background, entities and collision layer
-        level.updateEntity(dt,audioContext); // update 
+
+        sceneRunner.update(context,camera,dt,audioContext);
 
         if(level.stop){
             alert("Game Over!!");
             throw "exit";
         } 
+        
        
     }
     timer.start();
+    
 }
 
 const canvas = document.getElementById('screen');

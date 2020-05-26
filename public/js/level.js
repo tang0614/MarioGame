@@ -8,7 +8,6 @@ export default class Level {
         this.compo = new Compositor();
         this.entities = new Set();
         this.tileCollider = new TileCollider();
-        //only put in level we can access all entities
         this.entity_collider = new EntityCollider(this.entities);
         this.duration = 0;
         this.stop = false;

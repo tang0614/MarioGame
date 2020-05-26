@@ -38,8 +38,8 @@ export function drawFont(font,level){
 
         font.print('MARIO',context, 16, line1);  
         font.print('World',context, 112, line1);
-        font.print('@ X '+coin.toString().padStart(2,0),context,208, line1);  
-        font.print('+'+lives.toString(),context,208, line2);  
+        font.print('@ X '+coin.toString().padStart(2,0),context,208, line2);  
+        font.print('+'+lives.toString(),context,208, line1);  
         font.print('TIME',context, 304, line1);  
         font.print(score.toString().padStart(6,0),context, 16, line2); 
         font.print('Level 1',context, 112, line2);  

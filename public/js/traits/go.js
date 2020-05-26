@@ -15,7 +15,7 @@ export default class Go extends Trait{
 
         if(this.dir==1){
            
-            if(entity.velocity.x>100){
+            if(entity.velocity.x>80){
                 entity.velocity.x += 0;
             }else{
                 entity.velocity.x += this.acc_x * this.dir * dt;
@@ -25,7 +25,7 @@ export default class Go extends Trait{
         }else if (this.dir==-1){
            
 
-            if(entity.velocity.x<-100){
+            if(entity.velocity.x<-80){
                 entity.velocity.x += 0;
             }else{
                 entity.velocity.x += this.acc_x * this.dir * dt;

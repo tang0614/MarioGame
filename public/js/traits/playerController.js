@@ -21,10 +21,9 @@ export default class PlayerController extends Trait{
 
     addCoins(count){
         this.coin +=count;
-        if(this.coin >= COIN_MAX){
-          
-            const lifeCount = Math.floor(this.coin/COIN_MAX);
-            this.addLives(lifeCount);
+        while(this.coin >= COIN_MAX){
+            this.addLives(1);
+            this.coin -=COIN_MAX;
         }
     }
     
