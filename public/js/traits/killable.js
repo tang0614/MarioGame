@@ -4,7 +4,7 @@ export default class Killable extends Trait{
     constructor(){
         super('killable');
         this.dead = false;
-        this.removeTime = 1;
+        this.removeTime = 0;
     
         this.deadTime=0;
 
@@ -47,7 +47,7 @@ export default class Killable extends Trait{
 
 
     update(entity,dt,level){
-      
+        
 
         if(this.sleep){
             this.sleepTime += dt;
@@ -61,12 +61,32 @@ export default class Killable extends Trait{
 
         if(this.dead){
             this.deadTime += dt;
-           
+
+
             if(this.deadTime>this.removeTime){
-                level.entities.delete(entity);
+                if(entity.marioCollide){
+ 
+                    level.entities.forEach(e=>{
+                        if(e.jugemBehavior){
+                            console.log('deleting Jugem');
+                            level.entities.delete(e);
+                        }
+                    })
+                    level.entities.delete(entity);
+    
+                }else{
+                    level.entities.delete(entity);
+                }
+
+                
             }
-          
+
+            
+
+           
+            
         }
+
         
 
      

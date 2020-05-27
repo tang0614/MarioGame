@@ -1,8 +1,8 @@
 import Trait from './trait.js';
 
-export default class JugemBehavior extends Trait{
+export default class LakituBehavior extends Trait{
     constructor(){
-        super('jugemBehavior');
+        super('lakituBehavior');
         
     }
 
@@ -18,7 +18,7 @@ export default class JugemBehavior extends Trait{
                 other.playerController.disgrow();
             
             }
-
+            
             
         } 
           

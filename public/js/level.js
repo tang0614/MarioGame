@@ -44,8 +44,10 @@ export default class Level extends CompositionScene{
                 this.tileCollider.test(entity); 
             }
 
+ 
             //check if overlap or collide with mario
-            this.entity_collider.checkEntityCollideMario(entity); 
+            this.entity_collider.checkEntityCollideMario(entity);
+            this.entity_collider.checkEntityPushedByMario(entity);
 
             //"this "is pointing to level
             this.duration +=dt;

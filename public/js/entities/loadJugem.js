@@ -56,8 +56,8 @@ function createJugemEntity(jugem,audioBoard,entitiyFactories){
         jugem_entity.addTrait(new AnimalGo());
         jugem_entity.addTrait(new Jump());
         jugem_entity.addTrait(new Position());
-        jugem_entity.addTrait(new JugemBehavior());
         jugem_entity.addTrait(new Killable());
+        jugem_entity.addTrait(new JugemBehavior());
 
        
 

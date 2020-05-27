@@ -7,6 +7,7 @@ import Jump from '../traits/jump.js';
 import Position from '../traits/position.js';
 import SynPosition from '../traits/synposition.js';
 import Killable from '../traits/killable.js';
+import LakituBehavior from '../traits/lakituBehavior.js';
 
 export function loadLakitu(audioContext,entitiyFactories){
 
@@ -63,6 +64,7 @@ function createLakituEntity(lakitu,audioBoard,entitiyFactories){
         lakitu_entity.addTrait(new AnimalGo());
         lakitu_entity.addTrait(new Jump());
         lakitu_entity.addTrait(new Killable());
+        lakitu_entity.addTrait(new LakituBehavior());
         
         lakitu_entity.walk.go_limit = 50;
         lakitu_entity.size.set(16,16);

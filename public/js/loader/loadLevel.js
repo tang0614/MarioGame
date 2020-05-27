@@ -111,6 +111,6 @@ function pushCollisionOnLevelCompo(levelFile,level){
 
     //level.setCollisionGrid(collistionGrid); 
     const draw_collision_function =createCollisionLayer(level);
-    level.compo.layers.push(draw_collision_function);
+    //level.compo.layers.push(draw_collision_function);
 }
 

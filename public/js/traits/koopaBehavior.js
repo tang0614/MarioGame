@@ -13,7 +13,7 @@ export default class KoopaBehavior extends Trait{
         if(other.marioCollide){
 
             if(me.killable.sleepTime){
-                
+                console.log('koopa is sleeping.......');
                 if(other.velocity.y>me.velocity.y){
 
                     me.canDetectTiles = false; 
@@ -26,7 +26,8 @@ export default class KoopaBehavior extends Trait{
 
                     }
                     
-                }else if (other.velocity.y==me.velocity.y){
+                }else{
+                    console.log('koopa can be push......');
                     me.canDetectTiles = true;
                     me.canBePush = true;
                 }

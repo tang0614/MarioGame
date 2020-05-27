@@ -13,6 +13,7 @@ export default class EntityCollider{
             //property check because only mario entity has marioCollide
             if(me.bounds.overlaps(entity.bounds)){
                 if(entity.marioCollide){
+                    console.log(me);
                     if(!me.killable.dead){
                        
                         me.collides(entity);
