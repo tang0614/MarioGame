@@ -19,7 +19,6 @@ export function drawWaitLayer(font,level){
     }
     return function drawWaitLayer(context,camera){  
         const size = font.size;
-        let coin = getPlayerInfo()[2];
         let lives = getPlayerInfo()[3];
 
         font.print('World   X',context, size*20, size*13);

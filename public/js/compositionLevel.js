@@ -8,8 +8,6 @@ export default class CompositionLevel extends CompositionScene{
  
     }
     
-
-
     updateEntity(dt,audioContext){
         this.count -=dt;
 

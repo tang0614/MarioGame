@@ -10,6 +10,10 @@ export default class SceneRunner{
         scene.events.listen(CompositionScene.EventFinish, ()=>{
             this.runNext();
         })
+
+        scene.events.listen(CompositionScene.GameFinish, ()=>{
+            this.runNext();
+        })
        
         this.scenes.push(scene);
 

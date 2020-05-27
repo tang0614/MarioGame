@@ -8,7 +8,8 @@ import {drawFont} from './layers/fontLayer.js';
 import {drawWaitLayer} from './layers/waitLayer.js';
 import {loadFont} from './loader.js';
 import SceneRunner from './scene.js';
-import CompositionLevel from './compositionLevel.js'
+import CompositionLevel from './compositionLevel.js';
+import FinishLevel from './finishLevel.js';
 
 
 //loadBackGroundSprite(),loadBackGroundLevel('1')
@@ -28,8 +29,11 @@ async function main(canvas){
     const sceneRunner= new SceneRunner();
     
     const composedLevel = new CompositionLevel();
+    const finishLevel = new FinishLevel();
     composedLevel.compo.layers.push(drawWaitLayer(font,level));
     composedLevel.compo.layers.push(drawFont(font,level));
+    finishLevel.compo.layers.push(drawWaitLayer(font,level));
+  
     
   
     //entity position unit is not index, but number of pixel from (0,0);
@@ -45,6 +49,7 @@ async function main(canvas){
     
     sceneRunner.addScene(composedLevel);
     sceneRunner.addScene(level);
+    sceneRunner.addScene(finishLevel);
 
     console.log(level);
 

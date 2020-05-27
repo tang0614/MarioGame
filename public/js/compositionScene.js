@@ -14,6 +14,7 @@ export default class CompositionScene{
     }
 
     static EventFinish = Symbol('EventFinish');
+    static GameFinish= Symbol('GameFinish');
 
  
 }

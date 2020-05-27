@@ -6,7 +6,7 @@ export default class PlayerController extends Trait{
     constructor(){
         super('playerController');
         this.player =null;
-        this.playerTime = 400;
+        this.playerTime = 50;
         this.superTime = null;
         this.score =0;
         this.coin = 0;
@@ -59,16 +59,13 @@ export default class PlayerController extends Trait{
                 this.player.pos.set(0,0);
                 this.player.velocity.set(0,0);
                 this.player.go.distance = 0;
-                this.playerTime = 400;
+                this.playerTime = 50;
                 this.lives -=1
                 level.entities.add(this.player);
 
             }
 
-            if(this.lives==0){
-                level.stop= true;
-
-            }     
+            
 
         }else{
            
