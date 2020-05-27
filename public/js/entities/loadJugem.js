@@ -25,10 +25,10 @@ function createJugemEntity(jugem,audioBoard,entitiyFactories){
   
     function routeFrame(jugem_entity){
         
-        if(jugem_entity.walk.acc_x >0){
+        if(jugem_entity.walk.dir >0){
      
             return anime_walk_f(jugem_entity.walk.duration);
-        }else if (jugem_entity.walk.acc_x <0){
+        }else if (jugem_entity.walk.dir <0){
           
             return anime_walk_b(jugem_entity.walk.duration);
         }else{

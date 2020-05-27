@@ -48,6 +48,7 @@ function createGoombaEntity(goomba,audioBoard){
         goomba_entity.addTrait(new Killable());
 
         //add a draw method to mario entity
+        goomba_entity.walk.go_limit = 50;
         goomba_entity.draw = drawGoomba;
         return goomba_entity;
     }

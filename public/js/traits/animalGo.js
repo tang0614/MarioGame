@@ -7,6 +7,7 @@ export default class AnimalGo extends Trait{
         this.acc_x=30;
         this.distance = 0;
         this.duration =0;
+        this.go_limit = 50
     }
     
     update(entity,dt,level){
@@ -14,7 +15,7 @@ export default class AnimalGo extends Trait{
         //cannot move in x direction if jumping
 
         if(this.dir==1){
-            if(entity.velocity.x>100){
+            if(entity.velocity.x>this.go_limit){
                 entity.velocity.x += 0;
             }else{
                 entity.velocity.x += this.acc_x * this.dir * dt;
@@ -23,7 +24,7 @@ export default class AnimalGo extends Trait{
 
         }else if (this.dir==-1){
 
-            if(entity.velocity.x<-100){
+            if(entity.velocity.x<-this.go_limit){
                 entity.velocity.x += 0;
             }else{
                 entity.velocity.x += this.acc_x * this.dir * dt;

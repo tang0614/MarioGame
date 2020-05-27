@@ -11,7 +11,7 @@ export default class Level extends CompositionScene{
         this.tileCollider = new TileCollider();
         this.entity_collider = new EntityCollider(this.entities);
         this.duration = 0;
-        this.count=50;
+        this.count=300;
    
 
     }

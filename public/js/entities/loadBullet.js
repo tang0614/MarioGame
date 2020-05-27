@@ -41,7 +41,7 @@ function createBulletEntity(bullet,audioBoard){
         bullet_entity.addTrait(new Killable());
         bullet_entity.addTrait(new BulletBehavior());
 
-
+        bullet_entity.walk.go_limit = 100;
         bullet_entity.draw = drawBullet; 
         return bullet_entity;
     }

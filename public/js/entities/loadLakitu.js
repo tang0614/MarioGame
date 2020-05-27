@@ -64,7 +64,7 @@ function createLakituEntity(lakitu,audioBoard,entitiyFactories){
         lakitu_entity.addTrait(new Jump());
         lakitu_entity.addTrait(new Killable());
         
- 
+        lakitu_entity.walk.go_limit = 50;
         lakitu_entity.size.set(16,16);
         lakitu_entity.offset.set(0,8);
         lakitu_entity.velocity.set(0,0);

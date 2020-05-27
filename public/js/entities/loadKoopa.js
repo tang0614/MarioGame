@@ -82,7 +82,7 @@ function createKoopaEntity(koopa,audioBoard){
         koopa_entity.addTrait(new Killable());
 
       
-        koopa_entity.walk.acc_x=10;
+        koopa_entity.walk.go_limit = 30;
 
         //add a draw method to mario entity
         koopa_entity.draw = drawKoopa;
