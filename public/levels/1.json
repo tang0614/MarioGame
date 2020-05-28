@@ -682,12 +682,18 @@
     
         {
             "name":"koopa",
-            "pos":[640,0]
+            "pos":[320,0]
         },
         {
-            "name":"koopa",
-            "pos":[800,0]
+            "name":"goomba",
+            "pos":[1600,0]
         },
+        {
+            "name":"goomba",
+            "pos":[1616,0]
+        },
+
+        
       
         {
             "name":"cannon",
@@ -701,6 +707,18 @@
         {
             "name":"flower",
             "pos":[1600,184]
+        },
+        {
+            "name":"koopa",
+            "pos":[1280,0]
+        },
+        {
+            "name":"koopa",
+            "pos":[1760,0]
+        },
+        {
+            "name":"koopa",
+            "pos":[1760,0]
         },
         {
             "name":"lakitu",

@@ -17,9 +17,11 @@ export default class KoopaBehavior extends Trait{
                 if(other.velocity.y>me.velocity.y){
 
                     me.canDetectTiles = false; 
-                    me.canBePush = false; 
+                    me.canBePush = true; 
                     
                     if(this.startKill==0){
+                        
+                        me.killable.killed();
                         me.audio.playAudio('stomp');
                         other.playerController.score +=200;
                         this.startKill += 1;
