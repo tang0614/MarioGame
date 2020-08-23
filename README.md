@@ -1,8 +1,8 @@
 ## Super-mario contribution to meth meth method
 
 1. Fixed bugs on Mario's speed and acceleration
-2. Add new characters to the game: Piranha plants, Spiny and Lahitu
-3. Hoopa able to fly and then to to "walk mode" after hit by Mario.
+2. Added new characters to the game: Piranha plants, Spiny and Lahitu
+3. Hoopa are able to fly and then to to "walk mode" after hit by Mario.
 4. Mario becomes Super mario after eating mushroom
 
 
