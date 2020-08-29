@@ -1,8 +1,13 @@
 {
   "name": "supermario",
   "version": "1.0.0",
-  "main": "index.js",
+  "engines": {
+    "node": "12.x",
+    "npm": "6.x"
+  },
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "XinyuTang",
@@ -10,5 +15,8 @@
   "keywords": [
     "mario"
   ],
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
