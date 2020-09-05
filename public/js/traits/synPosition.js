@@ -8,7 +8,6 @@ export default class SynPosition extends Trait {
 
   // update the position of entity after time dt
   update(entity, dt, level, audioContext) {
-    console.log("updating lakitu position");
     this.updateLakituPos(entity, level, dt);
   }
 

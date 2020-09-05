@@ -47,7 +47,7 @@ async function main(canvas) {
   sceneRunner.addScene(level);
   sceneRunner.addScene(finishLevel);
 
-  console.log(level);
+  // console.log(level);
 
   //clicking and move mario
   //setting up keyboard,enter enable jump
