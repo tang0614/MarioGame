@@ -6,7 +6,7 @@ export default class PlayerController extends Trait {
     super("playerController");
     this.player = null;
     this.playerTime = 300;
-
+    this.superTime = null;
     this.score = 0;
     this.coin = 0;
     this.lives = 3;
@@ -33,11 +33,12 @@ export default class PlayerController extends Trait {
   }
 
   grow() {
+    this.superTime = 300000;
     this.super = true;
   }
 
   disgrow() {
-    this.super = false;
+    this.superTime = 1;
   }
 
   update(entity, dt, level) {
@@ -55,10 +56,13 @@ export default class PlayerController extends Trait {
     } else {
       this.playerTime -= dt;
       if (this.super) {
-        this.superTime -= 20;
-      } else {
-        this.player.offset.set(0, 0);
-        this.super = false;
+        if (this.superTime > 0) {
+          this.player.offset.set(0, 16);
+          this.superTime -= 20;
+        } else {
+          this.player.offset.set(0, 0);
+          this.super = false;
+        }
       }
     }
   }
