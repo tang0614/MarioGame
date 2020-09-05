@@ -1,13 +1,34 @@
-## Super-mario contribution to meth meth method
+## Super-mario Implementation in Javascript
+*This is inspired by Meth-Meth-Methods's [super mario game](https://github.com/meth-meth-method/super-mario)*
 
-1. Fixed bugs on Mario's speed and acceleration
-2. Added new characters to the game: Piranha plants, Spiny and Lahitu
-3. Hoopa are able to fly and then to to "walk mode" after hit by Mario.
-4. Mario becomes Super mario after eating mushroom
+### Running
+* clone this repo
+* npm i -y
+* npm start
+* go to local host
+
+### Controls 
+* Left: Move left
+* Right: Move right
+* Space: Jump
+* Shift: Boost
+
+### In-game Screens
+
+#### Start
+![Starting game](public/image/start.png)
+#### Inside Game
+![Middle of the game](public/image/middle.png)
+#### Ending
+![End of the game](public/image/end.png)
 
 
-## To run
-1. clone this repo
-2. npm i -y
-3. npm start
-4. go to local host
+### Video Showcase
+
+### Distinctive contributions 
+1. Fixed bugs on Mario's speed and acceleration.
+2. Added new characters to the game:  Spiny and Lahitu.
+3. Added Hoopa which is able to fly and then switch to to "walk mode" after hit by Mario.
+4. Add question blocks which release mushrooms after being hit by Mario.
+5. Mario becomes Super mario after eating mushroom.
+
