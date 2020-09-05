@@ -1,0 +1,9 @@
+{
+  "imageURL": "./image/tiles.png",
+  "frames": [
+    {
+      "name": "mushroom",
+      "rect": [256, 0, 16, 16]
+    }
+  ]
+}

@@ -22,32 +22,32 @@ async function main(canvas) {
   //camera is use to determine the range of layers to draw on context
   const camera = new Camera();
   const entitiyFactories = await loadEntities(audioContext); //return back a promise
-  const levelfunction = await createLoadLevel(entitiyFactories); //return back a promise
-  const level = await levelfunction("1"); //return back a promise
+  const levelFunction = await createLoadLevel(entitiyFactories); //return back a promise
+  const level = await levelFunction("1"); //return back a promise
   const font = await loadFont();
-  const sceneRunner = new SceneRunner();
 
   const composedLevel = new CompositionLevel();
-  const finishLevel = new FinishLevel();
   composedLevel.compo.layers.push(drawWaitLayer(font, level));
   composedLevel.compo.layers.push(drawFont(font, level));
-  finishLevel.compo.layers.push(drawWaitLayer(font, level));
 
   //entity position unit is not index, but number of pixel from (0,0);
   //one tile has 16 pixles, and 64/16 = 4 tile away from 0
   //seeing three tile because first tile start at -16 pixel
 
-  level.compo.layers.push(drawFont(font, level));
   const mario_entity_reference = entitiyFactories["mario"];
   const mario_entity = mario_entity_reference();
   mario_entity.pos.set(0, 0);
+
+  level.compo.layers.push(drawFont(font, level));
   level.entities.add(mario_entity);
 
+  const finishLevel = new FinishLevel();
+  finishLevel.compo.layers.push(drawWaitLayer(font, level));
+
+  const sceneRunner = new SceneRunner();
   sceneRunner.addScene(composedLevel);
   sceneRunner.addScene(level);
   sceneRunner.addScene(finishLevel);
-
-  // console.log(level);
 
   //clicking and move mario
   //setting up keyboard,enter enable jump
@@ -83,11 +83,11 @@ async function main(canvas) {
 }
 
 const canvas = document.getElementById("screen");
-main(canvas);
+// main(canvas);
 
-// const start = () => {
-//   window.removeEventListener("click", start);
-//   main(canvas);
-// };
+const start = () => {
+  window.removeEventListener("click", start);
+  main(canvas);
+};
 
-// window.addEventListener("click", start);
+window.addEventListener("click", start);

@@ -1,0 +1,29 @@
+{
+  "imageURL": "./image/tiles.png",
+  "frames": [
+    {
+      "name": "chance-1",
+      "rect": [384, 0, 16, 16]
+    },
+    {
+      "name": "chance-2",
+      "rect": [400, 0, 16, 16]
+    },
+    {
+      "name": "chance-3",
+      "rect": [416, 0, 16, 16]
+    },
+    {
+      "name": "flat",
+      "rect": [432, 0, 16, 16]
+    }
+  ],
+
+  "animations": [
+    {
+      "name": "chance",
+      "frameLen": 0.15,
+      "frames": ["chance-1", "chance-2", "chance-3"]
+    }
+  ]
+}

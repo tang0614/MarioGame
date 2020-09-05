@@ -32,6 +32,7 @@ export default class Level extends CompositionScene {
       // console.log('updating after dt.....');
 
       entity.updateBytime(dt, this, audioContext); //this pointing to level
+
       //check whether entities collide with tiles
       if (entity.canDetectTiles) {
         this.tileCollider.test(entity);
@@ -39,7 +40,10 @@ export default class Level extends CompositionScene {
 
       //check if overlap or collide with mario
       this.entity_collider.checkEntityCollideMario(entity);
-      this.entity_collider.checkEntityPushedByMario(entity);
+
+      if (entity.canBePush) {
+        this.entity_collider.checkEntityPushedByMario(entity);
+      }
 
       //"this "is pointing to level
       this.duration += dt;

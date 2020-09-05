@@ -1,39 +1,37 @@
-import Trait from './trait.js'
+import Trait from "./trait.js";
 
-export default class Emit extends Trait{
-    constructor(){
-        super('emit');
-        this.coolDown =5;
-        this.bullet_list = [];
-       
-        
-    }
-  
-    //update after time dt
-    update(entity,dt,level,audioContext){      
+export default class Emit extends Trait {
+  constructor() {
+    super("emit");
+    this.coolDown = 5;
+    this.bullet_list = [];
+  }
 
-        if(this.coolDown >0){
-            this.coolDown-=dt;
-        }else{
-            if(entity.name=='cannon'){
-                entity.audio.playAudio('shoot');
-
-            }
-            
-            this.emit(entity,level);
-            this.coolDown =5;
+  //update after time dt
+  update(entity, dt, level, audioContext) {
+    if (entity.chanceBehavior) {
+      if (entity.canBePush) {
+        console.log("chance is emitting......");
+        this.emit(entity, level);
+        entity.canBePush = false;
+      }
+    } else {
+      if (this.coolDown > 0) {
+        this.coolDown -= dt;
+      } else {
+        if (entity.name == "cannon") {
+          entity.audio.playAudio("shoot");
         }
-     
+
+        this.emit(entity, level);
+        this.coolDown = 5;
+      }
     }
+  }
 
-    emit(entity,level){
-
-        
-        for (let emitter of this.bullet_list){
-            emitter(entity,level);
-        }
+  emit(entity, level) {
+    for (let emitter of this.bullet_list) {
+      emitter(entity, level);
     }
-
-    
-
+  }
 }
