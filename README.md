@@ -3,9 +3,13 @@
 
 ### Running
 * clone this repo
-* npm i -y
+* npm init
 * npm start
 * go to local host
+
+
+### Live Demo
+[Play this game here](https://xinyu-supermario-js.herokuapp.com/)
 
 ### Controls 
 * Left: Move left
@@ -20,7 +24,7 @@
 #### Inside Game
 ![Middle of the game](public/image/middle.png)
 #### Ending
-![End of the game](public/image/end.png)
+![End of the game](public/image/ends.png)
 
 
 ### Video Showcase
