@@ -8,7 +8,7 @@
 * go to local host
 
 
-### Live Demo
+### Play this game using chrome 
 [Play this game here](https://xinyu-supermario-js.herokuapp.com/)
 
 ### Controls 
@@ -27,7 +27,6 @@
 ![End of the game](public/image/ends.png)
 
 
-### Video Showcase
 
 ### Distinctive contributions 
 1. Fixed bugs on Mario's speed and acceleration.
