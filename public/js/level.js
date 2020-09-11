@@ -4,9 +4,7 @@ import TileCollider from "./tileCollider.js";
 import CompositionScene from "./compositionScene.js";
 
 export default class Level extends CompositionScene {
-  constructor() {
-    super();
-    this.compo = new Compositor();
+  constructor(
     this.entities = new Set();
     this.tileCollider = new TileCollider();
     this.entity_collider = new EntityCollider(this.entities);
