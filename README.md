@@ -3,7 +3,7 @@
 
 ### Running
 * clone this repo
-* npm init
+* npm install
 * npm start
 * go to local host
 
